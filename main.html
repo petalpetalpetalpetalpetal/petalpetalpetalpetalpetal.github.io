@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Page</title>
+  <style>
+    /* Basic CSS for layout */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .video-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .movable-image {
+      position: absolute;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .links-container {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .links-container a {
+      display: inline-block;
+      margin: 10px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    /* Add responsive styling for smaller screens */
+    @media screen and (max-width: 600px) {
+      .links-container a {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to My Interactive Page</h1>
+
+  <!-- Embed YouTube Video -->
+  <div class="video-container">
+    <h2>Watch this cool video!</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <!-- Movable Images by Cursor -->
+  <div class="movable-image" id="image1" style="top: 100px; left: 100px;">
+    <img src="https://via.placeholder.com/150" alt="Movable Image 1" width="150">
+  </div>
+
+  <div class="movable-image" id="image2" style="top: 300px; left: 250px;">
+    <img src="https://via.placeholder.com/150" alt="Movable Image 2" width="150">
+  </div>
+
+  <!-- Links -->
+  <div class="links-container">
+    <h2>Useful Links:</h2>
+    <a href="https://www.example.com" target="_blank">Example Link 1</a>
+    <a href="https://www.github.com" target="_blank">GitHub</a>
+    <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>
+  </div>
+
+  <script>
+    // JavaScript to make images movable by cursor
+    document.querySelectorAll('.movable-image').forEach(image => {
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      image.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - image.getBoundingClientRect().left;
+        offsetY = e.clientY - image.getBoundingClientRect().top;
+        image.style.transition = 'none'; // Disable transition while dragging
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          let left = e.clientX - offsetX;
+          let top = e.clientY - offsetY;
+          image.style.left = left + 'px';
+          image.style.top = top + 'px';
+        }
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+        image.style.transition = 'transform 0.2s ease'; // Re-enable transition
+      });
+    });
+  </script>
+
+</body>
+</html>
