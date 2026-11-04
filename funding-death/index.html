@@ -295,8 +295,8 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
     <button class="btn" id="sideBtn" aria-label="Open details, saved items and who held power">Panel</button>
     <button class="btn" id="about">About</button>
   </div>
-  <div class="trackwrap" id="trackwrap" title="Scroll here: up goes back in time, down goes forward">
-    <div class="wheelhint">Scroll here: up goes back in time, down goes forward</div>
+  <div class="trackwrap" id="trackwrap" title="Scroll up or down here, or left/right anywhere, to move through time">
+    <div class="wheelhint">Scroll up or down here, or left/right anywhere, to move through time</div>
     <div class="eras" id="eras"></div><div class="ticks" id="ticks"></div>
     <input type="range" id="slider" min="1824" max="2026" step="1" value="2026" aria-label="Year">
     <div class="axis" id="axis"></div>
@@ -489,8 +489,15 @@ function build(){
   $("ticks").innerHTML = [...byYear].map(([y, es]) => `<i class="${es.some(e => e.aboriginal_led === "yes") ? "tk-led" : es.some(e => e.type === "violence" || e.type === "death") ? "tk-harm" : ""}" style="left:${pos(y)}"></i>`).join("");
   $("axis").innerHTML = [1824, 1863, 1911, 1953, 1978, 2007, 2026].map(y => `<span style="left:${pos(y)}">${y}</span>`).join("");
   $("slider").addEventListener("input", e => setYear(+e.target.value));
-  let acc = 0;
+  let acc = 0, horizontalAcc = 0;
   $("trackwrap").addEventListener("wheel", e => { e.preventDefault(); acc += e.deltaY; const step = Math.trunc(acc / 90); if (step){ acc -= step * 90; setYear(state.year + step); } }, {passive:false});
+  window.addEventListener("wheel", e => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    e.preventDefault(); e.stopPropagation();
+    horizontalAcc += e.deltaX;
+    const step = Math.trunc(horizontalAcc / 90);
+    if (step){ horizontalAcc -= step * 90; setYear(state.year + step); }
+  }, {passive:false, capture:true});
   $("prevEv").onclick = () => { const y = [...D.eventYears].reverse().find(y => y < state.year); if (y) setYear(y); };
   $("nextEv").onclick = () => { const y = D.eventYears.find(y => y > state.year); if (y) setYear(y); };
   $("play").onclick = togglePlay;
