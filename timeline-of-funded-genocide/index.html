@@ -1,6 +1,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Timeline of Funded Genocide</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Timeline of Funded Genocide">
+<meta property="og:description" content="How Commonwealth and Northern Territory institutions act on Aboriginal children and families, 1824 to today">
+<meta property="og:image" content="https://petalpetalpetalpetalpetal.github.io/timeline-of-funded-genocide/thumnail.png">
+<meta property="og:image:alt" content="Timeline of Funded Genocide">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Timeline of Funded Genocide">
+<meta name="twitter:description" content="How Commonwealth and Northern Territory institutions act on Aboriginal children and families, 1824 to today">
+<meta name="twitter:image" content="https://petalpetalpetalpetalpetal.github.io/timeline-of-funded-genocide/thumnail.png">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="A power map of the Commonwealth and Northern Territory institutions acting on Aboriginal children and families, the money behind them, and the Aboriginal-controlled organisations that work, 1824 to today.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,12 +43,14 @@ a{color:inherit}
 /* ---------- time bar ---------- */
 .bar{flex:none;background:var(--surface);border-bottom:1px solid var(--line);padding-block:6px 4px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
-  display:grid;grid-template-columns:1fr auto;grid-template-areas:"year ctrls" "sub ctrls" "track track";gap:2px 16px;align-items:center;position:relative;z-index:6}
+  display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"identity year ctrls" "track track track";gap:2px 16px;align-items:center;position:relative;z-index:6}
 .logo{position:absolute;top:4px;right:max(8px,env(safe-area-inset-right,0px));width:22px;height:22px;display:block;opacity:.9}
 .logo:hover{opacity:1}
 .logo img{width:22px;height:22px;display:block}
 .ctrls{margin-right:22px}
-.brand{grid-area:sub;padding-right:30px;min-width:0;margin:0;color:var(--muted);font-size:12px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.identity{grid-area:identity;min-width:0}
+.site-title{margin:0 0 2px;font-family:var(--f-display);font-stretch:85%;font-size:20px;line-height:1.1;font-weight:700}
+.brand{margin:0;color:var(--muted);font-size:12px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .yearbox{grid-area:year;display:flex;align-items:baseline;gap:10px;min-width:0}
 .year{font-family:var(--f-mono);font-weight:600;font-size:24px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .era{min-width:0;display:flex;gap:8px;align-items:baseline;overflow:hidden}
@@ -268,7 +279,12 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 }
 @media (min-width:901px){ #sideBtn{display:none} #pop{display:none!important} }
 @media (max-width:720px){
-  .bar{grid-template-columns:1fr;grid-template-areas:"year" "sub" "ctrls" "track"}
+  .bar{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"identity year" "ctrls ctrls" "track track";gap:4px 12px}
+  .site-title{font-size:17px}
+  .brand{font-size:11px;white-space:normal}
+  .yearbox{align-self:start;gap:6px}
+  .year{font-size:21px}
+  .era{flex-direction:column;align-items:flex-start;gap:1px}
   .ctrls{justify-content:flex-start;gap:4px}
   .btn{height:30px;min-width:30px;padding:0 8px;font-size:12px}
   .btn.mode{height:32px;padding:0 10px;font-size:13px}
@@ -281,7 +297,10 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 
 <header class="bar">
   <a class="logo" href="https://petalpetalpetalpetalpetal.github.io/" title="petalpetalpetalpetalpetal home" aria-label="Home"><img src="logo.png" alt="petal logo" width="22" height="22"></a>
-  <p class="brand" id="siteSub"></p>
+  <div class="identity">
+    <h1 class="site-title" id="siteTitle">Timeline of Funded Genocide</h1>
+    <p class="brand" id="siteSub"></p>
+  </div>
   <div class="yearbox"><div class="year" id="yearOut" aria-live="polite">2026</div><div class="era"><b id="eraLabel"></b><span id="eraSum"></span></div></div>
   <div class="ctrls">
     <button class="btn mode money-btn" id="moneyBtn" aria-pressed="false" title="Show money paid, who receives it and what it achieves">Funded</button>
@@ -376,6 +395,8 @@ Promise.all(files.map(f => d3.csv("data/" + f + ".csv"))).then(res => {
 
 function prepare(){
   const cfg = {}; D.config.forEach(r => cfg[r.key] = r.value); D.cfg = cfg;
+  $("siteTitle").textContent = cfg.site_title || document.title;
+  document.title = cfg.site_title || document.title;
   $("siteSub").textContent = cfg.subtitle || "";
   D.y0 = +cfg.start_year || 1824; D.y1 = +cfg.end_year || 2026; state.year = +cfg.default_year || D.y1;
   $("slider").min = D.y0; $("slider").max = D.y1;
@@ -494,7 +515,7 @@ function build(){
   window.addEventListener("wheel", e => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault(); e.stopPropagation();
-    horizontalAcc += e.deltaX;
+    horizontalAcc -= e.deltaX;
     const step = Math.trunc(horizontalAcc / 90);
     if (step){ horizontalAcc -= step * 90; setYear(state.year + step); }
   }, {passive:false, capture:true});
