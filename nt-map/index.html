@@ -1,0 +1,700 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taken, Year by Year</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="An evidence map of how Commonwealth and Northern Territory institutions act on Aboriginal children and families, from 1824 to today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: one screen. A time bar on top; below it a zoomable org chart of the state, standing on a band of Country. */
+:root{
+  --bg:#e7eae5; --surface:#f7f8f5; --ink:#18201c; --muted:#58645d; --line:#b4bcb5; --faint:#d4d9d3;
+  --state:#2c3a44; --state-ink:#f1f4f0; --state-soft:#dfe5e3;
+  --harm:#b2352b; --ochre:#a86a1f; --ochre-soft:#f1dfc3;
+  --country:#5e3a20; --country-ink:#f4e5d1; --country-soft:#7a5133;
+  --ok:#2f6b4a; --warn:#94620f;
+  --shadow:0 10px 30px rgba(20,28,24,.18);
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111513; --surface:#1a201d; --ink:#e4e9e5; --muted:#98a39d; --line:#3a4440; --faint:#262e2a;
+  --state:#344753; --state-ink:#eef2ef; --state-soft:#22302b;
+  --harm:#e46a5d; --ochre:#d9a04f; --ochre-soft:#3b2b16;
+  --country:#33200f; --country-ink:#f0dcc2; --country-soft:#4a3019;
+  --ok:#6fbf8f; --warn:#e2b25c; --shadow:0 12px 34px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111513; --surface:#1a201d; --ink:#e4e9e5; --muted:#98a39d; --line:#3a4440; --faint:#262e2a;
+  --state:#344753; --state-ink:#eef2ef; --state-soft:#22302b;
+  --harm:#e46a5d; --ochre:#d9a04f; --ochre-soft:#3b2b16;
+  --country:#33200f; --country-ink:#f0dcc2; --country-soft:#4a3019;
+  --ok:#6fbf8f; --warn:#e2b25c; --shadow:0 12px 34px rgba(0,0,0,.5); color-scheme:dark}
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;overflow:hidden;display:flex;flex-direction:column}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--harm);outline-offset:2px}
+
+/* ---------- time bar ---------- */
+.bar{flex:none;background:var(--surface);border-bottom:1px solid var(--line);
+  padding-block:10px 8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:grid;grid-template-columns:auto 1fr auto;gap:6px 20px;align-items:center;position:relative;z-index:5}
+.brand{min-width:0}
+.brand h1{margin:0;font-family:var(--f-display);font-stretch:78%;font-weight:750;font-size:19px;letter-spacing:.01em;line-height:1.1;text-wrap:balance}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:12px;max-width:34ch;line-height:1.3}
+.yearbox{display:flex;align-items:baseline;gap:12px;min-width:0}
+.year{font-family:var(--f-mono);font-weight:600;font-size:34px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.era{min-width:0}
+.era b{display:block;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.era span{display:block;color:var(--muted);font-size:12px;line-height:1.3;max-width:56ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctrls{display:flex;gap:6px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:6px;height:32px;min-width:32px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13px}
+.btn:hover{border-color:var(--ink)}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.btn svg{width:14px;height:14px;fill:currentColor}
+.trackwrap{grid-column:1 / -1;position:relative;height:44px;touch-action:pan-y}
+.eras{position:absolute;left:0;right:0;top:4px;height:14px;display:flex}
+.eras div{height:100%;border-right:1px solid var(--surface);background:var(--state-soft);font-size:10px;color:var(--muted);
+  white-space:nowrap;overflow:hidden;text-overflow:clip;padding-left:4px;line-height:14px;font-family:var(--f-display);font-stretch:80%;letter-spacing:.03em;text-transform:uppercase}
+.eras div.on{background:var(--state);color:var(--state-ink)}
+.ticks{position:absolute;left:0;right:0;top:20px;height:12px;pointer-events:none}
+.ticks i{position:absolute;top:0;width:1px;height:8px;background:var(--muted);opacity:.7}
+.ticks i.tk-led{background:var(--ochre);height:12px;opacity:1}
+.ticks i.tk-harm{background:var(--harm)}
+.axis{position:absolute;left:0;right:0;top:33px;height:10px;font-family:var(--f-mono);font-size:10px;color:var(--muted);pointer-events:none}
+.axis span{position:absolute;transform:translateX(-50%)}
+#slider{position:absolute;left:0;right:0;top:12px;width:100%;margin:0;height:22px;background:transparent;-webkit-appearance:none;appearance:none}
+#slider::-webkit-slider-runnable-track{height:22px;background:transparent}
+#slider::-moz-range-track{height:22px;background:transparent}
+#slider::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:26px;margin-top:-2px;background:var(--harm);border-radius:2px;box-shadow:0 0 0 3px var(--surface)}
+#slider::-moz-range-thumb{width:4px;height:26px;background:var(--harm);border:0;border-radius:2px;box-shadow:0 0 0 3px var(--surface)}
+.wheelhint{position:absolute;right:0;top:-14px;font-size:10px;color:var(--muted)}
+
+/* ---------- map ---------- */
+main{flex:1;position:relative;min-height:0}
+#map{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+#map:active{cursor:grabbing}
+.crumbs{position:absolute;top:10px;left:max(16px,env(safe-area-inset-left,0px));display:flex;gap:6px;align-items:center;font-size:13px;z-index:3}
+.crumbs button{border:0;background:none;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+.crumbs .sep{color:var(--muted)}
+.crumbs .here{font-weight:600}
+.zoomctl{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px;z-index:3}
+.panel{position:absolute;z-index:3;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.thisyear{left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));width:min(340px,calc(100vw - 100px));max-height:min(38%,220px);display:flex;flex-direction:column}
+.thisyear header{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:1px solid var(--faint)}
+.thisyear header b{font-family:var(--f-display);font-stretch:85%;text-transform:uppercase;letter-spacing:.06em;font-size:12px}
+.thisyear ul{list-style:none;margin:0;padding:4px 0;overflow:auto}
+.thisyear li button{display:grid;grid-template-columns:12px 1fr;gap:8px;width:100%;text-align:left;border:0;background:none;padding:6px 10px;font-size:13px;line-height:1.3}
+.thisyear li button:hover{background:var(--faint)}
+.thisyear li .dot{width:8px;height:8px;border-radius:50%;margin-top:5px;background:var(--harm)}
+.thisyear li .dot.led{background:var(--ochre)}
+.thisyear li small{display:block;color:var(--muted);font-size:11px}
+.thisyear .empty{padding:8px 10px;font-size:12px;color:var(--muted);line-height:1.4}
+.thisyear .empty button{border:0;background:none;padding:0;text-decoration:underline;font-size:12px;color:var(--ink)}
+.thisyear.collapsed ul,.thisyear.collapsed .empty{display:none}
+.legend{right:max(64px,calc(env(safe-area-inset-right,0px) + 64px));bottom:max(16px,env(safe-area-inset-bottom,0px));padding:8px 10px;font-size:11px;display:grid;grid-template-columns:auto auto;gap:4px 14px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.sw{display:inline-block;width:18px;height:0;border-top:2px solid var(--ink)}
+.sw.d{border-top-style:dashed}.sw.o{border-top-style:dotted}
+.chip{display:inline-block;font-size:10px;line-height:16px;padding:0 6px;border-radius:9px;border:1px solid currentColor;font-family:var(--f-mono);white-space:nowrap}
+.chip.v{color:var(--ok)}.chip.t{color:var(--warn)}.chip.s{color:var(--ochre)}.chip.c{color:var(--muted)}
+.ring{display:inline-block;width:10px;height:10px;border:2px solid var(--harm);border-radius:2px}
+.led-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ochre)}
+.hint{position:absolute;top:10px;right:max(16px,env(safe-area-inset-right,0px));z-index:3;max-width:300px;padding:8px 32px 8px 10px;font-size:12px;line-height:1.4}
+.hint button{position:absolute;right:4px;top:4px;border:0;background:none;width:24px;height:24px}
+
+/* svg */
+.sec-box{fill:var(--surface);stroke:var(--line)}
+.sec-head{fill:var(--state)}
+.sec-title{fill:var(--state-ink);font-family:var(--f-display);font-stretch:78%;font-weight:700;font-size:18px}
+.sec-sub{fill:var(--state-ink);opacity:.8;font-size:10.5px;font-family:var(--f-body)}
+.sec-fig{fill:var(--ink);font-family:var(--f-mono);font-weight:600;font-size:20px;letter-spacing:-.03em}
+.sec-figcap{fill:var(--muted);font-size:11px}
+.sec-figyr{fill:var(--muted);font-family:var(--f-mono);font-size:10px}
+.sec-take{fill:var(--muted);font-size:11px;font-style:italic}
+.sec-count{fill:var(--muted);font-family:var(--f-mono);font-size:10px}
+.sec.changed .sec-box{stroke:var(--harm);stroke-width:3}
+.sec.ghost{opacity:.16}
+.sec.focus .sec-box{stroke:var(--ink);stroke-width:2}
+.sec{cursor:pointer;transition:opacity .3s}
+.auth-box{fill:var(--ink)}
+.auth-text{fill:var(--surface);font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:18px;letter-spacing:.02em}
+.auth{cursor:pointer}
+.conn{fill:none;stroke:var(--muted);stroke-width:1.2}
+.conn-label{fill:var(--muted);font-size:10px;font-style:italic}
+.lk{fill:none;stroke:var(--ink);stroke-width:1.6;opacity:.55;cursor:pointer}
+.lk.national{stroke-dasharray:6 4}.lk.gap{stroke-dasharray:1.5 4;stroke-linecap:round}
+.lk:hover,.lk.focus{opacity:1;stroke-width:2.6}
+.lk-hit{fill:none;stroke:transparent;stroke-width:14;cursor:pointer}
+.lk-label{font-size:9.5px;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.badge{fill:var(--surface);stroke:var(--ink);cursor:pointer}
+.badge-t{font-family:var(--f-mono);font-size:8px;fill:var(--ink);pointer-events:none}
+.country{fill:var(--country)}
+.country-label{fill:var(--country-ink);font-family:var(--f-display);font-stretch:90%;font-weight:700;font-size:16px;letter-spacing:.08em;text-transform:uppercase}
+.country-sub{fill:var(--country-ink);opacity:.8;font-size:10.5px}
+.led-pin{fill:var(--ochre);cursor:pointer}
+.legal-line{stroke:var(--country-ink);opacity:.35;stroke-dasharray:2 3}
+
+/* foreignObject content (tier 2) */
+.fo{font-family:var(--f-body);color:var(--ink)}
+.mech{display:block;border:1px solid var(--faint);border-left:3px solid var(--line);border-radius:3px;background:var(--surface);padding:3px 5px 4px;margin:0 0 3px;cursor:pointer;font-size:7.2px;line-height:1.25}
+.mech b{display:block;font-size:7.6px;font-weight:600}
+.mech .st{display:block;color:var(--muted)}
+.mech .fig{font-family:var(--f-mono);color:var(--ink);font-weight:500}
+.mech.on{border-left-color:var(--state)}
+.mech.changed{border-left-color:var(--harm);background:color-mix(in srgb,var(--harm) 9%,var(--surface))}
+.mech.off{opacity:.45;border-style:dashed}
+.mech:hover{border-color:var(--ink)}
+.money{font-family:var(--f-mono);font-size:6.8px;color:var(--muted);padding:2px 1px;border-top:1px dashed var(--line);margin-top:2px}
+.money .cut{color:var(--harm)}
+.excards{display:flex;flex-direction:column;gap:3px}
+.ex{background:var(--surface);border:1px solid var(--ink);border-radius:3px;padding:3px 5px;font-size:6.6px;line-height:1.25;cursor:pointer}
+.ex b{display:block;font-size:7px}
+.ex i{font-style:normal;font-family:var(--f-mono);font-size:6px;color:var(--muted)}
+.ledlist{display:flex;flex-direction:column;gap:3px}
+.led{background:var(--country-soft);color:var(--country-ink);border-left:3px solid var(--ochre);border-radius:2px;padding:3px 5px;font-size:7px;line-height:1.25;cursor:pointer}
+.led i{font-style:normal;font-family:var(--f-mono);opacity:.8}
+
+/* ---------- tooltip ---------- */
+#tip{position:fixed;z-index:20;width:min(360px,calc(100vw - 32px));max-height:min(70vh,560px);overflow:auto;background:var(--surface);color:var(--ink);
+  border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:12px 14px 12px;font-size:13px;line-height:1.45;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s}
+#tip.show{opacity:1;transform:none}
+#tip.pinned{pointer-events:auto;border-color:var(--ink)}
+#tip .k{display:flex;justify-content:space-between;gap:8px;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+#tip h3{margin:4px 0 6px;font-family:var(--f-display);font-stretch:82%;font-weight:700;font-size:18px;line-height:1.15;text-wrap:balance}
+#tip p{margin:0 0 8px}
+#tip dl{display:grid;grid-template-columns:max-content 1fr;gap:3px 10px;margin:0 0 8px;font-size:12px}
+#tip dt{color:var(--muted)}
+#tip dd{margin:0}
+#tip .sa{border-left:3px solid var(--line);padding:4px 8px;margin:0 0 8px;font-size:12px;color:var(--muted)}
+#tip .sa b{color:var(--ink);font-weight:600}
+#tip .ledbox{border-left:3px solid var(--ochre);background:var(--ochre-soft);padding:4px 8px;margin:0 0 8px;font-size:12px}
+#tip ul.tl{list-style:none;margin:0 0 8px;padding:0;font-size:12px}
+#tip ul.tl li{display:grid;grid-template-columns:38px 1fr;gap:6px;padding:2px 0;border-top:1px solid var(--faint)}
+#tip ul.tl li span:first-child{font-family:var(--f-mono);color:var(--muted)}
+#tip .src{font-size:11.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+#tip .src a{color:var(--ink)}
+#tip .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;padding-top:8px;border-top:1px solid var(--faint);font-size:11px;color:var(--muted)}
+#tip .foot button{border:1px solid var(--line);background:none;border-radius:5px;padding:3px 8px;font-size:12px}
+#tip .x{position:absolute;right:6px;top:6px;border:0;background:none;width:28px;height:28px;font-size:18px;display:none}
+#tip.pinned .x{display:block}
+#tip.pinned .k{padding-right:26px}
+#tip .fix{margin-top:8px;padding:8px;border:1px dashed var(--line);border-radius:6px;font-size:12px}
+#tip .fix code{font-family:var(--f-mono);font-size:12px;user-select:all;background:var(--faint);padding:1px 4px;border-radius:3px}
+#tip .fix textarea{width:100%;box-sizing:border-box;margin:6px 0;font:12px/1.4 var(--f-mono);background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:6px;resize:vertical;min-height:88px}
+#tip .fix .row{display:flex;flex-wrap:wrap;gap:6px}
+#tip .fix .row a,#tip .fix .row button{border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:3px 8px;font-size:12px;text-decoration:none}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:14px;padding:16px;text-align:center}
+
+@media (max-width:720px){
+  .bar{grid-template-columns:1fr auto}
+  .brand p{display:none}
+  .yearbox{grid-column:1 / -1;order:3}
+  .year{font-size:28px}
+  .legend{display:none}
+  .wheelhint{display:none}
+  .thisyear{max-height:30%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="bar">
+  <div class="brand"><h1 id="siteTitle">Taken, Year by Year</h1><p id="siteSub">How Commonwealth and Northern Territory institutions act on Aboriginal children and families</p></div>
+  <div class="yearbox"><div class="year" id="yearOut" aria-live="polite">2026</div><div class="era"><b id="eraLabel"></b><span id="eraSum"></span></div></div>
+  <div class="ctrls">
+    <button class="btn" id="prevEv" title="Previous recorded change" aria-label="Previous recorded change"><svg viewBox="0 0 16 16"><path d="M3 2h2v12H3zM14 2v12L6 8z"/></svg></button>
+    <button class="btn" id="play" aria-pressed="false" title="Play through time"><svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2l10 6-10 6z"/></svg></button>
+    <button class="btn" id="nextEv" title="Next recorded change" aria-label="Next recorded change"><svg viewBox="0 0 16 16"><path d="M11 2h2v12h-2zM2 2v12l8-6z"/></svg></button>
+    <button class="btn" id="about">About</button>
+  </div>
+  <div class="trackwrap" id="trackwrap">
+    <div class="wheelhint">Scroll here: up goes back in time, down goes forward</div>
+    <div class="eras" id="eras"></div>
+    <div class="ticks" id="ticks"></div>
+    <input type="range" id="slider" min="1824" max="2026" step="1" value="2026" aria-label="Year">
+    <div class="axis" id="axis"></div>
+  </div>
+</header>
+
+<main id="main">
+  <svg id="map" role="img" aria-label="Zoomable map of institutions"></svg>
+  <div class="loading" id="loading">Loading the evidence tables…</div>
+  <nav class="crumbs" id="crumbs" aria-label="Where you are"></nav>
+  <div class="panel hint" id="hint">Scroll on the map to zoom into a section, scroll back to zoom out. Hover for details, click to pin.<button aria-label="Close tip" id="hintX">×</button></div>
+  <section class="panel thisyear" id="thisYear">
+    <header><b id="tyTitle">Changes in 2026</b><button class="btn" id="tyToggle" style="height:24px;padding:0 8px;font-size:12px">Hide</button></header>
+    <ul id="tyList"></ul><div class="empty" id="tyEmpty" hidden></div>
+  </section>
+  <div class="panel legend" id="legend">
+    <span><i class="ring"></i>Changed this year</span><span><i class="led-dot"></i>Aboriginal-led</span>
+    <span><i class="sw"></i>NT evidence</span><span><i class="sw d"></i>National evidence</span>
+    <span><i class="sw o"></i>Gap: needs evidence</span><span><i class="chip v">verified</i> <i class="chip t">to source</i></span>
+  </div>
+  <div class="zoomctl">
+    <button class="btn" id="zin" aria-label="Zoom in">+</button>
+    <button class="btn" id="zout" aria-label="Zoom out">−</button>
+    <button class="btn" id="zfit" aria-label="Show whole map" title="Show whole map"><svg viewBox="0 0 16 16"><path d="M1 1h5v2H3v3H1zM10 1h5v5h-2V3h-3zM1 10h2v3h3v2H1zM13 10h2v5h-5v-2h3z"/></svg></button>
+  </div>
+</main>
+<div id="tip" role="dialog" aria-live="polite"><button class="x" id="tipX" aria-label="Unpin">×</button><div id="tipBody"></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const num = v => (v === "" || v == null) ? null : +v;
+const LIMB = {a:"Killing members of the group (a)", b:"Serious bodily or mental harm (b)", c:"Conditions of life (c)", d:"Preventing births (d)", e:"Forcibly transferring children (e)"};
+const KIND = {nt:"NT evidence", national:"National evidence, NT data needed", gap:"Gap: logical link, no NT figure yet"};
+
+/* geometry of the virtual canvas */
+const COLW = 190, BOXW = 170, BOXH = 250, X0 = 40;
+const Y_AUTH = 30, AUTH_H = 52, Y_SEC = 170, Y_COUNTRY = 610, COUNTRY_H = 150;
+let W = 0, H = Y_COUNTRY + COUNTRY_H + 20;
+
+const state = {year:2026, k:1, kFit:1, pinned:null, playing:null, focusSection:null};
+let D = {};
+
+/* ---------------- load ---------------- */
+const files = ["config","authorities","eras","sections","mechanisms","events","links","examples","money"];
+Promise.all(files.map(f => d3.csv("data/" + f + ".csv"))).then(res => {
+  files.forEach((f,i) => D[f] = res[i]);
+  prepare(); build(); setYear(state.year, true); fit(false);
+  $("loading").remove();
+  if (innerWidth < 720){ $("thisYear").classList.add("collapsed"); $("tyToggle").textContent = "Show"; const h = $("hint"); if (h) h.firstChild.textContent = "Pinch to zoom into a section. Tap anything for details."; }
+}).catch(err => {
+  $("loading").textContent = "The data tables did not load. If you opened this file directly, serve the folder over the web (for example GitHub Pages) so the browser can read data/*.csv.";
+  console.error(err);
+});
+
+function prepare(){
+  const cfg = {}; D.config.forEach(r => cfg[r.key] = r.value); D.cfg = cfg;
+  if (cfg.site_title){ $("siteTitle").textContent = cfg.site_title; }
+  if (cfg.subtitle) $("siteSub").textContent = cfg.subtitle;
+  const y0 = +cfg.start_year || 1824, y1 = +cfg.end_year || 2026;
+  D.y0 = y0; D.y1 = y1; state.year = +cfg.default_year || y1;
+  const sl = $("slider"); sl.min = y0; sl.max = y1;
+  const range = r => { r.start = num(r.start_year); r.end = num(r.end_year); return r; };
+  ["authorities","eras","sections","mechanisms","links"].forEach(t => D[t].forEach(range));
+  D.events.forEach(e => { e.y = +e.year; e.ye = num(e.end_year); });
+  D.examples.forEach(x => x.y = +x.year);
+  D.money.forEach(m => { m.y = +m.year; m.ye = num(m.end_year) ?? m.y; m.amt = +m.amount_aud; });
+  D.sections.forEach(s => {
+    s.col = +s.col;
+    s.x = X0 + (s.col - 1) * COLW; s.y = Y_SEC; s.cx = s.x + BOXW/2;
+    s.eraLabels = (s.era_labels || "").split("|").filter(Boolean).map(t => { const [r, l] = t.split(/:(.+)/); const [a,b] = r.split("-"); return {a:+a, b:b ? +b : 9999, l}; });
+    s.mechs = D.mechanisms.filter(m => m.section === s.id);
+  });
+  D.secById = Object.fromEntries(D.sections.map(s => [s.id, s]));
+  D.mechById = Object.fromEntries(D.mechanisms.map(m => [m.id, m]));
+  D.linkById = Object.fromEntries(D.links.map(l => [l.id, l]));
+  W = X0 * 2 + (d3.max(D.sections, s => s.col) - 1) * COLW + BOXW;
+  D.eventYears = [...new Set(D.events.map(e => e.y))].sort((a,b) => a-b);
+}
+
+const active = (r, y) => (r.start == null || r.start <= y) && (r.end == null || y <= r.end);
+const labelAt = (s, y) => (s.eraLabels.find(e => e.a <= y && y <= e.b) || {}).l || s.label;
+const eraAt = y => D.eras.find(e => active(e, y));
+function parentAt(s, y){ if (y < 1863) return "crown"; if (y < 1911) return "sa"; return s.parent; }
+function authAt(id, y){ return D.authorities.find(a => a.id === id && active(a, y)); }
+function authPos(id){
+  const cw = D.sections.filter(s => s.parent === "cwlth"), nt = D.sections.filter(s => s.parent === "ntg");
+  const mid = arr => (d3.min(arr, s => s.x) + d3.max(arr, s => s.x + BOXW)) / 2;
+  if (id === "cwlth") return {x: mid(cw), y: Y_AUTH};
+  if (id === "ntg") return {x: mid(nt), y: Y_AUTH};
+  return {x: W/2, y: Y_AUTH};
+}
+const fmt$ = v => v >= 1e9 ? "$" + (v/1e9).toFixed(v % 1e9 ? 2 : 0).replace(/\.?0+$/,"") + "B" : v >= 1e6 ? "$" + (v/1e6).toFixed(1).replace(/\.0$/,"") + "M" : v >= 1000 ? "$" + d3.format(",.0f")(v) : "$" + d3.format(",.2f")(v);
+const statusChip = s => s === "verified" ? '<i class="chip v">verified</i>' : s === "testimony" ? '<i class="chip s">testimony</i>' : s ? '<i class="chip t">' + esc(s) + '</i>' : "";
+const srcHtml = (t, u, st) => (t || u) ? '<div class="src">' + statusChip(st) + (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(t || u) + '</a>' : '<span>' + esc(t) + '</span>') + '</div>' : "";
+
+/* ---------------- build svg ---------------- */
+let svg, root, gConn, gAuth, gSec, gLinks, gCountry, zoom;
+function build(){
+  svg = d3.select("#map");
+  const defs = svg.append("defs");
+  defs.append("marker").attr("id","arr").attr("viewBox","0 0 10 10").attr("refX",8).attr("refY",5).attr("markerWidth",7).attr("markerHeight",7).attr("orient","auto-start-reverse")
+    .append("path").attr("d","M0,0L10,5L0,10z").style("fill","var(--ink)");
+  root = svg.append("g");
+  gCountry = root.append("g");
+  gConn = root.append("g");
+  gLinks = root.append("g");
+  gAuth = root.append("g");
+  gSec = root.append("g");
+
+  /* country band */
+  gCountry.append("rect").attr("class","country").attr("x",0).attr("y",Y_COUNTRY).attr("width",W).attr("height",COUNTRY_H).attr("rx",6);
+  gCountry.append("text").attr("class","country-label").attr("x",16).attr("y",Y_COUNTRY + 24).text(D.cfg.country_label || "Country: sovereignty never ceded");
+  gCountry.append("text").attr("class","country-sub").attr("x",16).attr("y",Y_COUNTRY + 40).text("Every institution above stands on this ground. Aboriginal-led responses sit under the section they answer.");
+  D.ledCols = gCountry.selectAll("g.ledcol").data(D.sections).join("g").attr("class","ledcol");
+  D.ledCols.append("g").attr("class","pins");
+  D.ledCols.append("foreignObject").attr("class","ledfo").attr("x", s => s.x).attr("y", Y_COUNTRY + 52).attr("width", BOXW).attr("height", COUNTRY_H - 58)
+    .append("xhtml:div").attr("class","fo ledlist");
+
+  /* authorities */
+  gAuth.selectAll("g").data(["crown","sa","cwlth","ntg"]).join("g").attr("class","auth").attr("data-id", d => d).each(function(id){
+    const g = d3.select(this);
+    g.append("rect").attr("class","auth-box").attr("rx",4).attr("height",AUTH_H);
+    g.append("text").attr("class","auth-text").attr("y", AUTH_H/2 + 5).attr("text-anchor","middle");
+  }).on("pointerenter", (ev,id) => hover(ev, () => tipAuthority(id), "A-" + id))
+    .on("pointermove", moveTip).on("pointerleave", leave)
+    .on("click", (ev,id) => { ev.stopPropagation(); pin(ev, () => tipAuthority(id), "A-" + id); });
+
+  /* sections */
+  const sec = gSec.selectAll("g.sec").data(D.sections).join("g").attr("class","sec").attr("transform", s => `translate(${s.x},${s.y})`);
+  sec.append("rect").attr("class","sec-box").attr("width",BOXW).attr("height",BOXH).attr("rx",5);
+  sec.append("path").attr("class","sec-head").attr("d", `M0,5a5,5 0 0 1 5,-5h${BOXW-10}a5,5 0 0 1 5,5v59h-${BOXW}z`);
+  sec.append("text").attr("class","sec-title").attr("x",10).attr("y",20);
+  sec.append("text").attr("class","sec-sub").attr("x",10).attr("y",56);
+  sec.append("text").attr("class","sec-take").attr("x",10).attr("y",82);
+  sec.append("text").attr("class","sec-count").attr("x",10).attr("y",BOXH - 12);
+  const ov = sec.append("g").attr("class","overview");
+  ov.append("text").attr("class","sec-figyr").attr("x",10).attr("y",112);
+  ov.append("text").attr("class","sec-fig").attr("x",10).attr("y",140);
+  ov.append("text").attr("class","sec-figcap").attr("x",10).attr("y",160);
+  sec.append("foreignObject").attr("class","mechfo").attr("x",6).attr("y",70).attr("width",BOXW-12).attr("height",BOXH-88)
+    .append("xhtml:div").attr("class","fo mechs");
+  sec.on("pointerenter", (ev,s) => hover(ev, () => tipSection(s), "S-" + s.id))
+     .on("pointermove", moveTip).on("pointerleave", leave)
+     .on("click", (ev,s) => { ev.stopPropagation(); zoomToSection(s); pin(ev, () => tipSection(s), "S-" + s.id); });
+
+  zoom = d3.zoom().scaleExtent([0.2, 9]).on("zoom", ev => {
+    root.attr("transform", ev.transform); state.k = ev.transform.k; state.t = ev.transform; semantic(); crumbs();
+  });
+  svg.call(zoom).on("dblclick.zoom", null);
+  svg.on("click", () => unpin());
+  window.addEventListener("resize", () => { if (state.k / state.kFit < 1.2) fit(false); });
+
+  /* time bar */
+  const span = D.y1 - D.y0;
+  $("eras").innerHTML = D.eras.map(e => `<div data-era="${e.id}" style="width:${((Math.min(e.end ?? D.y1, D.y1) - e.start + 1) / (span + 1) * 100).toFixed(3)}%" title="${esc(e.label)}">${esc(e.label)}</div>`).join("");
+  const pos = y => ((y - D.y0) / span * 100).toFixed(3) + "%";
+  const byYear = d3.group(D.events, e => e.y);
+  $("ticks").innerHTML = [...byYear].map(([y, es]) => `<i class="${es.some(e => e.aboriginal_led === "yes") ? "tk-led" : es.some(e => e.type === "violence" || e.type === "death") ? "tk-harm" : ""}" style="left:${pos(y)}"></i>`).join("");
+  const axisYears = [1824, 1863, 1911, 1953, 1978, 2007, 2026].filter(y => y >= D.y0 && y <= D.y1);
+  $("axis").innerHTML = axisYears.map(y => `<span style="left:${pos(y)}">${y}</span>`).join("");
+  $("slider").addEventListener("input", e => setYear(+e.target.value));
+  let acc = 0;
+  $("trackwrap").addEventListener("wheel", e => {
+    e.preventDefault(); acc += e.deltaY;
+    const step = Math.trunc(acc / 90);
+    if (step){ acc -= step * 90; setYear(state.year + step); }
+  }, {passive:false});
+  $("prevEv").onclick = () => { const y = [...D.eventYears].reverse().find(y => y < state.year); if (y) setYear(y); };
+  $("nextEv").onclick = () => { const y = D.eventYears.find(y => y > state.year); if (y) setYear(y); };
+  $("play").onclick = togglePlay;
+  $("zin").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1.6);
+  $("zout").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.6);
+  $("zfit").onclick = () => fit(true);
+  $("hintX").onclick = () => $("hint").remove();
+  $("tyToggle").onclick = () => { const c = $("thisYear").classList.toggle("collapsed"); $("tyToggle").textContent = c ? "Show" : "Hide"; };
+  $("tipX").onclick = e => { e.stopPropagation(); unpin(); };
+  $("about").onclick = e => { e.stopPropagation(); pinCentered(tipAbout, "ABOUT"); };
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") unpin();
+    if (e.target.closest && e.target.closest("textarea,input,button")) return;
+    if (e.key === "ArrowLeft"){ setYear(state.year - 1); } if (e.key === "ArrowRight"){ setYear(state.year + 1); }
+  });
+}
+
+function fit(animate){
+  const r = svg.node().getBoundingClientRect();
+  const pad = 70;
+  const reserve = r.width > 720 ? 150 : 110;
+  const k = Math.min((r.width - 32) / W, (r.height - pad - reserve) / H);
+  state.kFit = k;
+  let t = d3.zoomIdentity.translate((r.width - W * k) / 2, pad).scale(k);
+  if (r.width < 720){ const kp = Math.max(k, 0.4); state.kFit = kp; t = d3.zoomIdentity.translate(16 - authPos("ntg").x * kp + r.width / 2 - 16, pad).scale(kp); }
+  (animate ? svg.transition().duration(500) : svg).call(zoom.transform, t);
+}
+function zoomTo(cx, cy, rel){
+  const r = svg.node().getBoundingClientRect();
+  const k = Math.min(state.kFit * rel, 9);
+  const t = d3.zoomIdentity.translate(r.width/2 - cx * k, r.height/2 - cy * k).scale(k);
+  svg.transition().duration(600).call(zoom.transform, t);
+}
+function zoomToSection(s){
+  const r = svg.node().getBoundingClientRect();
+  const rel = Math.max(2.4, Math.min((r.height * 0.86) / ((BOXH + 140) * state.kFit), (r.width * 0.5) / (BOXW * state.kFit)));
+  if (state.k / state.kFit < 2.2) zoomTo(s.cx, s.y + BOXH/2 + 40, rel);
+}
+
+/* ---------------- semantic zoom ---------------- */
+function semantic(){
+  const rel = state.k / state.kFit;
+  gSec.selectAll(".mechfo").style("display", rel >= 1.9 ? null : "none");
+  gSec.selectAll(".sec-take,.overview").style("display", rel < 1.9 ? null : "none");
+  gLinks.selectAll(".lk-label").style("display", rel >= 1.35 ? null : "none");
+  gLinks.selectAll(".exfo").style("display", rel >= 2.6 ? null : "none");
+  gLinks.selectAll(".badge,.badge-t").style("display", rel >= 2.6 ? "none" : null);
+  gCountry.selectAll(".ledfo").style("display", rel >= 1.9 ? null : "none");
+  gCountry.selectAll(".pins").style("display", rel < 1.9 ? null : "none");
+}
+function crumbs(){
+  const rel = state.k / state.kFit, el = $("crumbs");
+  let html = rel > 1.15 ? '<button id="cbHome">Whole map</button>' : '<span class="here">Whole map</span>';
+  let here = null;
+  if (rel >= 1.6 && state.t){
+    const r = svg.node().getBoundingClientRect();
+    const [cx] = state.t.invert([r.width/2, r.height/2]);
+    here = D.sections.find(s => cx >= s.x - (COLW - BOXW)/2 && cx <= s.x + BOXW + (COLW - BOXW)/2);
+  }
+  if (here) html += '<span class="sep">›</span><span class="here">' + esc(labelAt(here, state.year)) + '</span>';
+  el.innerHTML = html;
+  const b = $("cbHome"); if (b) b.onclick = () => fit(true);
+  gSec.selectAll(".sec").classed("focus", s => s === here);
+}
+
+/* ---------------- time ---------------- */
+function setYear(y, force){
+  y = Math.max(D.y0, Math.min(D.y1, Math.round(y)));
+  if (y === state.year && !force) return;
+  state.year = y;
+  $("slider").value = y; $("yearOut").textContent = y;
+  const era = eraAt(y);
+  $("eraLabel").textContent = era ? era.label : ""; $("eraSum").textContent = era ? era.summary : "";
+  document.querySelectorAll("#eras div").forEach(d => d.classList.toggle("on", era && d.dataset.era === era.id));
+  render();
+  if (state.pinned && state.pinned.fn){ $("tipBody").innerHTML = state.pinned.fn(); wireTip(); }
+}
+function togglePlay(){
+  const b = $("play");
+  if (state.playing){ clearInterval(state.playing); state.playing = null; b.setAttribute("aria-pressed","false"); $("playIcon").innerHTML = '<path d="M4 2l10 6-10 6z"/>'; return; }
+  if (state.year >= D.y1) setYear(D.y0);
+  b.setAttribute("aria-pressed","true"); $("playIcon").innerHTML = '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>';
+  state.playing = setInterval(() => { if (state.year >= D.y1) return togglePlay(); setYear(state.year + 1); }, 350);
+}
+
+function render(){
+  const y = state.year;
+  /* authorities */
+  gAuth.selectAll(".auth").each(function(id){
+    const a = authAt(id, y), g = d3.select(this);
+    g.style("display", a ? null : "none"); if (!a) return;
+    const p = authPos(id), label = a.label, w = Math.max(220, label.length * 9.6 + 44); state.authW = state.authW || {}; state.authW[id] = w;
+    g.attr("transform", `translate(${p.x - w/2},${p.y})`);
+    g.select("rect").attr("width", w); g.select("text").attr("x", w/2).text(label);
+  });
+  /* connectors */
+  const secs = D.sections.filter(s => active(s, y));
+  const conns = secs.map(s => ({s, p: authPos(parentAt(s, y))}));
+  gConn.selectAll("path.conn-sec").data(conns, d => d.s.id).join("path").attr("class","conn conn-sec")
+    .attr("d", d => { const x1 = d.p.x, y1 = d.p.y + AUTH_H, x2 = d.s.cx, y2 = Y_SEC, my = (y1 + y2) / 2 + 6; return `M${x1},${y1}V${my}H${x2}V${y2}`; });
+  const cw = authAt("cwlth", y), nt = authAt("ntg", y);
+  const between = (cw && nt) ? [{a: authPos("cwlth"), b: authPos("ntg"), t: y < 1978 ? "runs the Territory directly" : "funds most of the NT budget"}] : [];
+  gConn.selectAll("g.cn").data(between).join(en => { const g = en.append("g").attr("class","cn"); g.append("path").attr("class","conn").attr("marker-end","url(#arr)"); g.append("text").attr("class","conn-label").attr("text-anchor","middle"); return g; })
+    .each(function(d){ const g = d3.select(this); const xa = d.a.x + state.authW.cwlth/2 + 6, xb = d.b.x - state.authW.ntg/2 - 8, yy = d.a.y + AUTH_H/2;
+      g.select("path").attr("d", `M${xa},${yy}H${xb}`); g.select("text").attr("x", (xa + xb)/2).attr("y", yy - 6).text(d.t); });
+
+  /* sections */
+  const evY = D.events.filter(e => e.y === y);
+  gSec.selectAll(".sec").each(function(s){
+    const g = d3.select(this), on = active(s, y);
+    g.classed("ghost", !on).classed("changed", on && evY.some(e => e.section === s.id));
+    const tl = wrapWords(s.label, 18).slice(0, 2); g.select(".sec-title").selectAll("tspan").data(tl).join("tspan").attr("x",10).attr("dy",(d,i) => i ? 17 : 0).text(d => d);
+    g.select(".sec-sub").text(on ? fitText(labelAt(s, y), 30) : (s.start > y ? "From " + s.start : "Ended " + s.end));
+    g.select(".sec-take").text(on ? fitText("Takes: " + s.what_it_takes, 30) : "");
+    const hf = on ? D.events.filter(e => e.section === s.id && e.figure && e.y <= y && e.status !== "testimony").sort((a,b) => b.y - a.y)[0] : null;
+    g.select(".sec-fig").text(hf ? fitText(hf.figure, 15) : "");
+    g.select(".sec-figcap").selectAll("tspan").data(hf ? wrapWords(hf.title, 28).slice(0, 3) : []).join("tspan").attr("x",10).attr("dy",(d,i) => i ? 14 : 0).text(d => d);
+    g.select(".sec-figyr").text(hf ? (hf.y === y ? "This year" : "Latest figure, " + hf.y) : (on ? "No figure recorded yet" : ""));
+    const am = s.mechs.filter(m => active(m, y));
+    const nEv = D.events.filter(e => e.section === s.id && e.y <= y).length;
+    g.select(".sec-count").text(on ? `${am.length} active · ${nEv} records to ${y}` : "");
+    g.select(".mechs").html(on ? mechHtml(s, y) : "");
+    g.selectAll(".mech").on("pointerenter", function(ev){ ev.stopPropagation(); const m = D.mechById[this.dataset.id]; hover(ev, () => tipMech(m), "M-" + m.id); })
+      .on("pointermove", moveTip).on("pointerleave", function(ev){ ev.stopPropagation(); hoverSectionAgain(ev, s); })
+      .on("click", function(ev){ ev.stopPropagation(); const m = D.mechById[this.dataset.id]; pin(ev, () => tipMech(m), "M-" + m.id); });
+  });
+
+  /* links */
+  const lks = D.links.filter(l => active(l, y) && D.secById[l.from] && D.secById[l.to] && active(D.secById[l.from], y) && active(D.secById[l.to], y));
+  lks.forEach(l => { const a = D.secById[l.from], b = D.secById[l.to]; const x1 = a.cx + (b.cx > a.cx ? 18 : -18), x2 = b.cx + (b.cx > a.cx ? -18 : 18);
+    const yb = Y_SEC + BOXH; const depth = 26 + Math.min(Math.abs(x2 - x1) * 0.08, 118) + (l.id.length % 3) * 8;
+    l.path = `M${x1},${yb}C${x1},${yb + depth} ${x2},${yb + depth} ${x2},${yb + 4}`; l.mx = (x1 + x2)/2; l.my = yb + depth * 0.75; });
+  const lg = gLinks.selectAll("g.lkg").data(lks, l => l.id).join(en => {
+    const g = en.append("g").attr("class","lkg");
+    g.append("path").attr("class", l => "lk " + l.evidence).attr("marker-end","url(#arr)");
+    g.append("path").attr("class","lk-hit");
+    g.append("text").attr("class","lk-label").attr("text-anchor","middle");
+    g.append("circle").attr("class","badge").attr("r",7);
+    g.append("text").attr("class","badge-t").attr("text-anchor","middle").attr("dy",3);
+    g.append("foreignObject").attr("class","exfo").attr("width",120).attr("height",120).append("xhtml:div").attr("class","fo excards");
+    return g;
+  });
+  lg.select(".lk").attr("d", l => l.path); lg.select(".lk-hit").attr("d", l => l.path);
+  lg.select(".lk-label").attr("x", l => l.mx).attr("y", l => l.my - 10).text(l => l.label);
+  const exFor = l => D.examples.filter(x => x.attach_to === "link" && x.attach_id === l.id && x.y <= y);
+  lg.select(".badge").attr("cx", l => l.mx).attr("cy", l => l.my).style("visibility", l => exFor(l).length ? null : "hidden");
+  lg.select(".badge-t").attr("x", l => l.mx).attr("y", l => l.my).text(l => exFor(l).length || "");
+  lg.select(".exfo").attr("x", l => l.mx - 60).attr("y", l => l.my - 4).attr("height", l => 6 + exFor(l).length * 34)
+    .select("div").html(l => exFor(l).map(x => `<div class="ex" data-id="${x.id}"><i>${esc(x.kind)} · ${x.y}</i><b>${esc(x.title)}</b></div>`).join(""));
+  lg.selectAll(".lk-hit,.badge").on("pointerenter", (ev,l) => { hover(ev, () => tipLink(l), "L-" + l.id); gLinks.selectAll(".lk").classed("focus", d => d === l); })
+    .on("pointermove", moveTip).on("pointerleave", ev => { leave(ev); gLinks.selectAll(".lk").classed("focus", false); })
+    .on("click", (ev,l) => { ev.stopPropagation(); zoomTo(l.mx, l.my, 3.2); pin(ev, () => tipLink(l), "L-" + l.id); });
+  lg.selectAll(".ex").on("pointerenter", function(ev){ ev.stopPropagation(); const x = D.examples.find(d => d.id === this.dataset.id); hover(ev, () => tipExample(x), "X-" + x.id); })
+    .on("pointermove", moveTip).on("pointerleave", leave)
+    .on("click", function(ev){ ev.stopPropagation(); const x = D.examples.find(d => d.id === this.dataset.id); pin(ev, () => tipExample(x), "X-" + x.id); });
+
+  /* country band */
+  D.ledCols.each(function(s){
+    const led = D.events.filter(e => e.section === s.id && e.aboriginal_led === "yes" && e.y <= y).sort((a,b) => b.y - a.y);
+    const g = d3.select(this);
+    g.select(".pins").selectAll("circle").data(led.slice(0, 6), e => e.id).join("circle").attr("class","led-pin")
+      .attr("cx", (e,i) => s.x + 12 + i * 16).attr("cy", Y_COUNTRY + 70).attr("r", 5.5)
+      .on("pointerenter", (ev,e) => hover(ev, () => tipEvent(e), "E-" + e.id)).on("pointermove", moveTip).on("pointerleave", leave)
+      .on("click", (ev,e) => { ev.stopPropagation(); pin(ev, () => tipEvent(e), "E-" + e.id); });
+    g.select(".ledlist").html(led.slice(0, 3).map(e => `<div class="led" data-id="${e.id}"><i>${e.y}</i> ${esc(e.title)}</div>`).join(""));
+    g.selectAll(".led").on("pointerenter", function(ev){ const e = D.events.find(d => d.id === this.dataset.id); hover(ev, () => tipEvent(e), "E-" + e.id); })
+      .on("pointermove", moveTip).on("pointerleave", leave)
+      .on("click", function(ev){ ev.stopPropagation(); const e = D.events.find(d => d.id === this.dataset.id); pin(ev, () => tipEvent(e), "E-" + e.id); });
+  });
+
+  semantic(); crumbs(); thisYear(evY);
+}
+function wrapWords(t, n){ const out = []; let cur = ""; String(t).split(" ").forEach(w => { if ((cur + " " + w).trim().length > n && cur){ out.push(cur); cur = w; } else cur = (cur + " " + w).trim(); }); if (cur) out.push(cur); return out; }
+function fitText(t, n){ t = String(t || ""); return t.length > n ? t.slice(0, n - 1).trimEnd() + "…" : t; }
+function latestEvent(mid, y){ return D.events.filter(e => e.mechanism === mid && e.y <= y).sort((a,b) => b.y - a.y || (b.date > a.date ? 1 : -1))[0]; }
+function mechHtml(s, y){
+  const rows = s.mechs.slice().sort((a,b) => (active(b,y) - active(a,y)) || (a.start - b.start)).slice(0, 6).map(m => {
+    const on = active(m, y), le = on ? latestEvent(m.id, y) : null, ch = D.events.some(e => e.mechanism === m.id && e.y === y);
+    const st = !on ? (m.start > y ? "From " + m.start : "Ended " + m.end) : le ? `${le.y}: ${fitText(le.title, 54)}` : "In place";
+    const fig = on && le && le.figure ? ` <span class="fig">${esc(fitText(le.figure, 26))}</span>` : "";
+    return `<div class="mech ${on ? "on" : "off"} ${ch ? "changed" : ""}" data-id="${m.id}"><b>${esc(m.label)}</b><span class="st">${esc(st)}${fig}</span></div>`;
+  });
+  const money = D.money.filter(m => m.section === s.id && m.y <= y && y <= m.ye).slice(0, 2)
+    .map(m => `<div><span class="${m.direction === "cut" ? "cut" : ""}">${m.direction === "cut" ? "cut " : ""}${fmt$(m.amt)}</span> ${esc(fitText(m.label, 34))}</div>`).join("");
+  return rows.join("") + (money ? `<div class="money">${money}</div>` : "");
+}
+function thisYear(evY){
+  const y = state.year;
+  $("tyTitle").textContent = "Changes in " + y;
+  const list = $("tyList"), empty = $("tyEmpty");
+  if (evY.length){
+    empty.hidden = true;
+    list.innerHTML = evY.map(e => `<li><button data-id="${e.id}"><i class="dot ${e.aboriginal_led === "yes" ? "led" : ""}"></i><span>${esc(e.title)}<small>${esc(labelAt(D.secById[e.section], y))}${e.status !== "verified" ? " · " + esc(e.status) : ""}</small></span></button></li>`).join("");
+    list.querySelectorAll("button").forEach(b => b.onclick = ev => { ev.stopPropagation(); const e = D.events.find(d => d.id === b.dataset.id); const s = D.secById[e.section]; if (s) zoomToSection(s); pinCentered(() => tipEvent(e), "E-" + e.id); });
+  } else {
+    list.innerHTML = ""; empty.hidden = false;
+    const prev = [...D.eventYears].reverse().find(v => v < y), next = D.eventYears.find(v => v > y);
+    empty.innerHTML = `No change is recorded for ${y} yet. That can be a gap in the research rather than a quiet year.` +
+      (prev || next ? `<br>Nearest records: ${prev ? `<button data-y="${prev}">${prev}</button>` : ""}${prev && next ? " · " : ""}${next ? `<button data-y="${next}">${next}</button>` : ""}` : "");
+    empty.querySelectorAll("button").forEach(b => b.onclick = () => setYear(+b.dataset.y));
+  }
+}
+
+/* ---------------- tooltip ---------------- */
+const tip = $("tip"), body = $("tipBody");
+let lastPt = {x:0, y:0};
+function hover(ev, fn, code){ if (state.pinned) return; body.innerHTML = fn(); tip.classList.add("show"); tip.dataset.code = code; moveTip(ev); }
+function moveTip(ev){ if (state.pinned) return; lastPt = {x: ev.clientX, y: ev.clientY}; place(ev.clientX, ev.clientY); }
+function place(x, y){
+  const r = tip.getBoundingClientRect(), vw = innerWidth, vh = innerHeight, m = 16;
+  let left = x + 18, top = y + 18;
+  if (left + r.width > vw - m) left = x - r.width - 18;
+  if (left < m) left = m;
+  if (top + r.height > vh - m) top = Math.max(m, vh - r.height - m);
+  tip.style.left = left + "px"; tip.style.top = top + "px";
+}
+function leave(){ if (state.pinned) return; tip.classList.remove("show"); }
+function hoverSectionAgain(ev, s){ if (state.pinned) return; body.innerHTML = tipSection(s); }
+function pin(ev, fn, code){
+  state.pinned = {fn, code}; body.innerHTML = fn(); tip.classList.add("show","pinned"); tip.dataset.code = code;
+  place(ev.clientX || innerWidth/2, ev.clientY || 120); wireTip();
+}
+function pinCentered(fn, code){
+  state.pinned = {fn, code}; body.innerHTML = fn(); tip.classList.add("show","pinned"); tip.dataset.code = code;
+  const r = tip.getBoundingClientRect(); tip.style.left = Math.max(16, (innerWidth - r.width)/2) + "px"; tip.style.top = Math.max(16, innerHeight * 0.18) + "px"; wireTip();
+}
+function unpin(){ state.pinned = null; tip.classList.remove("pinned","show"); }
+tip.addEventListener("click", e => e.stopPropagation());
+function wireTip(){
+  const fixBtn = body.querySelector("[data-fix]");
+  if (fixBtn) fixBtn.onclick = () => { if (!state.pinned) return; const box = body.querySelector(".fix"); if (box){ box.hidden = !box.hidden; return; } };
+  body.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => {
+    const t = b.dataset.copy === "email" ? (D.cfg.contact_email || "") : body.querySelector(".fix textarea").value;
+    const done = () => { b.textContent = "Copied"; setTimeout(() => b.textContent = b.dataset.label, 1400); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(done).catch(() => select(b)); else select(b);
+  });
+  body.querySelectorAll("[data-goto]").forEach(b => b.onclick = () => setYear(+b.dataset.goto));
+}
+function select(b){ const ta = body.querySelector(".fix textarea"); if (ta){ ta.focus(); ta.select(); } }
+function foot(code, title){
+  const email = D.cfg.contact_email || "", y = state.year;
+  const subject = `Correction ${code} (${y}): ${title}`;
+  const msg = `Item: ${code}\nYear viewed: ${y}\nTitle: ${title}\n\nWhat should change:\n\nSource (link or document):\n\nCan we credit you? (yes/no, name):\n`;
+  const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+  return `<div class="foot"><span>${state.pinned ? "Code " + esc(code) : "Click to pin · code " + esc(code)}</span>${state.pinned ? '<button data-fix>Suggest a correction</button>' : ""}</div>` +
+    (state.pinned ? `<div class="fix" hidden><div>${esc(D.cfg.contact_note || "Email a correction with the item code.")}</div>
+      <div style="margin-top:6px">Send to <code>${esc(email)}</code></div>
+      <textarea aria-label="Message to copy">${esc(msg)}</textarea>
+      <div class="row"><button data-copy="msg" data-label="Copy message">Copy message</button><button data-copy="email" data-label="Copy address">Copy address</button><a href="${esc(mailto)}" target="_blank" rel="noopener">Open in email app</a></div></div>` : "");
+}
+const head = (kicker, right, title) => `<div class="k"><span>${esc(kicker)}</span><span>${esc(right || "")}</span></div><h3>${esc(title)}</h3>`;
+
+function tipSection(s){
+  const y = state.year, on = active(s, y), par = authAt(parentAt(s, y), y);
+  if (!on) return head("Section", y, s.label) + `<p>${s.start > y ? "Not yet established in " + y + ". Shown from " + s.start + "." : "No longer operating in " + y + "."}</p>` + foot("S-" + s.id, s.label);
+  const am = s.mechs.filter(m => active(m, y));
+  const evs = D.events.filter(e => e.section === s.id && e.y <= y).sort((a,b) => b.y - a.y).slice(0, 4);
+  const money = D.money.filter(m => m.section === s.id && m.y <= y && y <= m.ye);
+  const led = D.events.filter(e => e.section === s.id && e.aboriginal_led === "yes" && e.y <= y).sort((a,b) => b.y - a.y)[0];
+  const rel = state.k / state.kFit;
+  return head("Run by " + (par ? par.label : "—"), y, labelAt(s, y)) +
+    `<p>${esc(s.summary)}</p><dl><dt>What it takes</dt><dd>${esc(s.what_it_takes)}</dd>${s.stages ? `<dt>Journey stage</dt><dd>${esc(s.stages.split("|").join(", "))}</dd>` : ""}<dt>Mechanisms</dt><dd>${am.length ? am.map(m => esc(m.label)).join("; ") : "None recorded yet"}</dd></dl>` +
+    (evs.length ? `<ul class="tl">${evs.map(e => `<li><span>${e.y}</span><span>${esc(e.title)}</span></li>`).join("")}</ul>` : "") +
+    (money.length ? `<dl>${money.map(m => `<dt>${m.direction === "cut" ? "Cut" : "Money"}</dt><dd>${fmt$(m.amt)} ${esc(m.kind)} · ${esc(m.label)} ${statusChip(m.status)}</dd>`).join("")}</dl>` : "") +
+    (led ? `<div class="ledbox"><b>Aboriginal-led:</b> ${esc(led.title)} (${led.y})</div>` : "") +
+    (rel < 1.9 ? `<p style="color:var(--muted);font-size:12px">Scroll over this section to zoom in and see each mechanism.</p>` : "") + foot("S-" + s.id, s.label);
+}
+function tipMech(m){
+  const y = state.year, s = D.secById[m.section], on = active(m, y);
+  const evs = D.events.filter(e => e.mechanism === m.id).sort((a,b) => a.y - b.y);
+  const past = evs.filter(e => e.y <= y), le = past[past.length - 1], future = evs.filter(e => e.y > y);
+  return head(labelAt(s, y), (m.start ?? "") + "–" + (m.end ?? "now"), m.label) +
+    `<p>${esc(m.summary)}</p><dl>${m.what_it_takes ? `<dt>What it takes</dt><dd>${esc(m.what_it_takes)}</dd>` : ""}${m.limb ? `<dt>Convention limb argued</dt><dd>${esc(LIMB[m.limb] || m.limb)}</dd>` : ""}<dt>In ${y}</dt><dd>${on ? (le ? esc(le.title) + (le.figure ? " · " + esc(le.figure) : "") : "In place, no change recorded") : (m.start > y ? "Not yet in place" : "Ended")}</dd></dl>` +
+    (past.length ? `<ul class="tl">${past.slice(-6).reverse().map(e => `<li><span>${e.y}</span><span>${esc(e.title)}${e.figure ? " · " + esc(e.figure) : ""} ${statusChip(e.status)}</span></li>`).join("")}</ul>` : "") +
+    (le && le.state_account ? `<div class="sa"><b>State's account:</b> ${esc(le.state_account)}</div>` : "") +
+    (le ? srcHtml(le.source_title, le.source_url, le.status) : "") +
+    (future.length && state.pinned ? `<p style="font-size:12px;color:var(--muted);margin-top:8px">Next recorded change: <button data-goto="${future[0].y}" style="border:0;background:none;padding:0;text-decoration:underline">${future[0].y}</button></p>` : "") +
+    foot("M-" + m.id, m.label);
+}
+function tipEvent(e){
+  const s = D.secById[e.section];
+  return head(e.type + " · " + (s ? labelAt(s, e.y) : ""), e.date || e.y, e.title) +
+    (e.detail ? `<p>${esc(e.detail)}</p>` : "") +
+    `<dl>${e.actor ? `<dt>Who acted</dt><dd>${esc(e.actor)}</dd>` : ""}${e.what_it_takes ? `<dt>What it takes</dt><dd>${esc(e.what_it_takes)}</dd>` : ""}${e.figure ? `<dt>Figure</dt><dd>${esc(e.figure)}</dd>` : ""}${e.limb ? `<dt>Limb argued</dt><dd>${esc(LIMB[e.limb] || e.limb)}</dd>` : ""}</dl>` +
+    (e.aboriginal_led === "yes" ? `<div class="ledbox"><b>Aboriginal-led</b></div>` : "") +
+    (e.state_account ? `<div class="sa"><b>State's account:</b> ${esc(e.state_account)}</div>` : "") +
+    srcHtml(e.source_title, e.source_url, e.status) + foot(e.id, e.title);
+}
+function tipLink(l){
+  const a = D.secById[l.from], b = D.secById[l.to], y = state.year;
+  const ex = D.examples.filter(x => x.attach_to === "link" && x.attach_id === l.id && x.y <= y);
+  return head("Link · " + (KIND[l.evidence] || l.evidence), (l.start ?? "") + "–" + (l.end ?? "now"), l.label) +
+    `<p><b>${esc(labelAt(a, y))}</b> → <b>${esc(labelAt(b, y))}</b></p><p>${esc(l.summary)}</p>` +
+    (l.figure ? `<dl><dt>Figure</dt><dd>${esc(l.figure)}</dd></dl>` : "") +
+    (ex.length ? `<dl><dt>Examples</dt><dd>${ex.length} — zoom in on the link to read them</dd></dl>` : "") +
+    srcHtml(l.source_title, l.source_url, l.evidence === "gap" ? "to source" : "verified") + foot("L-" + l.id, l.label);
+}
+function tipExample(x){
+  return head(x.kind + " · example", x.y, x.title) + `<p>${esc(x.text)}</p><dl><dt>Consent</dt><dd>${esc(x.consent)}</dd></dl>` +
+    srcHtml(x.source_title, x.source_url, x.kind === "composite" ? "composite" : "verified") + foot("X-" + x.id, x.title);
+}
+function tipAuthority(id){
+  const a = authAt(id, state.year); if (!a) return "";
+  return head("Authority", (a.start ?? "") + "–" + (a.end ?? "now"), a.label) + `<p>${esc(a.summary)}</p>` + srcHtml(a.source_title, a.source_url, "verified") + foot("A-" + id, a.label);
+}
+function tipAbout(){
+  return head("About", "", "How to read this map") +
+    `<p>Each box is an institution run by the Commonwealth or the NT, placed under the government that runs it in the year you choose. Every institution stands on Country, which was never ceded. Aboriginal-led responses sit in that band, under the section they answer.</p>
+     <p>Sentences name the institution that acts and what it takes. Government positions are labelled <b>State's account</b>. Testimony is shown as testimony, beside official figures. Every item carries a status: <i class="chip v">verified</i> has a linked source, <i class="chip t">to source</i> still needs one.</p>
+     <p>Arrows between boxes show how one system feeds another. Solid arrows rest on NT evidence, dashed on national evidence, dotted mark a link communities report that still needs a figure. Zoom into an arrow to read examples: public records, or composites built from several cases and labelled as such.</p>
+     <p>All content comes from CSV tables in the <code>data</code> folder, so anyone maintaining the site can add rows without touching code.</p>` + foot("ABOUT", "About this map");
+}
+})();
+</script>
