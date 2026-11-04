@@ -279,12 +279,13 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 }
 @media (min-width:901px){ #sideBtn{display:none} #pop{display:none!important} }
 @media (max-width:720px){
-  .bar{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"identity year" "ctrls ctrls" "track track";gap:4px 12px}
+  .bar{grid-template-columns:minmax(0,1fr) minmax(0,34vw);grid-template-areas:"identity year" "ctrls ctrls" "track track";gap:4px 10px;padding-right:max(38px,env(safe-area-inset-right,0px))}
   .site-title{font-size:17px}
-  .brand{font-size:11px;white-space:normal}
-  .yearbox{align-self:start;gap:6px}
+  .brand{font-size:11px;white-space:normal;overflow:visible}
+  .yearbox{align-self:start;width:100%;flex-direction:column;align-items:flex-start;gap:3px;overflow:hidden}
   .year{font-size:21px}
-  .era{flex-direction:column;align-items:flex-start;gap:1px}
+  .era{width:100%;flex-direction:column;align-items:flex-start;gap:1px}
+  .era b{max-width:100%;white-space:normal;overflow:visible;text-overflow:clip}
   .ctrls{justify-content:flex-start;gap:4px}
   .btn{height:30px;min-width:30px;padding:0 8px;font-size:12px}
   .btn.mode{height:32px;padding:0 10px;font-size:13px}
@@ -292,6 +293,7 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
   .era span{display:none}
   .moneysum{bottom:52px;left:8px;right:8px;width:auto;font-size:11.5px}
 }
+@media (max-width:720px) and (orientation:portrait){ .brand{display:none} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
