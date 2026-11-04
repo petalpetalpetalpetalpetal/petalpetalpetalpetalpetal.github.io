@@ -7,8 +7,9 @@ A one-page power map of the Commonwealth and Northern Territory institutions tha
 - **Departments:** zoomed out, each box shows its funding for the year; zoomed in, every recorded change up to that year.
 - **Companies, contractors and charities:** a middle band.
 - **Country:** Aboriginal-controlled organisations and nations.
-- **Funding button:** blue view of payments, cuts and results. Click any box or line to follow only that money.
-- **Deaths button:** red view of deaths, injuries, rates and odds recorded in each system.
+- **Funded button:** blue view of payments, cuts and results. Click any box or line to follow only that money.
+- **Divested button:** red view of money cut, withheld or diverted (flows with kind cut, diverted or withheld).
+- **Deaths and harm** (`harm.csv`) appear in each box’s list of changes with a content note, and as a red count on the box.
 - **Search:** words plus one year, a range, before or after.
 - **Sidebar (desktop):** Details, Saved (pins kept in the viewer's browser) and Who held power. On phones, tap for a pop-up; the Panel button opens the sidebar.
 

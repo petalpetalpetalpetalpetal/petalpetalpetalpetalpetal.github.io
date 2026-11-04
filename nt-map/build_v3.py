@@ -66,6 +66,7 @@ F("housing", "bukmak", 2021, 2026, 51500000, "5 years", "contract", "87 houses i
 F("health", "consult", 2020, 2020, 4300000, "contract", "contract", "EY health contract (no public tender)", "verified", "NT Independent", "https://ntindependent.com.au/nt-governments-consultancy-contract-costs-continue-to-rise/")
 F("ntbudget", "consult", 2019, 2019, 47600000, "year", "contract", "All NT consultancy contracts 2019-20", "verified", "NT Independent", "https://ntindependent.com.au/nt-governments-consultancy-contract-costs-continue-to-rise/")
 F("cwlth", "ntg", 2012, 2012, 2000000000, "year", "Indigenous expenditure", "Commonwealth direct spending on Aboriginal Territorians 2012-13", "verified", "Productivity Commission, Indigenous Expenditure Report 2014 (NT)", "https://assets.pc.gov.au/ongoing/indigenous-expenditure-report/2014/ier-2014-factsheet9-nt.pdf", "NT Government added $2.7B; 71% through mainstream services")
+F("cwlth", "ntbudget", 2026, 2026, 842600000, "6 years", "withheld", "NTRAI: $842.6M promised, nothing paid by May 2026", "verified", "NIT", "https://nit.com.au/25-05-2026/24445/no-funding-spent-under-842-million-nt-remote-aboriginal-services-agreement-documents-reveal", "Due to start December 2025; to be paid retrospectively")
 for f in fl:
     if f["from"] == "ntg": f["from"] = "ntbudget"
     if f["to"] == "ntg": f["to"] = "ntbudget"

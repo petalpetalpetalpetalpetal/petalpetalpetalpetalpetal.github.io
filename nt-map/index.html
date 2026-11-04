@@ -22,7 +22,7 @@
 /* Funding mode: a blue ledger. Deaths mode: a red record. */
 body.money{--bg:#07131f; --surface:#0d1f30; --surface2:#12283d; --ink:#cfe6ff; --muted:#88a8c6; --line:#25445f; --faint:#16304a;
   --state:#16466f; --state-ink:#e3f2ff; --country:#0e2a44; --country-ink:#d4e9ff; --corp-band:#0f2234; --flow:#62b0f5}
-body.deaths{--bg:#120607; --surface:#1d0b0c; --surface2:#2a1012; --ink:#ffd9d4; --muted:#c9928b; --line:#4a1d1e; --faint:#311416;
+body.divest{--bg:#120607; --surface:#1d0b0c; --surface2:#2a1012; --ink:#ffd9d4; --muted:#c9928b; --line:#4a1d1e; --faint:#311416;
   --state:#4a1416; --state-ink:#ffe1dc; --country:#2a0d0e; --country-ink:#ffd6cf; --corp-band:#1c0a0b; --harm:#ff5a4a}
 
 html,body{height:100%}
@@ -108,7 +108,7 @@ main{flex:1;position:relative;min-width:0}
 .moneysum{position:absolute;left:16px;bottom:56px;z-index:3;width:min(420px,calc(100% - 100px));padding:8px 12px;font-size:12px;line-height:1.4;display:none}
 .moneysum .mx{float:right;border:0;background:none;font-size:12px;text-decoration:underline;padding:0}
 .moneysum.min .row,.moneysum.min small{display:none}
-body.money .moneysum,body.deaths .moneysum{display:block}
+body.money .moneysum{display:block}
 .moneysum b{font-family:var(--f-display);font-stretch:85%;text-transform:uppercase;letter-spacing:.05em;font-size:12px}
 .moneysum .row{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--faint);padding-top:3px;margin-top:3px}
 .moneysum .num{font-family:var(--f-mono);font-weight:600}
@@ -120,6 +120,7 @@ body.money .moneysum,body.deaths .moneysum{display:block}
 .ticker{position:absolute;left:0;right:0;bottom:0;z-index:4;height:42px;display:flex;align-items:stretch;background:var(--state);color:var(--state-ink);overflow:hidden}
 .tk-year{flex:none;display:flex;flex-direction:column;justify-content:center;padding:0 12px 0 16px;background:var(--harm);color:#fff;line-height:1}
 body.money .tk-year{background:var(--flow);color:#06121d}
+body.divest .tk-year{background:var(--harm);color:#1a0505}
 .tk-year small{font-size:9px;text-transform:uppercase;letter-spacing:.08em;opacity:.9}
 .tk-year b{font-family:var(--f-mono);font-size:16px}
 .tk-viewport{flex:1;min-width:0;overflow:hidden;position:relative}
@@ -143,6 +144,7 @@ body.money .tk-year{background:var(--flow);color:#06121d}
 .ov-v{fill:var(--ink);font-family:var(--f-mono);font-weight:600;font-size:21px;letter-spacing:-.03em}
 .ov-c{fill:var(--muted);font-size:11px}
 .ov-who{fill:var(--ink);font-size:11px;font-weight:600}
+.ov-h{fill:var(--harm);font-family:var(--f-mono);font-size:10px;font-weight:600}
 .ov-bar{fill:var(--flow);opacity:.8}
 .ov-barbg{fill:var(--faint)}
 .act{cursor:pointer;transition:opacity .3s}
@@ -282,8 +284,8 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
   <p class="brand" id="siteSub"></p>
   <div class="yearbox"><div class="year" id="yearOut" aria-live="polite">2026</div><div class="era"><b id="eraLabel"></b><span id="eraSum"></span></div></div>
   <div class="ctrls">
-    <button class="btn mode money-btn" id="moneyBtn" aria-pressed="false" title="Show only funding flows and what they achieve"><svg viewBox="0 0 16 16"><path d="M7 1h2v2c1.7.3 3 1.3 3 3h-2c0-.7-.9-1.2-2-1.2S6 5.3 6 6s.6 1 2.3 1.4C10.6 8 12 8.8 12 10.6c0 1.6-1.3 2.7-3 3V15H7v-1.5c-1.8-.3-3-1.5-3-3.2h2c0 .8.9 1.4 2 1.4s2-.5 2-1.2c0-.8-.7-1.1-2.4-1.5C6.2 9.4 4 8.6 4 6.3 4 4.7 5.3 3.4 7 3.1z"/></svg>Funding</button>
-    <button class="btn mode death-btn" id="deathBtn" aria-pressed="false" title="Show deaths and injuries recorded">Deaths</button>
+    <button class="btn mode money-btn" id="moneyBtn" aria-pressed="false" title="Show money paid, who receives it and what it achieves"><svg viewBox="0 0 16 16"><path d="M7 1h2v2c1.7.3 3 1.3 3 3h-2c0-.7-.9-1.2-2-1.2S6 5.3 6 6s.6 1 2.3 1.4C10.6 8 12 8.8 12 10.6c0 1.6-1.3 2.7-3 3V15H7v-1.5c-1.8-.3-3-1.5-3-3.2h2c0 .8.9 1.4 2 1.4s2-.5 2-1.2c0-.8-.7-1.1-2.4-1.5C6.2 9.4 4 8.6 4 6.3 4 4.7 5.3 3.4 7 3.1z"/></svg>Funded</button>
+    <button class="btn mode death-btn" id="deathBtn" aria-pressed="false" title="Show money cut, withheld or diverted">Divested</button>
     <span class="sep" aria-hidden="true"></span>
     <button class="btn" id="prevEv" title="Previous recorded change" aria-label="Previous recorded change"><svg viewBox="0 0 16 16"><path d="M3 2h2v12H3zM14 2v12L6 8z"/></svg></button>
     <button class="btn" id="play" aria-pressed="false" title="Play through time" aria-label="Play through time"><svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2l10 6-10 6z"/></svg></button>
@@ -361,7 +363,7 @@ const COLW = 190, BOXW = 170, X0 = 40, CE = 29, CO = 46, HEAD = 74;
 const Y_AUTH = 26, AUTH_H = 66, Y_SEC = 196;
 let W = 0, H = 0, Y_PRIV = 0, Y_COUNTRY = 0, COUNTRY_H = 0;
 
-const state = {year:2026, k:1, kFit:1, money:false, deaths:false, locked:null, playing:null, authW:{}, trace:null};
+const state = {year:2026, k:1, kFit:1, money:false, divest:false, locked:null, playing:null, authW:{}, trace:null};
 let D = {}, svg, root, zoom, gConn, gLinks, gFlows, gAuth, gAct, gBands;
 
 const files = ["config","authorities","eras","actors","mechanisms","events","links","examples","flows","outcomes","officeholders","harm"];
@@ -393,7 +395,7 @@ function prepare(){
     a.oc = D.outcomes.filter(o => o.actor === a.id);
     a.mechs = D.mechanisms.filter(m => m.section === a.id);
     a.hm = D.harm.filter(d => d.actor === a.id).sort((p,q) => q.ye - p.ye);
-    a.h = Math.max(196, HEAD + a.events.length * CE + 34, HEAD + a.fl.length * CE + a.oc.length * CO + 40, HEAD + a.hm.length * CO + 40);
+    a.h = Math.max(196, HEAD + a.events.length * CE + a.hm.length * CO + 34, HEAD + a.fl.length * CE + a.oc.length * CO + 40, HEAD + a.hm.length * CO + 40);
   });
   const nMax = d3.max(["state","private","aboriginal"], b => d3.max(D.actors.filter(a => a.band === b), a => a.col) || 0);
   W = X0 * 2 + (nMax - 1) * COLW + BOXW;
@@ -408,7 +410,7 @@ function prepare(){
   band("aboriginal").forEach(a => a.y = Y_COUNTRY + 54);
   COUNTRY_H = maxH("aboriginal") + 80; H = Y_COUNTRY + COUNTRY_H + 30;
   D.eventYears = [...new Set(D.events.map(e => e.y).concat(D.flows.map(f => f.y)))].sort((a,b) => a-b);
-  D.maxAmt = d3.max(D.flows.filter(f => f.amt && f.kind !== "cut" && f.per === "year"), f => f.amt) || 1;
+  D.maxAmt = d3.max(D.flows.filter(f => f.amt && !isDiv(f) && f.per === "year"), f => f.amt) || 1;
 }
 const active = (r, y) => (r.start == null || r.start <= y) && (r.end == null || y <= r.end);
 const labelAt = (a, y) => (a.eraLabels.find(e => e.a <= y && y <= e.b) || {}).l || a.label;
@@ -423,7 +425,9 @@ function authPos(id){
 }
 const holdersAt = (y, pred) => D.officeholders.filter(h => h.sy <= y && (h.ey == null || h.ey >= y) && pred(h));
 const fmt$ = v => v == null ? "amount not public" : v >= 1e9 ? "$" + (v/1e9).toFixed(2).replace(/\.?0+$/,"") + "B" : v >= 1e6 ? "$" + (v/1e6).toFixed(1).replace(/\.0$/,"") + "M" : v >= 1000 ? "$" + d3.format(",.0f")(v) : "$" + d3.format(",.2f")(v);
+const isDiv = f => f.kind === "cut" || f.kind === "diverted" || f.kind === "withheld";
 const flowsAt = y => D.flows.filter(f => f.y <= y && y <= f.ye);
+const shownFlows = y => flowsAt(y).filter(f => state.divest ? isDiv(f) : !isDiv(f));
 const chip = s => s === "verified" ? '<i class="chip v">verified</i>' : s === "testimony" ? '<i class="chip s">testimony</i>' : s === "reference" ? '<i class="chip c">reference</i>' : s ? '<i class="chip t">' + esc(s) + '</i>' : "";
 const src = (t, u, st) => (t || u) ? '<div class="src">' + chip(st) + (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(t || u) + '</a>' : '<span>' + esc(t) + '</span>') + '</div>' : "";
 const isHarm = e => ["violence","death","cut","law","invasion"].includes(e.type) && e.aboriginal_led !== "yes";
@@ -467,8 +471,9 @@ function build(){
   ov.append("rect").attr("class","ov-barbg").attr("x",10).attr("y",120).attr("height",5).attr("width",BOXW-20);
   ov.append("rect").attr("class","ov-bar").attr("x",10).attr("y",120).attr("height",5);
   ov.append("text").attr("class","ov-c").attr("x",10).attr("y",142);
-  ov.append("text").attr("class","ov-who").attr("x",10).attr("y",162);
+  ov.append("text").attr("class","ov-who").attr("x",10).attr("y",152);
   ov.append("text").attr("class","ov-k ov-n").attr("x",10).attr("y",182);
+  ov.append("text").attr("class","ov-h").attr("x",10).attr("y",166);
   g.append("foreignObject").attr("class","fo3").attr("x",6).attr("y",70).attr("width",BOXW-12).attr("height", a => a.h - 76).append("xhtml:div").attr("class","fo inner");
   g.on("pointerenter", (ev,a) => hover(ev, "A:" + a.id)).on("pointermove", moveLabel).on("pointerleave", leave)
    .on("click", (ev,a) => { ev.stopPropagation(); zoomToActor(a); choose(ev, "A:" + a.id); });
@@ -489,10 +494,11 @@ function build(){
   $("prevEv").onclick = () => { const y = [...D.eventYears].reverse().find(y => y < state.year); if (y) setYear(y); };
   $("nextEv").onclick = () => { const y = D.eventYears.find(y => y > state.year); if (y) setYear(y); };
   $("play").onclick = togglePlay;
-  const setMode = m => { state.money = m === "money" && !state.money; state.deaths = m === "deaths" && !state.deaths; state.trace = null;
-    document.body.classList.toggle("money", state.money); document.body.classList.toggle("deaths", state.deaths);
-    $("moneyBtn").setAttribute("aria-pressed", state.money); $("deathBtn").setAttribute("aria-pressed", state.deaths); render(); unlock(); };
-  $("moneyBtn").onclick = () => setMode("money"); $("deathBtn").onclick = () => setMode("deaths");
+  const setMode = m => { const on = m === "funded" ? !(state.money && !state.divest) : !(state.money && state.divest);
+    state.money = on; state.divest = on && m === "divested"; state.trace = null;
+    document.body.classList.toggle("money", state.money); document.body.classList.toggle("divest", state.divest);
+    $("moneyBtn").setAttribute("aria-pressed", state.money && !state.divest); $("deathBtn").setAttribute("aria-pressed", state.divest); render(); unlock(); };
+  $("moneyBtn").onclick = () => setMode("funded"); $("deathBtn").onclick = () => setMode("divested");
   $("searchBtn").onclick = () => { tab("pSearch"); if (!isDesk()) $("side").classList.add("open"); setTimeout(() => $("q").focus(), 50); };
   ["q","qMode","qY1","qY2","qType"].forEach(id => $(id).addEventListener("input", runSearch));
   tickerLoop();
@@ -523,7 +529,7 @@ function build(){
   });
   $("legend").innerHTML = `<span><i class="sq" style="background:var(--state)"></i>Government</span><span><i class="sq" style="background:var(--abo-head)"></i>First Nations controlled</span>
     <span><i class="sq" style="background:var(--corp-head)"></i>Company or charity</span><span><i class="sq" style="border:2px solid var(--harm)"></i>Changed this year</span>
-    <span><i class="sw"></i>NT evidence</span><span><i class="sw d"></i>National evidence</span><span><i class="sw o"></i>Gap</span><span><i class="sq" style="background:var(--flow)"></i>Funding</span>`;
+    <span><i class="sw"></i>NT evidence</span><span><i class="sw d"></i>National evidence</span><span><i class="sw o"></i>Gap</span><span><i class="sq" style="background:var(--flow)"></i>Funded</span><span><i class="sq" style="background:var(--harm)"></i>Divested, deaths</span>`;
 }
 function tab(id){
   document.querySelectorAll(".tabs [role=tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.pane === id));
@@ -587,14 +593,16 @@ function togglePlay(){
 }
 
 function fundingFor(a, y){
-  const inn = flowsAt(y).filter(f => f.to === a.id && f.kind !== "cut");
+  if (state.divest){ const dv = shownFlows(y).filter(f => f.to === a.id || f.from === a.id); if (!dv.length) return null;
+    return {amt: d3.sum(dv, f => f.amt || 0) || null, label: "Divested", note: dv.map(f => f.label).join("; "), cut: true}; }
+  const inn = flowsAt(y).filter(f => f.to === a.id && !isDiv(f));
   const annual = inn.filter(f => f.per === "year" && f.amt);
   if (annual.length) return {amt: d3.sum(annual, f => f.amt), label: "Funding in " + y, note: annual.map(f => f.label).join("; ")};
   const other = inn.filter(f => f.amt).sort((p,q) => q.amt - p.amt)[0];
   if (other) return {amt: other.amt, label: "Funding, " + other.per, note: other.label};
-  const out = flowsAt(y).filter(f => f.from === a.id && f.amt && f.kind !== "cut").sort((p,q) => q.amt - p.amt)[0];
+  const out = flowsAt(y).filter(f => f.from === a.id && f.amt && !isDiv(f)).sort((p,q) => q.amt - p.amt)[0];
   if (out) return {amt: out.amt, label: "Pays out, " + out.per, note: out.label};
-  const cut = flowsAt(y).find(f => (f.to === a.id || f.from === a.id) && f.kind === "cut");
+  const cut = flowsAt(y).find(f => (f.to === a.id || f.from === a.id) && isDiv(f));
   if (cut) return {amt: cut.amt, label: "Cut in " + cut.y, note: cut.label, cut: true};
   return null;
 }
@@ -623,22 +631,13 @@ function render(){
   const evY = D.events.filter(e => e.y === y);
   gAct.selectAll(".act").each(function(a){
     const g = d3.select(this), on = active(a, y);
-    const deaths = state.deaths;
-    g.classed("ghost", !on).classed("changed", on && (deaths ? a.hm.some(d => d.ye === y) : evY.some(e => e.section === a.id) || (money && D.flows.some(f => f.y === y && (f.from === a.id || f.to === a.id)))));
+    g.classed("ghost", !on).classed("changed", on && (money ? shownFlows(y).some(f => f.y === y && (f.from === a.id || f.to === a.id)) : evY.some(e => e.section === a.id) || a.hm.some(d => d.ye === y)));
     const lines = wrapWords(a.label, 18);
     g.select(".ttl").selectAll("tspan").data(lines.slice(0, 2)).join("tspan").attr("x",10).attr("dy",(d,i) => i ? 17 : 0).text((d,i) => i === 1 && lines.length > 2 ? fitText(d, 15) + "…" : d);
     g.select(".sub").text(on ? fitText(a.band === "state" ? labelAt(a, y) : BAND_LABEL[a.band], 32) : (a.start > y ? "From " + a.start : "Ended " + a.end));
     const ov = g.select(".overview"), evs = a.events.filter(e => e.y <= y);
     if (!on){ ov.style("visibility","hidden"); g.select(".inner").html(""); return; }
     ov.style("visibility", null);
-    if (deaths){
-      const hs = a.hm.filter(d => d.y <= y), top = hs[0];
-      ov.select(".ov-k").text(hs.length ? hs.length + " records of death or harm" : "No death or harm recorded");
-      ov.select(".ov-v").text(top ? fitText(top.value.split(/[;(,]/)[0], 15) : "").style("fill", "var(--harm)");
-      ov.select(".ov-bar").attr("width", 0); ov.select(".ov-barbg").style("display", "none");
-      ov.select(".ov-c").text(top ? fitText(top.measure, 30) : ""); ov.select(".ov-who").text(""); ov.select(".ov-n").text(top ? top.scope + " · " + (top.y === top.ye ? top.y : top.y + "–" + top.ye) : "");
-      g.select(".inner").html(harmHtml(a, y)); return;
-    }
     const fu = fundingFor(a, y);
     ov.select(".ov-k").text(fu ? fu.label : (money ? "No funding figure for " + y : "Changes to " + y));
     ov.select(".ov-v").text(fu ? (fu.cut ? "cut " : "") + fmt$(fu.amt) : String(evs.length)).style("fill", fu && fu.cut ? "var(--harm)" : null);
@@ -648,7 +647,9 @@ function render(){
     const who = holdersAt(y, h => h.actor === a.id)[0];
     ov.select(".ov-who").text(who ? fitText(who.person + ", " + who.role.replace(/^Minister for /, ""), 32) : "");
     const oc = a.oc.filter(o => o.y <= y).sort((p,q) => q.y - p.y)[0];
-    ov.select(".ov-n").text(money && oc ? fitText("Result: " + oc.value, 34) : `${evs.length} changes to ${y}`);
+    ov.select(".ov-n").text(money && !state.divest && oc ? fitText("Result: " + oc.value, 34) : `${evs.length} changes to ${y}`);
+    const nh = a.hm.filter(d => d.y <= y).length;
+    ov.select(".ov-h").text(!money && nh ? nh + (nh === 1 ? " death or harm record" : " deaths and harm records") : "");
     g.select(".inner").html(money ? moneyHtml(a, y) : changesHtml(a, y));
   });
   gAct.selectAll(".chg,.mrow,.oc,.hm").on("pointerenter", function(ev){ if (!this.dataset.key) return; ev.stopPropagation(); hover(ev, this.dataset.key); })
@@ -663,7 +664,7 @@ function harmHtml(a, y){
 }
 /* follow the money: trace every flow connected upstream and downstream */
 function traceFrom(key){
-  const y = state.year, fl = flowsAt(y).filter(f => f.from);
+  const y = state.year, fl = shownFlows(y).filter(f => f.from);
   const [t, id] = key.split(/:(.+)/); let start = [];
   if (t === "F"){ const f = D.flows.find(x => x.id === id); if (!f) return null; start = [f.from, f.to].filter(Boolean); }
   else if (t === "A" || t === "G") start = [id]; else return null;
@@ -687,18 +688,19 @@ function funnelHtml(tr){
   const q = roots.map(n => [n, 0]); while (q.length){ const [n, d] = q.shift(); if (depth[n] != null && depth[n] <= d) continue; depth[n] = d; fl.filter(f => f.from === n && f.to).forEach(f => q.push([f.to, d + 1])); }
   fl.sort((p,q2) => (depth[p.from] ?? 0) - (depth[q2.from] ?? 0) || (q2.amt || 0) - (p.amt || 0));
   const max = d3.max(fl, f => f.amt) || 1;
-  return `<div class="funnel"><div class="k"><span>Follow the money</span><span>${state.year}</span></div>` + fl.map(f => `<div class="fr"><button class="lnk" data-key="F:${f.id}">${esc(nameOf(f.from))} → ${f.to ? esc(nameOf(f.to)) : "not traced further"}</button><br>${f.kind === "cut" ? "Cut " : ""}${fmt$(f.amt)} ${f.per && f.per !== "year" ? "(" + esc(f.per) + ")" : "a year"} · ${esc(f.label)}<div class="fb ${f.kind === "cut" ? "cut" : ""}" style="width:${f.amt ? Math.max(2, Math.sqrt(f.amt / max) * 100) : 2}%"></div></div>`).join("") +
+  return `<div class="funnel"><div class="k"><span>Follow the money</span><span>${state.year}</span></div>` + fl.map(f => `<div class="fr"><button class="lnk" data-key="F:${f.id}">${esc(nameOf(f.from))} → ${f.to ? esc(nameOf(f.to)) : "not traced further"}</button><br>${isDiv(f) ? "Cut " : ""}${fmt$(f.amt)} ${f.per && f.per !== "year" ? "(" + esc(f.per) + ")" : "a year"} · ${esc(f.label)}<div class="fb ${isDiv(f) ? "cut" : ""}" style="width:${f.amt ? Math.max(2, Math.sqrt(f.amt / max) * 100) : 2}%"></div></div>`).join("") +
     `<p style="font-size:11px;color:var(--muted)">Bars use a square-root scale so small amounts stay visible. Where a line ends, the money is spent inside government or the recipient is not public.</p></div>`;
 }
 function changesHtml(a, y){
-  const evs = a.events.filter(e => e.y <= y);
-  if (!evs.length) return '<div class="chg data"><i>no record</i><b>No change recorded yet</b></div>';
-  return evs.map(e => `<div class="chg ${e.aboriginal_led === "yes" ? "led" : isHarm(e) ? "harm" : "data"} ${e.y === y ? "now" : ""}" data-key="E:${e.id}"><i>${e.y} · ${esc(e.type)}${e.figure ? " · " + esc(e.figure) : ""}${e.status !== "verified" ? " · " + esc(e.status) : ""}</i><b>${esc(e.title)}</b></div>`).join("");
+  const evs = a.events.filter(e => e.y <= y), hs = a.hm.filter(d => d.y <= y);
+  if (!evs.length && !hs.length) return '<div class="chg data"><i>no record</i><b>No change recorded yet</b></div>';
+  const items = evs.map(e => ({y: e.y, e})).concat(hs.map(d => ({y: d.ye, d}))).sort((p,q) => q.y - p.y);
+  return items.map(({e, d}) => d ? `<div class="hm" data-key="D:${d.id}"><i>content note · ${esc(d.kind)} · ${d.y === d.ye ? d.y : d.y + "–" + d.ye} · ${esc(d.scope)}</i><b>${esc(d.measure)}</b><span>${esc(d.value)}</span></div>` : `<div class="chg ${e.aboriginal_led === "yes" ? "led" : isHarm(e) ? "harm" : "data"} ${e.y === y ? "now" : ""}" data-key="E:${e.id}"><i>${e.y} · ${esc(e.type)}${e.figure ? " · " + esc(e.figure) : ""}${e.status !== "verified" ? " · " + esc(e.status) : ""}</i><b>${esc(e.title)}</b></div>`).join("");
 }
 function moneyHtml(a, y){
-  const fl = a.fl.filter(f => f.y <= y).sort((p,q) => q.y - p.y), oc = a.oc.filter(o => o.y <= y);
+  const fl = a.fl.filter(f => f.y <= y && (state.divest ? isDiv(f) : !isDiv(f))).sort((p,q) => q.y - p.y), oc = state.divest ? [] : a.oc.filter(o => o.y <= y);
   const rows = fl.map(f => { const dir = f.to === a.id ? "from " + nameOf(f.from) : "to " + (f.to ? nameOf(f.to) : "—");
-    return `<div class="mrow ${f.kind === "cut" ? "cut" : ""}" data-key="F:${f.id}"><i>${f.y}${f.ye !== f.y ? "–" + f.ye : ""} · ${esc(f.kind)} · ${esc(dir)}</i><b>${f.kind === "cut" ? "Cut " : ""}${fmt$(f.amt)} ${esc(f.label)}</b></div>`; }).join("");
+    return `<div class="mrow ${isDiv(f) ? "cut" : ""}" data-key="F:${f.id}"><i>${f.y}${f.ye !== f.y ? "–" + f.ye : ""} · ${esc(f.kind)} · ${esc(dir)}</i><b>${isDiv(f) ? "Cut " : ""}${fmt$(f.amt)} ${esc(f.label)}</b></div>`; }).join("");
   const ocs = oc.map(o => `<div class="oc" data-key="O:${o.id}"><i>Result · ${o.y}</i><b>${esc(o.value)}</b><span>${esc(o.measure)}${o.cost ? " · cost " + esc(o.cost) : ""}</span></div>`).join("");
   return (ocs + rows) || '<div class="mrow"><i>no record</i><b>No money figure recorded yet</b></div>';
 }
@@ -736,7 +738,7 @@ function endpoint(id){
 }
 function renderFlows(y){
   const ok = id => D.byId[id] ? active(D.byId[id], y) : !!authAt(id, y);
-  const fl = flowsAt(y).filter(f => ok(f.from) && (!f.to || ok(f.to)));
+  const fl = shownFlows(y).filter(f => ok(f.from) && (!f.to || ok(f.to)));
   const wScale = v => v ? 1.5 + Math.min(1, Math.sqrt(v / D.maxAmt)) * 16 : 2;
   fl.forEach((f, i) => {
     const s = endpoint(f.from), off = ((i % 5) - 2) * 10;
@@ -748,46 +750,45 @@ function renderFlows(y){
     f.lx = (s.x + t.x)/2 + off * 2; f.ly = down || up ? mid + off : y1 + 70;
   });
   const g = gFlows.selectAll("g.flg").data(fl, f => f.id).join(en => { const g = en.append("g").attr("class","flg"); g.append("path").attr("class","fl"); g.append("path").attr("class","hit"); g.append("text").attr("class","fl-label").attr("text-anchor","middle"); return g; });
-  g.select(".fl").attr("class", f => "fl" + (f.kind === "cut" ? " cut" : "")).attr("d", f => f.path).attr("stroke-width", f => f.kind === "cut" ? 2.5 : wScale(f.amt));
+  g.select(".fl").attr("class", f => "fl" + (isDiv(f) ? " cut" : "")).attr("d", f => f.path).attr("stroke-width", f => isDiv(f) ? 2.5 : wScale(f.amt));
   g.select(".hit").attr("d", f => f.path);
-  g.select(".fl-label").attr("class", f => "fl-label" + (f.kind === "cut" ? " cut" : "")).attr("x", f => f.lx).attr("y", f => f.ly)
-    .text(f => (f.kind === "cut" ? "cut " : "") + (f.amt ? fmt$(f.amt) : "$ not public") + (f.per && f.per !== "year" ? " / " + f.per : ""));
+  g.select(".fl-label").attr("class", f => "fl-label" + (isDiv(f) ? " cut" : "")).attr("x", f => f.lx).attr("y", f => f.ly)
+    .text(f => (isDiv(f) ? "cut " : "") + (f.amt ? fmt$(f.amt) : "$ not public") + (f.per && f.per !== "year" ? " / " + f.per : ""));
   g.selectAll(".hit").on("pointerenter", (ev,f) => { hover(ev, "F:" + f.id); g.select(".fl").classed("focus", d => d === f); })
     .on("pointermove", moveLabel).on("pointerleave", () => { leave(); g.select(".fl").classed("focus", false); })
     .on("click", (ev,f) => { ev.stopPropagation(); choose(ev, "F:" + f.id); });
 }
 function moneySummary(y){
-  if (state.deaths){
-    const hs = D.harm.filter(d => d.y <= y), nt = hs.filter(d => d.scope === "NT" && d.n && /killed|died|deaths/.test(d.kind));
-    $("moneySum").innerHTML = `<button class="mx" id="mx">${$("moneySum").classList.contains("min") ? "Show" : "Hide"}</button><b>Deaths and harm recorded to ${y}</b>
-      <div class="cnote">This view lists deaths and injuries caused or not prevented by these systems. People are named only where families have made it public.</div>
-      ${hs.filter(d => (d.n && d.n > 1) || /custody/.test(d.measure)).sort((p,q) => q.ye - p.ye).slice(0, 6).map(d => `<div class="row"><span>${esc(d.measure)} <i style="font-style:normal;color:var(--muted)">(${esc(d.scope)}, ${d.y === d.ye ? d.y : d.y + "–" + d.ye})</i></span><span class="num">${esc(fitText(d.value, 40))}</span></div>`).join("")}
-      <small>Figures are listed, not added: records overlap (named deaths in custody are part of the 40), and the true toll is higher than any record. Click a box for every record.</small>`;
+  if (state.divest){
+    const dv = shownFlows(y).concat(D.flows.filter(f => isDiv(f) && f.ye < y)).filter((f, i, arr) => arr.indexOf(f) === i).sort((p,q) => q.y - p.y);
+    $("moneySum").innerHTML = `<button class="mx" id="mx">${$("moneySum").classList.contains("min") ? "Show" : "Hide"}</button><b>Divested up to ${y}</b>
+      ${dv.slice(0, 7).map(f => `<div class="row"><span>${esc(f.label)} <i style="font-style:normal;color:var(--muted)">(${f.y})</i></span><span class="num">${fmt$(f.amt)}</span></div>`).join("") || '<div class="row"><span>No cut or diversion recorded yet</span></div>'}
+      <small>Money cut, withheld or spent elsewhere. Sourced items only; the full total is not public. Click any line to follow it.</small>`;
     $("mx").onclick = ev => { ev.stopPropagation(); $("moneySum").classList.toggle("min"); moneySummary(state.year); };
     return;
   }
   if (!state.money) return;
   const typeOf = id => { const a = D.byId[id]; return a ? a.band : "gov"; };
-  const fl = flowsAt(y).filter(f => f.amt && f.kind !== "cut" && f.per === "year");
+  const fl = shownFlows(y).filter(f => f.amt && f.per === "year");
   const sum = b => d3.sum(fl.filter(f => typeOf(f.to) === b), f => f.amt);
-  const cuts = flowsAt(y).filter(f => f.kind === "cut");
-  const multi = flowsAt(y).filter(f => f.amt && f.kind !== "cut" && f.per !== "year" && typeOf(f.to) === "aboriginal");
+  const cuts = flowsAt(y).filter(isDiv);
+  const multi = flowsAt(y).filter(f => f.amt && !isDiv(f) && f.per !== "year" && typeOf(f.to) === "aboriginal");
   $("moneySum").innerHTML = `<button class="mx" id="mx">${$("moneySum").classList.contains("min") ? "Show" : "Hide"}</button><b>Funding recorded for ${y}</b>
     <div class="row"><span>Annual budgets to government departments</span><span class="num">${fmt$(sum("state"))}</span></div>
     <div class="row"><span>Annual payments to companies and contractors</span><span class="num">${fmt$(sum("private"))}</span></div>
     <div class="row"><span>Annual payments to First Nations controlled organisations</span><span class="num">${fmt$(sum("aboriginal"))}</span></div>
     ${multi.length ? `<div class="row"><span>Multi-year or one-off to First Nations controlled</span><span class="num">${multi.map(f => fmt$(f.amt)).join(" + ")}</span></div>` : ""}
-    ${cuts.length ? `<div class="row"><span>Cuts recorded</span><span class="num" style="color:var(--harm)">${cuts.length}</span></div>` : ""}
+    ${cuts.length ? `<div class="row"><span>Cuts and diversions: see Divested</span><span class="num" style="color:var(--harm)">${cuts.length}</span></div>` : ""}
     <small>Only sourced figures are counted, so totals are partial. Click any box or line to follow its money.</small>`;
   $("mx").onclick = ev => { ev.stopPropagation(); $("moneySum").classList.toggle("min"); moneySummary(state.year); };
 }
 function thisYear(evY){
   const y = state.year, track = $("tkTrack"), tk = $("ticker");
-  $("tkYear").textContent = y; $("tkLabel").textContent = state.money ? "Funding in" : state.deaths ? "Deaths, harm" : "Changes in";
-  const items = state.deaths ? D.harm.filter(d => d.ye === y || d.y === y).map(d => `<button class="tk-item" data-key="D:${d.id}"><i class="tk-dot"></i>${esc(d.measure)}: ${esc(d.value)}<small>${esc(d.scope)}</small></button>`)
-    : state.money
-    ? D.flows.filter(f => f.y === y).map(f => `<button class="tk-item" data-key="F:${f.id}"><i class="tk-dot ${f.kind === "cut" ? "" : "flow"}"></i>${f.kind === "cut" ? "Cut: " : ""}${fmt$(f.amt)} ${esc(f.label)}<small>${esc(nameOf(f.from))} → ${esc(f.to ? nameOf(f.to) : "—")}</small></button>`)
-    : evY.map(e => `<button class="tk-item" data-key="E:${e.id}"><i class="tk-dot ${e.aboriginal_led === "yes" ? "led" : ""}"></i>${esc(e.title)}<small>${esc(nameOf(e.section))}${e.status !== "verified" ? " · " + esc(e.status) : ""}</small></button>`);
+  $("tkYear").textContent = y; $("tkLabel").textContent = state.divest ? "Divested in" : state.money ? "Funded in" : "Changes in";
+  const items = state.money
+    ? D.flows.filter(f => f.y === y && (state.divest ? isDiv(f) : !isDiv(f))).map(f => `<button class="tk-item" data-key="F:${f.id}"><i class="tk-dot ${isDiv(f) ? "" : "flow"}"></i>${isDiv(f) ? "Cut: " : ""}${fmt$(f.amt)} ${esc(f.label)}<small>${esc(nameOf(f.from))} → ${esc(f.to ? nameOf(f.to) : "—")}</small></button>`)
+    : evY.map(e => `<button class="tk-item" data-key="E:${e.id}"><i class="tk-dot ${e.aboriginal_led === "yes" ? "led" : ""}"></i>${esc(e.title)}<small>${esc(nameOf(e.section))}${e.status !== "verified" ? " · " + esc(e.status) : ""}</small></button>`)
+      .concat(D.harm.filter(d => d.ye === y).map(d => `<button class="tk-item" data-key="D:${d.id}"><i class="tk-dot"></i>${esc(d.measure)}<small>death or harm · ${esc(d.scope)}</small></button>`));
   if (items.length){
     tk.classList.remove("still"); const h = items.join("");
     track.innerHTML = `<div class="tk-run">${h}</div><div class="tk-run" aria-hidden="true">${h}</div>`;
@@ -797,7 +798,7 @@ function thisYear(evY){
     tk.classList.add("still");
     const prev = [...D.eventYears].reverse().find(v => v < y), next = D.eventYears.find(v => v > y);
     tick.x = 0; track.style.transform = "";
-    track.innerHTML = `<div class="tk-run tk-empty">No ${state.money ? "funding record" : state.deaths ? "death or harm record" : "change"} for ${y} yet. That can be a gap in the research rather than a quiet year.` + (prev ? ` <button data-y="${prev}">Back to ${prev}</button>` : "") + (next ? ` <button data-y="${next}">On to ${next}</button>` : "") + `</div>`;
+    track.innerHTML = `<div class="tk-run tk-empty">No ${state.divest ? "cut or diversion" : state.money ? "funding record" : "change"} for ${y} yet. That can be a gap in the research rather than a quiet year.` + (prev ? ` <button data-y="${prev}">Back to ${prev}</button>` : "") + (next ? ` <button data-y="${next}">On to ${next}</button>` : "") + `</div>`;
     track.querySelectorAll("button").forEach(b => b.onclick = ev => { ev.stopPropagation(); setYear(+b.dataset.y); });
   }
 }
@@ -830,7 +831,7 @@ function runSearch(){
   const hit = txt => !q || q.split(/\s+/).every(w => txt.toLowerCase().includes(w));
   const rows = [];
   if (type === "all" || type === "E") D.events.forEach(e => { if (inYears(e.y) && hit([e.title, e.detail, e.actor, e.figure].join(" "))) rows.push({key: "E:" + e.id, y: e.y, t: e.title, k: "Change · " + nameOf(e.section)}); });
-  if (type === "all" || type === "F") D.flows.forEach(f => { if (inYears(f.y, f.ye) && hit([f.label, f.note, nameOf(f.from), f.to ? nameOf(f.to) : ""].join(" "))) rows.push({key: "F:" + f.id, y: f.y, t: (f.kind === "cut" ? "Cut: " : "") + fmt$(f.amt) + " " + f.label, k: "Funding · " + nameOf(f.from) + " → " + (f.to ? nameOf(f.to) : "—")}); });
+  if (type === "all" || type === "F") D.flows.forEach(f => { if (inYears(f.y, f.ye) && hit([f.label, f.note, nameOf(f.from), f.to ? nameOf(f.to) : ""].join(" "))) rows.push({key: "F:" + f.id, y: f.y, t: (isDiv(f) ? "Cut: " : "") + fmt$(f.amt) + " " + f.label, k: "Funding · " + nameOf(f.from) + " → " + (f.to ? nameOf(f.to) : "—")}); });
   if (type === "all" || type === "D") D.harm.forEach(d => { if (inYears(d.y, d.ye) && hit([d.measure, d.value, d.note].join(" "))) rows.push({key: "D:" + d.id, y: d.y, t: d.measure + ": " + d.value, k: "Death or harm · " + d.scope}); });
   if (type === "all" || type === "H") D.officeholders.forEach(h => { if (inYears(h.sy, h.ey ?? 2026) && hit([h.person, h.role, h.party].join(" "))) rows.push({key: "H:" + h.id, y: h.sy, t: h.person, k: h.role + " · " + h.sy + "–" + (h.ey ?? "now")}); });
   if (type === "all" || type === "A") D.actors.forEach(a => { if (inYears(a.start ?? 1824, a.end ?? 2026) && hit([a.label, a.summary].join(" "))) rows.push({key: "A:" + a.id, y: a.start, t: a.label, k: BAND_LABEL[a.band]}); });
@@ -847,7 +848,7 @@ function resolve(key){
   if (t === "A"){ const a = D.byId[id]; return a && {title: a.label, kind: BAND_LABEL[a.band], actor: a, html: () => actorHtml(a)}; }
   if (t === "E"){ const e = D.events.find(x => x.id === id); return e && {title: e.title, kind: "Change, " + e.y, actor: D.byId[e.section], html: () => eventHtml(e)}; }
   if (t === "L"){ const l = D.links.find(x => x.id === id); return l && {title: l.label, kind: "Link", html: () => linkHtml(l)}; }
-  if (t === "F"){ const f = D.flows.find(x => x.id === id); return f && {title: (f.kind === "cut" ? "Cut: " : "") + f.label, kind: "Money, " + f.y, actor: D.byId[f.to] || D.byId[f.from], html: () => flowHtml(f)}; }
+  if (t === "F"){ const f = D.flows.find(x => x.id === id); return f && {title: (isDiv(f) ? "Cut: " : "") + f.label, kind: "Money, " + f.y, actor: D.byId[f.to] || D.byId[f.from], html: () => flowHtml(f)}; }
   if (t === "O"){ const o = D.outcomes.find(x => x.id === id); return o && {title: o.program + ": " + o.value, kind: "Result", actor: D.byId[o.actor], html: () => outcomeHtml(o)}; }
   if (t === "H"){ const h = D.officeholders.find(x => x.id === id); return h && {title: h.person, kind: h.role, actor: D.byId[h.actor], html: () => holderHtml(h)}; }
   if (t === "X"){ const x = D.examples.find(v => v.id === id); return x && {title: x.title, kind: "Example", html: () => exampleHtml(x)}; }
@@ -864,7 +865,7 @@ function actorHtml(a){
   return head(gov ? "Run by " + gov.label : BAND_LABEL[a.band], y, labelAt(a, y)) +
     `<p>${esc(a.summary)}</p><dl>${a.what_it_takes ? `<dt>What it takes</dt><dd>${esc(a.what_it_takes)}</dd>` : ""}${who.length ? `<dt>Responsible in ${y}</dt><dd>${who.map(h => `<button class="lnk" data-key="H:${h.id}">${esc(h.person)}</button> (${esc(h.role)})`).join("; ")}</dd>` : ""}</dl>` +
     (oc.length ? `<ul class="tl">${oc.map(o => `<li><span>${o.y}</span><span><button data-key="O:${o.id}">${esc(o.measure)}: ${esc(o.value)}</button></span></li>`).join("")}</ul>` : "") +
-    (fl.length ? `<ul class="tl">${fl.map(f => `<li><span>${f.y}</span><span><button data-key="F:${f.id}">${f.kind === "cut" ? "Cut " : ""}${fmt$(f.amt)} ${esc(f.label)}</button> ${chip(f.status)}</span></li>`).join("")}</ul>` : "") +
+    (fl.length ? `<ul class="tl">${fl.map(f => `<li><span>${f.y}</span><span><button data-key="F:${f.id}">${isDiv(f) ? "Cut " : ""}${fmt$(f.amt)} ${esc(f.label)}</button> ${chip(f.status)}</span></li>`).join("")}</ul>` : "") +
     (evs.length ? `<ul class="tl">${evs.slice(0, 8).map(e => `<li><span>${e.y}</span><span><button data-key="E:${e.id}">${esc(e.title)}</button></span></li>`).join("")}${evs.length > 8 ? `<li><span></span><span>${evs.length - 8} earlier changes: zoom into the box to see all</span></li>` : ""}</ul>` : "") +
     src(a.source_title, a.source_url, a.source_url ? "verified" : "");
 }
@@ -884,7 +885,7 @@ function linkHtml(l){
 }
 function flowHtml(f){
   const typeTo = f.to && D.byId[f.to] ? BAND_LABEL[D.byId[f.to].band] : "Government";
-  return head("Money · " + f.kind, f.y + (f.ye !== f.y ? "–" + f.ye : ""), (f.kind === "cut" ? "Cut: " : "") + f.label) +
+  return head("Money · " + f.kind, f.y + (f.ye !== f.y ? "–" + f.ye : ""), (isDiv(f) ? "Cut: " : "") + f.label) +
     `<dl><dt>From</dt><dd>${esc(nameOf(f.from))}</dd><dt>To</dt><dd>${f.to ? esc(nameOf(f.to)) + " · " + esc(typeTo) : "—"}</dd><dt>Amount</dt><dd>${fmt$(f.amt)}${f.per ? " (" + esc(f.per) + ")" : ""}</dd></dl>` +
     (f.note ? `<div class="cav">${esc(f.note)}</div>` : "") + src(f.source_title, f.source_url, f.status);
 }
@@ -912,17 +913,17 @@ function authHtml(id){
 function aboutHtml(){
   return head("About", "", "How to read this map") +
     `<p>Top row: the governments. Second row: the departments each one runs, showing their funding when zoomed out and every recorded change when zoomed in. Below them: the companies, contractors and charities paid by or working alongside government. At the bottom: First Nations controlled organisations, and what they achieve.</p>
-     <p><b>Deaths</b> turns the page red and lists deaths and injuries recorded in each system, with rates and odds.</p>
-     <p><b>Funding</b> turns the page blue and shows only money: who pays whom, what was cut, and the results recorded for each kind of spending, with caveats where comparisons are not like-for-like.</p>
+     <p>Deaths and injuries recorded in each system appear in its list of changes, marked with a content note, and as a red count on the box.</p>
+     <p><b>Divested</b> turns the page red and shows money cut, withheld or diverted. <b>Funded</b> turns the page blue and shows only money: who pays whom, what was cut, and the results recorded for each kind of spending, with caveats where comparisons are not like-for-like.</p>
      <p><b>Who held power</b> lists every person recorded in these offices up to the year you choose. Open a change to see who was in office.</p>
      <p>Sentences name the institution that acts and what it takes. Government positions are labelled State's account. Every item carries a status: verified (linked source), to source, testimony or reference. All content comes from CSV tables in the data folder.</p>`;
 }
 function showDefault(){
   if (state.locked) return;
-  $("pDetails").innerHTML = `<div class="empty-d">${head("Details", state.year, state.money ? "Funding" : state.deaths ? "Deaths and harm" : "Hover over anything on the map")}<p>${state.deaths
-    ? "Each box now lists deaths and injuries recorded in that system, with rates and odds where they exist. Content note: this view describes death and injury."
+  $("pDetails").innerHTML = `<div class="empty-d">${head("Details", state.year, state.divest ? "Divested" : state.money ? "Funded" : "Hover over anything on the map")}<p>${state.divest
+    ? "The map now shows money cut, withheld or spent elsewhere: GST assessed for Aboriginal need, ranger grants, rehab, bilingual schooling, YiSSA, and promised funding not paid. Click any line or box to follow it."
     : state.money
-    ? "The map now shows only funding: blue lines are payments (thicker means more), red dashed lines are cuts. Click any box or line to follow only that money from the Commonwealth down."
+    ? "The map now shows money paid: blue lines are payments (thicker means more). Zoom into a box to see each payment and the results recorded for it. Click any box or line to follow only that money from the Commonwealth down."
     : "Hover over a government, department, organisation, change or arrow to read about it here. Click to keep it here and add it to Saved. Scroll on the map to zoom in; scroll on the time bar to move through the years."}</p></div>`;
 }
 
