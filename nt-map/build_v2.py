@@ -126,7 +126,7 @@ BUD = ("AAP via Shepparton News", "https://www.sheppnews.com.au/national/norther
 FC = ("Funding Centre: NT budget 2026-27", "https://explore.fundingcentre.com.au/articles/whats-in-the-2026-27-nt-budget-for-your-organisation")
 MC = ("Minister McCarthy: NTRAI lines", "https://ministers.pmc.gov.au/mccarthy/strengthening-critical-remote-services-northern-territory")
 F = [
- ("cwlth", "ntg", 2024, 2024, 6323000000, "year", "revenue", "GST and Commonwealth grants, 72% of NT revenue", "verified", "NT Budget: revenue", "https://budget.nt.gov.au/papers/guide/territory-governments-revenue", ""),
+ ("cwlth", "ntbudget", 2024, 2024, 6323000000, "year", "revenue", "GST and Commonwealth grants, 72% of NT revenue", "verified", "NT Budget: revenue", "https://budget.nt.gov.au/papers/guide/territory-governments-revenue", ""),
  ("glencore", "ntg", 2024, 2024, 218000000, "year", "royalty", "Mining royalties to the NT, all mines combined", "verified", "NT Budget: revenue", "https://budget.nt.gov.au/papers/guide/territory-governments-revenue", "Total for all NT mines, not Glencore alone"),
  ("cwlth", "aba", 2018, 2018, 426100000, "year", "royalty equivalent", "Royalty equivalents for mining on Aboriginal land", "verified", *ABA, ""),
  ("aba", "landcouncils", 2018, 2018, 59000000, "year", "grant", "Land council administration", "verified", *ABA, ""),

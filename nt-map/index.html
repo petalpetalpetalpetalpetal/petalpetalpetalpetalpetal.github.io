@@ -10,33 +10,20 @@
 /* Layout: a time bar on top; a left sidebar (details, saved, who held power); a zoomable power map:
    governments, then departments, then contractors, all standing on Country where Aboriginal-controlled organisations sit. */
 :root{
-  --bg:#f0d98f; --surface:#fff5d8; --surface2:#f8e7b4; --ink:#2b1a0b; --muted:#6c5132; --line:#c8a35c; --faint:#ebd294;
-  --state:#3b2512; --state-ink:#f9d870;
-  --abo-head:#9b4f0b; --abo-ink:#fff1cf; --country:#6b330f; --country-ink:#fbe2b2;
-  --corp-head:#4b4840; --corp-ink:#f1ead6; --corp-band:#d9c48c;
-  --harm:#b42318; --led:#b8650f; --ok:#2d6a2d; --warn:#8a5900; --flow:#0f5ea8;
-  --shadow:0 12px 32px rgba(43,26,11,.22);
+  --bg:#15100a; --surface:#211910; --surface2:#2a2015; --ink:#f4d878; --muted:#c3a874; --line:#4c3b22; --faint:#33281a;
+  --state:#3b2a17; --state-ink:#ffd95e; --abo-head:#7c400e; --abo-ink:#ffe7ba; --country:#2e1a0b; --country-ink:#f6d7a2;
+  --corp-head:#3b3a35; --corp-ink:#ebe4cf; --corp-band:#262119;
+  --harm:#ff7b67; --led:#e39c3e; --ok:#8fd18f; --warn:#f0c05c; --flow:#6db3f2; --shadow:0 14px 36px rgba(0,0,0,.55);
   --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#15100a; --surface:#211910; --surface2:#2a2015; --ink:#f4d878; --muted:#c3a874; --line:#4c3b22; --faint:#33281a;
-  --state:#3b2a17; --state-ink:#ffd95e; --abo-head:#7c400e; --abo-ink:#ffe7ba; --country:#2e1a0b; --country-ink:#f6d7a2;
-  --corp-head:#3b3a35; --corp-ink:#ebe4cf; --corp-band:#262119;
-  --harm:#ff7b67; --led:#e39c3e; --ok:#8fd18f; --warn:#f0c05c; --flow:#6db3f2; --shadow:0 14px 36px rgba(0,0,0,.55); color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#15100a; --surface:#211910; --surface2:#2a2015; --ink:#f4d878; --muted:#c3a874; --line:#4c3b22; --faint:#33281a;
-  --state:#3b2a17; --state-ink:#ffd95e; --abo-head:#7c400e; --abo-ink:#ffe7ba; --country:#2e1a0b; --country-ink:#f6d7a2;
-  --corp-head:#3b3a35; --corp-ink:#ebe4cf; --corp-band:#262119;
-  --harm:#ff7b67; --led:#e39c3e; --ok:#8fd18f; --warn:#f0c05c; --flow:#6db3f2; --shadow:0 14px 36px rgba(0,0,0,.55); color-scheme:dark}
-/* money mode: a blue ledger */
-body.money{--bg:#d6e6f5; --surface:#f3f8fd; --surface2:#e2eef9; --ink:#0b2238; --muted:#46627d; --line:#9cb7d2; --faint:#c6d9eb;
-  --state:#0f3557; --state-ink:#dff0ff; --country:#123a5e; --country-ink:#e1f0ff; --corp-band:#bcd3ea; --flow:#0d5fb0}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body.money{--bg:#07131f; --surface:#0d1f30; --surface2:#12283d; --ink:#cfe6ff; --muted:#88a8c6; --line:#25445f; --faint:#16304a;
-  --state:#16466f; --state-ink:#e3f2ff; --country:#0e2a44; --country-ink:#d4e9ff; --corp-band:#0f2234; --flow:#62b0f5}}
-:root[data-theme="dark"] body.money{--bg:#07131f; --surface:#0d1f30; --surface2:#12283d; --ink:#cfe6ff; --muted:#88a8c6; --line:#25445f; --faint:#16304a;
+/* Funding mode: a blue ledger. Deaths mode: a red record. */
+body.money{--bg:#07131f; --surface:#0d1f30; --surface2:#12283d; --ink:#cfe6ff; --muted:#88a8c6; --line:#25445f; --faint:#16304a;
   --state:#16466f; --state-ink:#e3f2ff; --country:#0e2a44; --country-ink:#d4e9ff; --corp-band:#0f2234; --flow:#62b0f5}
+body.deaths{--bg:#120607; --surface:#1d0b0c; --surface2:#2a1012; --ink:#ffd9d4; --muted:#c9928b; --line:#4a1d1e; --faint:#311416;
+  --state:#4a1416; --state-ink:#ffe1dc; --country:#2a0d0e; --country-ink:#ffd6cf; --corp-band:#1c0a0b; --harm:#ff5a4a}
 
 html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;overflow:hidden;display:flex;flex-direction:column;transition:background .3s,color .3s}
@@ -45,24 +32,27 @@ a{color:inherit}
 :focus-visible{outline:2px solid var(--harm);outline-offset:2px}
 
 /* ---------- time bar ---------- */
-.bar{flex:none;background:var(--surface);border-bottom:1px solid var(--line);padding-block:10px 8px;
+.bar{flex:none;background:var(--surface);border-bottom:1px solid var(--line);padding-block:6px 4px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
-  display:grid;grid-template-columns:auto 1fr auto;gap:6px 20px;align-items:center;position:relative;z-index:6}
-.brand{min-width:0}
-.brand h1{margin:0;font-family:var(--f-display);font-stretch:78%;font-weight:780;font-size:20px;line-height:1.1}
-.brand p{margin:2px 0 0;color:var(--muted);font-size:12px;max-width:36ch;line-height:1.3}
-.yearbox{display:flex;align-items:baseline;gap:12px;min-width:0}
-.year{font-family:var(--f-mono);font-weight:600;font-size:34px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.era{min-width:0}
-.era b{display:block;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+  display:grid;grid-template-columns:1fr auto;grid-template-areas:"sub ctrls" "year ctrls" "track track";gap:2px 16px;align-items:center;position:relative;z-index:6}
+.brand{grid-area:sub;min-width:0;margin:0;color:var(--muted);font-size:12px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.yearbox{grid-area:year;display:flex;align-items:baseline;gap:10px;min-width:0}
+.year{font-family:var(--f-mono);font-weight:600;font-size:24px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.era{min-width:0;display:flex;gap:8px;align-items:baseline;overflow:hidden}
+.era b{display:block;white-space:nowrap;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
 .era span{display:block;color:var(--muted);font-size:12px;line-height:1.3;max-width:60ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ctrls{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.ctrls{grid-area:ctrls;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.ctrls .sep{width:1px;height:24px;background:var(--line);margin:0 2px}
 .btn{border:1px solid var(--line);background:var(--surface);border-radius:6px;height:32px;min-width:32px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13px}
 .btn:hover{border-color:var(--ink)}
 .btn[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
 .btn svg{width:14px;height:14px;fill:currentColor}
-.btn.money-btn[aria-pressed="true"]{background:var(--flow);border-color:var(--flow);color:#fff}
-.trackwrap{grid-column:1 / -1;position:relative;height:44px;touch-action:pan-y}
+.btn.mode{height:36px;padding:0 14px;font-size:14px;font-weight:600;border-width:2px}
+.btn.money-btn{border-color:var(--flow);color:var(--flow)}
+.btn.money-btn[aria-pressed="true"]{background:var(--flow);border-color:var(--flow);color:#06121d}
+.btn.death-btn{border-color:var(--harm);color:var(--harm)}
+.btn.death-btn[aria-pressed="true"]{background:var(--harm);border-color:var(--harm);color:#1a0505}
+.trackwrap{grid-area:track;position:relative;height:44px;touch-action:pan-y}
 .eras{position:absolute;left:0;right:0;top:4px;height:14px;display:flex}
 .eras div{height:100%;border-right:1px solid var(--surface);background:var(--surface2);font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;padding-left:4px;line-height:14px;font-family:var(--f-display);font-stretch:80%;letter-spacing:.03em;text-transform:uppercase}
 .eras div.on{background:var(--state);color:var(--state-ink)}
@@ -77,15 +67,16 @@ a{color:inherit}
 #slider::-moz-range-track{height:22px;background:transparent}
 #slider::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:26px;margin-top:-2px;background:var(--harm);border-radius:2px;box-shadow:0 0 0 3px var(--surface)}
 #slider::-moz-range-thumb{width:4px;height:26px;background:var(--harm);border:0;border-radius:2px;box-shadow:0 0 0 3px var(--surface)}
-.wheelhint{position:absolute;right:0;top:-14px;font-size:10px;color:var(--muted)}
+.wheelhint{display:none}
 
 /* ---------- body: sidebar + map ---------- */
 .wrap{flex:1;min-height:0;display:flex;position:relative}
-#side{flex:none;width:360px;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;z-index:5}
+#side{flex:none;width:200px;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;z-index:5}
 .tabs{display:flex;border-bottom:1px solid var(--line);flex:none}
-.tabs button{flex:1;border:0;background:none;padding:10px 6px;font-size:12.5px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent}
+.tabs{flex-wrap:wrap}
+.tabs button{flex:1 1 50%;border:0;background:none;padding:7px 4px;font-size:11.5px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--harm)}
-.pane{flex:1;overflow:auto;padding:14px 16px 70px;min-height:0;line-height:1.45}
+.pane{flex:1;overflow:auto;padding:10px 10px 70px;min-height:0;line-height:1.4;font-size:12.5px}
 .pane[hidden]{display:none}
 .closeSide{display:none}
 main{flex:1;position:relative;min-width:0}
@@ -96,16 +87,16 @@ main{flex:1;position:relative;min-width:0}
 .crumbs .sep{color:var(--muted)} .crumbs .here{font-weight:600}
 .zoomctl{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(56px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px;z-index:3}
 .panel{position:absolute;z-index:3;background:var(--surface);border:1px solid var(--line);border-radius:8px}
-.legend{right:max(64px,calc(env(safe-area-inset-right,0px) + 64px));bottom:calc(56px + env(safe-area-inset-bottom,0px));padding:8px 10px;font-size:11px;display:grid;grid-template-columns:auto auto;gap:4px 14px;color:var(--muted)}
-.legend span{display:flex;align-items:center;gap:6px;white-space:nowrap}
-.sw{display:inline-block;width:18px;height:0;border-top:2px solid var(--ink)} .sw.d{border-top-style:dashed} .sw.o{border-top-style:dotted}
-.sq{display:inline-block;width:12px;height:12px;border-radius:2px}
+.legend{right:max(60px,calc(env(safe-area-inset-right,0px) + 60px));bottom:calc(52px + env(safe-area-inset-bottom,0px));padding:3px 6px;font-size:9px;display:flex;flex-wrap:wrap;max-width:360px;gap:2px 8px;color:var(--muted);opacity:.9}
+.legend span{display:flex;align-items:center;gap:3px;white-space:nowrap}
+.sw{display:inline-block;width:12px;height:0;border-top:1.5px solid var(--ink)} .sw.d{border-top-style:dashed} .sw.o{border-top-style:dotted}
+.sq{display:inline-block;width:8px;height:8px;border-radius:2px}
 .hint{position:absolute;top:10px;right:max(16px,env(safe-area-inset-right,0px));z-index:3;max-width:320px;padding:8px 32px 8px 10px;font-size:12px;line-height:1.4}
 .hint button{position:absolute;right:4px;top:4px;border:0;background:none;width:24px;height:24px}
 .moneysum{position:absolute;left:16px;bottom:56px;z-index:3;width:min(420px,calc(100% - 100px));padding:8px 12px;font-size:12px;line-height:1.4;display:none}
 .moneysum .mx{float:right;border:0;background:none;font-size:12px;text-decoration:underline;padding:0}
 .moneysum.min .row,.moneysum.min small{display:none}
-body.money .moneysum{display:block}
+body.money .moneysum,body.deaths .moneysum{display:block}
 .moneysum b{font-family:var(--f-display);font-stretch:85%;text-transform:uppercase;letter-spacing:.05em;font-size:12px}
 .moneysum .row{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--faint);padding-top:3px;margin-top:3px}
 .moneysum .num{font-family:var(--f-mono);font-weight:600}
@@ -116,14 +107,11 @@ body.money .moneysum{display:block}
 /* ---------- ticker ---------- */
 .ticker{position:absolute;left:0;right:0;bottom:0;z-index:4;height:42px;display:flex;align-items:stretch;background:var(--state);color:var(--state-ink);overflow:hidden}
 .tk-year{flex:none;display:flex;flex-direction:column;justify-content:center;padding:0 12px 0 16px;background:var(--harm);color:#fff;line-height:1}
-body.money .tk-year{background:var(--flow)}
+body.money .tk-year{background:var(--flow);color:#06121d}
 .tk-year small{font-size:9px;text-transform:uppercase;letter-spacing:.08em;opacity:.9}
 .tk-year b{font-family:var(--f-mono);font-size:16px}
 .tk-viewport{flex:1;min-width:0;overflow:hidden;position:relative}
-.tk-track{display:flex;width:max-content;height:100%;animation:tk linear infinite;animation-duration:30s}
-.ticker:hover .tk-track,.ticker:focus-within .tk-track{animation-play-state:paused}
-.ticker.still .tk-track{animation:none}
-@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk-track{display:flex;width:max-content;height:100%;will-change:transform}
 .tk-run{display:flex;align-items:center;padding-right:40px}
 .tk-item{display:inline-flex;align-items:center;gap:8px;border:0;background:none;color:inherit;font-size:13.5px;padding:0 22px 0 0;white-space:nowrap;height:42px}
 .tk-item small{opacity:.7;font-size:11.5px}
@@ -173,6 +161,7 @@ body.money .tk-year{background:var(--flow)}
 .fl-label{font-family:var(--f-mono);font-size:10px;font-weight:600;fill:var(--flow);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
 .fl-label.cut{fill:var(--harm)}
 body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
+.cnote{font-size:11px;color:var(--muted);border-left:3px solid var(--harm);padding:3px 7px;margin:0 0 8px}
 
 /* foreignObject (tier 3) */
 .fo{font-family:var(--f-body);color:var(--ink)}
@@ -186,21 +175,40 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 .oc{display:block;box-sizing:border-box;height:44px;overflow:hidden;border:1px solid var(--ink);border-radius:3px;background:var(--surface2);padding:3px 5px;margin:0 0 2px;cursor:pointer;line-height:1.2}
 .oc b{display:block;font-size:8px;font-family:var(--f-mono)}
 .oc span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:6.6px}
+.hm{display:block;box-sizing:border-box;height:44px;overflow:hidden;border:1px solid var(--harm);border-left:3px solid var(--harm);border-radius:3px;background:var(--surface2);padding:3px 5px;margin:0 0 2px;cursor:pointer;line-height:1.2}
+.hm i{display:block;font-style:normal;font-family:var(--f-mono);font-size:5.8px;color:var(--muted)}
+.hm b{display:block;font-size:7.4px}
+.hm span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:6.6px}
+.dim{opacity:.08!important}
+.act.dimmed,.auth.dimmed{opacity:.22}
+.funnel{margin:8px 0}
+.funnel .fr{margin:0 0 6px;font-size:11.5px}
+.funnel .fb{height:8px;background:var(--flow);border-radius:2px;margin-top:2px}
+.funnel .fb.cut{background:var(--harm)}
 .excards{display:flex;flex-direction:column;gap:3px}
 .ex{background:var(--surface);border:1px solid var(--ink);border-radius:3px;padding:3px 5px;font-size:6.6px;line-height:1.25;cursor:pointer}
 .ex b{display:block;font-size:7px} .ex i{font-style:normal;font-family:var(--f-mono);font-size:6px;color:var(--muted)}
 
 /* ---------- details content (sidebar and phone pop-up) ---------- */
+.fl-l{display:block;font-size:11px;color:var(--muted);margin:8px 0 3px}
+#pSearch input,#pSearch select{width:100%;box-sizing:border-box;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:6px 7px;font:inherit;font-size:12.5px}
+.qyears{display:flex;gap:6px;margin-top:6px}
+.qout{margin-top:10px}
+.qout .qn{font-size:11px;color:var(--muted);margin-bottom:4px}
+.qout button{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--faint);background:none;padding:6px 0;font-size:12.5px}
+.qout button small{display:block;color:var(--muted);font-size:10.5px}
+.qout mark{background:var(--harm);color:#1a0505;border-radius:2px;padding:0 1px}
 .d .k{display:flex;justify-content:space-between;gap:8px;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-.d h3{margin:4px 0 6px;font-family:var(--f-display);font-stretch:82%;font-weight:700;font-size:20px;line-height:1.15;text-wrap:balance}
+.d h3{margin:4px 0 6px;font-family:var(--f-display);font-stretch:82%;font-weight:700;font-size:17px;line-height:1.15;text-wrap:balance}
 .d p{margin:0 0 8px}
-.d dl{display:grid;grid-template-columns:max-content 1fr;gap:3px 10px;margin:0 0 8px;font-size:12.5px}
+.d dl{display:grid;grid-template-columns:1fr;gap:1px 0;margin:0 0 8px;font-size:12px}
+.d dd{margin:0 0 4px!important}
 .d dt{color:var(--muted)} .d dd{margin:0}
 .d .sa{border-left:3px solid var(--line);padding:4px 8px;margin:0 0 8px;font-size:12.5px;color:var(--muted)} .d .sa b{color:var(--ink);font-weight:600}
 .d .ledbox{border-left:3px solid var(--led);background:color-mix(in srgb,var(--led) 16%,var(--surface));padding:4px 8px;margin:0 0 8px;font-size:12.5px}
 .d .cav{border-left:3px solid var(--warn);padding:4px 8px;margin:0 0 8px;font-size:12px}
 .d ul.tl{list-style:none;margin:0 0 8px;padding:0;font-size:12.5px}
-.d ul.tl li{display:grid;grid-template-columns:40px 1fr;gap:6px;padding:3px 0;border-top:1px solid var(--faint)}
+.d ul.tl li{display:grid;grid-template-columns:34px 1fr;gap:6px;padding:3px 0;border-top:1px solid var(--faint)}
 .d ul.tl li span:first-child{font-family:var(--f-mono);color:var(--muted)}
 .d button.lnk,.d ul.tl li button{border:0;background:none;padding:0;text-align:left;text-decoration:underline;text-underline-offset:2px}
 .d .src{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin-top:6px}
@@ -218,10 +226,10 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 .saved li button.open{border:0;background:none;text-align:left;padding:0}
 .saved li small{display:block;color:var(--muted);font-size:11px}
 .saved li button.rm{border:0;background:none;color:var(--muted);width:26px;height:26px}
-.power h3{margin:0 0 2px;font-family:var(--f-display);font-stretch:82%;font-size:22px}
+.power h3{margin:0 0 2px;font-family:var(--f-display);font-stretch:82%;font-size:18px}
 .power .lede{color:var(--muted);font-size:12.5px;margin:0 0 10px}
 .power h4{margin:14px 0 6px;font-family:var(--f-display);font-stretch:85%;text-transform:uppercase;letter-spacing:.06em;font-size:12px;color:var(--muted)}
-.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:5px}
 .tile{border:1px solid var(--faint);border-radius:6px;padding:6px;background:var(--surface);text-align:left;display:flex;flex-direction:column;gap:3px;min-width:0}
 .tile .av{width:30px;height:30px;border-radius:50%;background:var(--surface2);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--f-mono);font-size:11px;font-weight:600}
 .tile b{font-size:11.5px;line-height:1.2}
@@ -244,27 +252,33 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 }
 @media (min-width:901px){ #sideBtn{display:none} #pop{display:none!important} }
 @media (max-width:720px){
-  .bar{grid-template-columns:1fr auto}
-  .brand p,.wheelhint{display:none}
-  .yearbox{grid-column:1 / -1;order:3}
-  .year{font-size:28px}
+  .bar{grid-template-columns:1fr;grid-template-areas:"sub" "ctrls" "year" "track"}
+  .ctrls{justify-content:flex-start;gap:4px}
+  .btn{height:30px;min-width:30px;padding:0 8px;font-size:12px}
+  .btn.mode{height:32px;padding:0 10px;font-size:13px}
+  .ctrls .sep{display:none}
+  .era span{display:none}
   .moneysum{bottom:52px;left:8px;right:8px;width:auto;font-size:11.5px}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}.tk-track{animation:none!important}.tk-viewport{overflow-x:auto}.tk-run[aria-hidden]{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
 <header class="bar">
-  <div class="brand"><h1 id="siteTitle">Taken, Year by Year</h1><p id="siteSub"></p></div>
+  <p class="brand" id="siteSub"></p>
   <div class="yearbox"><div class="year" id="yearOut" aria-live="polite">2026</div><div class="era"><b id="eraLabel"></b><span id="eraSum"></span></div></div>
   <div class="ctrls">
-    <button class="btn" id="sideBtn" aria-label="Open details, saved items and who held power">Panel</button>
+    <button class="btn mode money-btn" id="moneyBtn" aria-pressed="false" title="Show only funding flows and what they achieve"><svg viewBox="0 0 16 16"><path d="M7 1h2v2c1.7.3 3 1.3 3 3h-2c0-.7-.9-1.2-2-1.2S6 5.3 6 6s.6 1 2.3 1.4C10.6 8 12 8.8 12 10.6c0 1.6-1.3 2.7-3 3V15H7v-1.5c-1.8-.3-3-1.5-3-3.2h2c0 .8.9 1.4 2 1.4s2-.5 2-1.2c0-.8-.7-1.1-2.4-1.5C6.2 9.4 4 8.6 4 6.3 4 4.7 5.3 3.4 7 3.1z"/></svg>Funding</button>
+    <button class="btn mode death-btn" id="deathBtn" aria-pressed="false" title="Show deaths and injuries recorded">Deaths</button>
+    <span class="sep" aria-hidden="true"></span>
     <button class="btn" id="prevEv" title="Previous recorded change" aria-label="Previous recorded change"><svg viewBox="0 0 16 16"><path d="M3 2h2v12H3zM14 2v12L6 8z"/></svg></button>
     <button class="btn" id="play" aria-pressed="false" title="Play through time" aria-label="Play through time"><svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2l10 6-10 6z"/></svg></button>
     <button class="btn" id="nextEv" title="Next recorded change" aria-label="Next recorded change"><svg viewBox="0 0 16 16"><path d="M11 2h2v12h-2zM2 2v12l8-6z"/></svg></button>
-    <button class="btn money-btn" id="moneyBtn" aria-pressed="false" title="Show only money flows and what they achieve"><svg viewBox="0 0 16 16"><path d="M7 1h2v2c1.7.3 3 1.3 3 3h-2c0-.7-.9-1.2-2-1.2S6 5.3 6 6s.6 1 2.3 1.4C10.6 8 12 8.8 12 10.6c0 1.6-1.3 2.7-3 3V15H7v-1.5c-1.8-.3-3-1.5-3-3.2h2c0 .8.9 1.4 2 1.4s2-.5 2-1.2c0-.8-.7-1.1-2.4-1.5C6.2 9.4 4 8.6 4 6.3 4 4.7 5.3 3.4 7 3.1z"/></svg>Money</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button class="btn" id="searchBtn">Search</button>
+    <button class="btn" id="sideBtn" aria-label="Open details, saved items and who held power">Panel</button>
     <button class="btn" id="about">About</button>
   </div>
-  <div class="trackwrap" id="trackwrap">
+  <div class="trackwrap" id="trackwrap" title="Scroll here: up goes back in time, down goes forward">
     <div class="wheelhint">Scroll here: up goes back in time, down goes forward</div>
     <div class="eras" id="eras"></div><div class="ticks" id="ticks"></div>
     <input type="range" id="slider" min="1824" max="2026" step="1" value="2026" aria-label="Year">
@@ -279,10 +293,21 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
       <button role="tab" aria-selected="true" data-pane="pDetails">Details</button>
       <button role="tab" aria-selected="false" data-pane="pSaved">Saved <span id="savedN"></span></button>
       <button role="tab" aria-selected="false" data-pane="pPower">Who held power</button>
+      <button role="tab" aria-selected="false" data-pane="pSearch">Search</button>
     </div>
     <div class="pane d" id="pDetails"></div>
     <div class="pane" id="pSaved" hidden></div>
     <div class="pane power" id="pPower" hidden></div>
+    <div class="pane d" id="pSearch" hidden>
+      <label class="fl-l" for="q">Search the map</label>
+      <input id="q" type="search" placeholder="e.g. bail, Coniston, Glencore" autocomplete="off">
+      <label class="fl-l" for="qMode">Years</label>
+      <select id="qMode"><option value="any">Any year</option><option value="in">In one year</option><option value="range">Between two years</option><option value="before">Before a year</option><option value="after">After a year</option></select>
+      <div class="qyears"><input id="qY1" type="number" inputmode="numeric" min="1824" max="2026" placeholder="year" aria-label="Year"><input id="qY2" type="number" inputmode="numeric" min="1824" max="2026" placeholder="to" aria-label="Second year" hidden></div>
+      <label class="fl-l" for="qType">Show</label>
+      <select id="qType"><option value="all">Everything</option><option value="E">Changes</option><option value="F">Funding</option><option value="D">Deaths and harm</option><option value="H">People in office</option><option value="A">Organisations</option></select>
+      <div id="qOut" class="qout"></div>
+    </div>
   </aside>
   <main id="main">
     <svg id="map" role="img" aria-label="Zoomable power map"></svg>
@@ -312,17 +337,17 @@ const num = v => (v === "" || v == null) ? null : +v;
 const yearOf = d => d ? +String(d).slice(0, 4) : null;
 const LIMB = {a:"Killing members of the group (a)", b:"Serious bodily or mental harm (b)", c:"Conditions of life (c)", e:"Forcibly transferring children (e)"};
 const KIND = {nt:"NT evidence", national:"National evidence, NT data needed", gap:"Gap: logical link, no NT figure yet"};
-const BAND_LABEL = {state:"Government department", private:"Company, contractor or charity", aboriginal:"Aboriginal-controlled"};
+const BAND_LABEL = {state:"Government department", private:"Company, contractor or charity", aboriginal:"First Nations controlled"};
 const isDesk = () => matchMedia("(min-width:901px)").matches;
 
 const COLW = 190, BOXW = 170, X0 = 40, CE = 29, CO = 46, HEAD = 74;
 const Y_AUTH = 26, AUTH_H = 66, Y_SEC = 196;
 let W = 0, H = 0, Y_PRIV = 0, Y_COUNTRY = 0, COUNTRY_H = 0;
 
-const state = {year:2026, k:1, kFit:1, money:false, locked:null, playing:null, authW:{}};
+const state = {year:2026, k:1, kFit:1, money:false, deaths:false, locked:null, playing:null, authW:{}, trace:null};
 let D = {}, svg, root, zoom, gConn, gLinks, gFlows, gAuth, gAct, gBands;
 
-const files = ["config","authorities","eras","actors","mechanisms","events","links","examples","flows","outcomes","officeholders"];
+const files = ["config","authorities","eras","actors","mechanisms","events","links","examples","flows","outcomes","officeholders","harm"];
 Promise.all(files.map(f => d3.csv("data/" + f + ".csv"))).then(res => {
   files.forEach((f,i) => D[f] = res[i]);
   prepare(); build(); setYear(state.year, true); fit(false); renderSaved(); showDefault();
@@ -332,7 +357,7 @@ Promise.all(files.map(f => d3.csv("data/" + f + ".csv"))).then(res => {
 
 function prepare(){
   const cfg = {}; D.config.forEach(r => cfg[r.key] = r.value); D.cfg = cfg;
-  $("siteTitle").textContent = cfg.site_title || "Taken, Year by Year"; $("siteSub").textContent = cfg.subtitle || "";
+  $("siteSub").textContent = cfg.subtitle || "";
   D.y0 = +cfg.start_year || 1824; D.y1 = +cfg.end_year || 2026; state.year = +cfg.default_year || D.y1;
   $("slider").min = D.y0; $("slider").max = D.y1;
   const range = r => { r.start = num(r.start_year); r.end = num(r.end_year); return r; };
@@ -342,18 +367,23 @@ function prepare(){
   D.flows.forEach(f => { f.y = +f.year; f.ye = num(f.end_year) ?? f.y; f.amt = num(f.amount_aud); });
   D.outcomes.forEach(o => o.y = +o.year);
   D.officeholders.forEach(h => { h.sy = yearOf(h.start); h.ey = h.end ? yearOf(h.end) : null; });
+  D.harm.forEach(d => { d.y = +d.year; d.ye = num(d.end_year) ?? d.y; d.n = num(d.count); });
   D.actors.forEach(a => {
-    a.col = +a.col; a.x = X0 + (a.col - 1) * COLW; a.cx = a.x + BOXW/2;
+    a.col = +a.col;
     a.eraLabels = (a.era_labels || "").split("|").filter(Boolean).map(t => { const [r, l] = t.split(/:(.+)/); const [p,q] = r.split("-"); return {a:+p, b:q ? +q : 9999, l}; });
     a.events = D.events.filter(e => e.section === a.id).sort((p,q) => q.y - p.y || String(q.date).localeCompare(String(p.date)));
     a.fl = D.flows.filter(f => f.from === a.id || f.to === a.id);
     a.oc = D.outcomes.filter(o => o.actor === a.id);
     a.mechs = D.mechanisms.filter(m => m.section === a.id);
-    a.h = Math.max(196, HEAD + a.events.length * CE + 34, HEAD + a.fl.length * CE + a.oc.length * CO + 40);
+    a.hm = D.harm.filter(d => d.actor === a.id).sort((p,q) => q.ye - p.ye);
+    a.h = Math.max(196, HEAD + a.events.length * CE + 34, HEAD + a.fl.length * CE + a.oc.length * CO + 40, HEAD + a.hm.length * CO + 40);
   });
+  const nMax = d3.max(["state","private","aboriginal"], b => d3.max(D.actors.filter(a => a.band === b), a => a.col) || 0);
+  W = X0 * 2 + (nMax - 1) * COLW + BOXW;
+  ["state","private","aboriginal"].forEach(b => { const n = d3.max(D.actors.filter(a => a.band === b), a => a.col) || 0, off = (W - ((n - 1) * COLW + BOXW)) / 2;
+    D.actors.filter(a => a.band === b).forEach(a => { a.x = off + (a.col - 1) * COLW; a.cx = a.x + BOXW/2; }); });
   D.byId = Object.fromEntries(D.actors.map(a => [a.id, a]));
   const band = b => D.actors.filter(a => a.band === b), maxH = b => d3.max(band(b), a => a.h) || 0;
-  W = X0 * 2 + (d3.max(D.actors, a => a.col) - 1) * COLW + BOXW;
   band("state").forEach(a => a.y = Y_SEC);
   Y_PRIV = Y_SEC + maxH("state") + 200;
   band("private").forEach(a => a.y = Y_PRIV + 46);
@@ -399,7 +429,7 @@ function build(){
   gBands.append("text").attr("class","band-sub").attr("x",16).attr("y",Y_PRIV + 37).text("Paid by governments, or extracting from Country with government approval.");
   gBands.append("rect").attr("class","country").attr("x",0).attr("y",Y_COUNTRY).attr("width",W).attr("height",COUNTRY_H).attr("rx",6);
   gBands.append("text").attr("class","country-label").attr("x",16).attr("y",Y_COUNTRY + 24).text(D.cfg.country_label || "Country: sovereignty never ceded");
-  gBands.append("text").attr("class","country-sub").attr("x",16).attr("y",Y_COUNTRY + 40).text("Everything above stands on this ground. Aboriginal-controlled organisations and nations, and what they achieve when resourced.");
+  gBands.append("text").attr("class","country-sub").attr("x",16).attr("y",Y_COUNTRY + 40).text("Organisations controlled by First Nations people, on Country that was never ceded, and what they achieve when resourced.");
 
   gAuth.selectAll("g").data(["crown","sa","cwlth","ntg"]).join("g").attr("class","auth").each(function(){
     const g = d3.select(this);
@@ -442,7 +472,13 @@ function build(){
   $("prevEv").onclick = () => { const y = [...D.eventYears].reverse().find(y => y < state.year); if (y) setYear(y); };
   $("nextEv").onclick = () => { const y = D.eventYears.find(y => y > state.year); if (y) setYear(y); };
   $("play").onclick = togglePlay;
-  $("moneyBtn").onclick = () => { state.money = !state.money; document.body.classList.toggle("money", state.money); $("moneyBtn").setAttribute("aria-pressed", state.money); render(); if (!state.locked) showDefault(); };
+  const setMode = m => { state.money = m === "money" && !state.money; state.deaths = m === "deaths" && !state.deaths; state.trace = null;
+    document.body.classList.toggle("money", state.money); document.body.classList.toggle("deaths", state.deaths);
+    $("moneyBtn").setAttribute("aria-pressed", state.money); $("deathBtn").setAttribute("aria-pressed", state.deaths); render(); unlock(); };
+  $("moneyBtn").onclick = () => setMode("money"); $("deathBtn").onclick = () => setMode("deaths");
+  $("searchBtn").onclick = () => { tab("pSearch"); if (!isDesk()) $("side").classList.add("open"); setTimeout(() => $("q").focus(), 50); };
+  ["q","qMode","qY1","qY2","qType"].forEach(id => $(id).addEventListener("input", runSearch));
+  tickerLoop();
   $("zin").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1.6);
   $("zout").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.6);
   $("zfit").onclick = () => fit(true);
@@ -457,13 +493,13 @@ function build(){
     if (e.target.closest && e.target.closest("textarea,input,button")) return;
     if (e.key === "ArrowLeft") setYear(state.year - 1); if (e.key === "ArrowRight") setYear(state.year + 1);
   });
-  $("legend").innerHTML = `<span><i class="sq" style="background:var(--state)"></i>Government</span><span><i class="sq" style="background:var(--abo-head)"></i>Aboriginal-controlled</span>
+  $("legend").innerHTML = `<span><i class="sq" style="background:var(--state)"></i>Government</span><span><i class="sq" style="background:var(--abo-head)"></i>First Nations controlled</span>
     <span><i class="sq" style="background:var(--corp-head)"></i>Company or charity</span><span><i class="sq" style="border:2px solid var(--harm)"></i>Changed this year</span>
-    <span><i class="sw"></i>NT evidence</span><span><i class="sw d"></i>National evidence</span><span><i class="sw o"></i>Gap</span><span><i class="sq" style="background:var(--flow)"></i>Money (in Money mode)</span>`;
+    <span><i class="sw"></i>NT evidence</span><span><i class="sw d"></i>National evidence</span><span><i class="sw o"></i>Gap</span><span><i class="sq" style="background:var(--flow)"></i>Funding</span>`;
 }
 function tab(id){
   document.querySelectorAll(".tabs [role=tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.pane === id));
-  ["pDetails","pSaved","pPower"].forEach(p => $(p).hidden = p !== id);
+  ["pDetails","pSaved","pPower","pSearch"].forEach(p => $(p).hidden = p !== id);
 }
 
 function fit(animate){
@@ -559,15 +595,24 @@ function render(){
   const evY = D.events.filter(e => e.y === y);
   gAct.selectAll(".act").each(function(a){
     const g = d3.select(this), on = active(a, y);
-    g.classed("ghost", !on).classed("changed", on && (evY.some(e => e.section === a.id) || (money && D.flows.some(f => f.y === y && (f.from === a.id || f.to === a.id)))));
+    const deaths = state.deaths;
+    g.classed("ghost", !on).classed("changed", on && (deaths ? a.hm.some(d => d.ye === y) : evY.some(e => e.section === a.id) || (money && D.flows.some(f => f.y === y && (f.from === a.id || f.to === a.id)))));
     const lines = wrapWords(a.label, 18);
     g.select(".ttl").selectAll("tspan").data(lines.slice(0, 2)).join("tspan").attr("x",10).attr("dy",(d,i) => i ? 17 : 0).text((d,i) => i === 1 && lines.length > 2 ? fitText(d, 15) + "…" : d);
     g.select(".sub").text(on ? fitText(a.band === "state" ? labelAt(a, y) : BAND_LABEL[a.band], 32) : (a.start > y ? "From " + a.start : "Ended " + a.end));
     const ov = g.select(".overview"), evs = a.events.filter(e => e.y <= y);
     if (!on){ ov.style("visibility","hidden"); g.select(".inner").html(""); return; }
     ov.style("visibility", null);
+    if (deaths){
+      const hs = a.hm.filter(d => d.y <= y), top = hs[0];
+      ov.select(".ov-k").text(hs.length ? hs.length + " records of death or harm" : "No death or harm recorded");
+      ov.select(".ov-v").text(top ? fitText(top.value.split(/[;(,]/)[0], 15) : "").style("fill", "var(--harm)");
+      ov.select(".ov-bar").attr("width", 0); ov.select(".ov-barbg").style("display", "none");
+      ov.select(".ov-c").text(top ? fitText(top.measure, 30) : ""); ov.select(".ov-who").text(""); ov.select(".ov-n").text(top ? top.scope + " · " + (top.y === top.ye ? top.y : top.y + "–" + top.ye) : "");
+      g.select(".inner").html(harmHtml(a, y)); return;
+    }
     const fu = fundingFor(a, y);
-    ov.select(".ov-k").text(fu ? fu.label : (money ? "No money figure for " + y : "Changes to " + y));
+    ov.select(".ov-k").text(fu ? fu.label : (money ? "No funding figure for " + y : "Changes to " + y));
     ov.select(".ov-v").text(fu ? (fu.cut ? "cut " : "") + fmt$(fu.amt) : String(evs.length)).style("fill", fu && fu.cut ? "var(--harm)" : null);
     ov.select(".ov-bar").attr("width", fu && fu.amt && !fu.cut ? Math.max(2, Math.min(1, Math.sqrt(fu.amt / D.maxAmt)) * (BOXW - 20)) : 0);
     ov.select(".ov-barbg").style("display", fu && fu.amt && !fu.cut ? null : "none");
@@ -578,10 +623,44 @@ function render(){
     ov.select(".ov-n").text(money && oc ? fitText("Result: " + oc.value, 34) : `${evs.length} changes to ${y}`);
     g.select(".inner").html(money ? moneyHtml(a, y) : changesHtml(a, y));
   });
-  gAct.selectAll(".chg,.mrow,.oc").on("pointerenter", function(ev){ if (!this.dataset.key) return; ev.stopPropagation(); hover(ev, this.dataset.key); })
+  gAct.selectAll(".chg,.mrow,.oc,.hm").on("pointerenter", function(ev){ if (!this.dataset.key) return; ev.stopPropagation(); hover(ev, this.dataset.key); })
     .on("pointermove", moveLabel).on("pointerleave", leave)
     .on("click", function(ev){ if (!this.dataset.key) return; ev.stopPropagation(); choose(ev, this.dataset.key); });
-  renderLinks(y); renderFlows(y); thisYear(evY); semantic(); crumbs(); moneySummary(y);
+  renderLinks(y); renderFlows(y); thisYear(evY); semantic(); crumbs(); moneySummary(y); applyTrace();
+}
+function harmHtml(a, y){
+  const hs = a.hm.filter(d => d.y <= y);
+  if (!hs.length) return '<div class="mrow"><i>no record</i><b>No death or harm recorded</b></div>';
+  return hs.map(d => `<div class="hm" data-key="D:${d.id}"><i>${esc(d.kind)} · ${d.y === d.ye ? d.y : d.y + "–" + d.ye} · ${esc(d.scope)}</i><b>${esc(d.measure)}</b><span>${esc(d.value)}</span></div>`).join("");
+}
+/* follow the money: trace every flow connected upstream and downstream */
+function traceFrom(key){
+  const y = state.year, fl = flowsAt(y).filter(f => f.from);
+  const [t, id] = key.split(/:(.+)/); let start = [];
+  if (t === "F"){ const f = D.flows.find(x => x.id === id); if (!f) return null; start = [f.from, f.to].filter(Boolean); }
+  else if (t === "A" || t === "G") start = [id]; else return null;
+  const nodes = new Set(start), flows = new Set();
+  if (t === "F") flows.add(id);
+  let up = [...start], dn = [...start];
+  while (up.length){ const n = up.pop(); fl.filter(f => f.to === n).forEach(f => { flows.add(f.id); if (!nodes.has(f.from)){ nodes.add(f.from); up.push(f.from); } }); }
+  while (dn.length){ const n = dn.pop(); fl.filter(f => f.from === n).forEach(f => { flows.add(f.id); if (f.to && !nodes.has(f.to)){ nodes.add(f.to); dn.push(f.to); } }); }
+  return flows.size ? {nodes, flows} : null;
+}
+function applyTrace(){
+  const tr = state.money && state.trace;
+  gFlows.selectAll("g.flg").classed("dim", f => !!tr && !tr.flows.has(f.id));
+  gAct.selectAll(".act").classed("dimmed", a => !!tr && !tr.nodes.has(a.id));
+  gAuth.selectAll(".auth").classed("dimmed", id => !!tr && !tr.nodes.has(id));
+}
+function funnelHtml(tr){
+  if (!tr) return "";
+  const fl = D.flows.filter(f => tr.flows.has(f.id));
+  const depth = {}; const roots = [...tr.nodes].filter(n => !fl.some(f => f.to === n));
+  const q = roots.map(n => [n, 0]); while (q.length){ const [n, d] = q.shift(); if (depth[n] != null && depth[n] <= d) continue; depth[n] = d; fl.filter(f => f.from === n && f.to).forEach(f => q.push([f.to, d + 1])); }
+  fl.sort((p,q2) => (depth[p.from] ?? 0) - (depth[q2.from] ?? 0) || (q2.amt || 0) - (p.amt || 0));
+  const max = d3.max(fl, f => f.amt) || 1;
+  return `<div class="funnel"><div class="k"><span>Follow the money</span><span>${state.year}</span></div>` + fl.map(f => `<div class="fr"><button class="lnk" data-key="F:${f.id}">${esc(nameOf(f.from))} → ${f.to ? esc(nameOf(f.to)) : "not traced further"}</button><br>${f.kind === "cut" ? "Cut " : ""}${fmt$(f.amt)} ${f.per && f.per !== "year" ? "(" + esc(f.per) + ")" : "a year"} · ${esc(f.label)}<div class="fb ${f.kind === "cut" ? "cut" : ""}" style="width:${f.amt ? Math.max(2, Math.sqrt(f.amt / max) * 100) : 2}%"></div></div>`).join("") +
+    `<p style="font-size:11px;color:var(--muted)">Bars use a square-root scale so small amounts stay visible. Where a line ends, the money is spent inside government or the recipient is not public.</p></div>`;
 }
 function changesHtml(a, y){
   const evs = a.events.filter(e => e.y <= y);
@@ -650,38 +729,87 @@ function renderFlows(y){
     .on("click", (ev,f) => { ev.stopPropagation(); choose(ev, "F:" + f.id); });
 }
 function moneySummary(y){
+  if (state.deaths){
+    const hs = D.harm.filter(d => d.y <= y), nt = hs.filter(d => d.scope === "NT" && d.n && /killed|died|deaths/.test(d.kind));
+    $("moneySum").innerHTML = `<button class="mx" id="mx">${$("moneySum").classList.contains("min") ? "Show" : "Hide"}</button><b>Deaths and harm recorded to ${y}</b>
+      <div class="cnote">This view lists deaths and injuries caused or not prevented by these systems. People are named only where families have made it public.</div>
+      ${hs.filter(d => (d.n && d.n > 1) || /custody/.test(d.measure)).sort((p,q) => q.ye - p.ye).slice(0, 6).map(d => `<div class="row"><span>${esc(d.measure)} <i style="font-style:normal;color:var(--muted)">(${esc(d.scope)}, ${d.y === d.ye ? d.y : d.y + "–" + d.ye})</i></span><span class="num">${esc(fitText(d.value, 40))}</span></div>`).join("")}
+      <small>Figures are listed, not added: records overlap (named deaths in custody are part of the 40), and the true toll is higher than any record. Click a box for every record.</small>`;
+    $("mx").onclick = ev => { ev.stopPropagation(); $("moneySum").classList.toggle("min"); moneySummary(state.year); };
+    return;
+  }
   if (!state.money) return;
   const typeOf = id => { const a = D.byId[id]; return a ? a.band : "gov"; };
   const fl = flowsAt(y).filter(f => f.amt && f.kind !== "cut" && f.per === "year");
   const sum = b => d3.sum(fl.filter(f => typeOf(f.to) === b), f => f.amt);
   const cuts = flowsAt(y).filter(f => f.kind === "cut");
   const multi = flowsAt(y).filter(f => f.amt && f.kind !== "cut" && f.per !== "year" && typeOf(f.to) === "aboriginal");
-  $("moneySum").innerHTML = `<button class="mx" id="mx">${$("moneySum").classList.contains("min") ? "Show" : "Hide"}</button><b>Money recorded for ${y}</b>
+  $("moneySum").innerHTML = `<button class="mx" id="mx">${$("moneySum").classList.contains("min") ? "Show" : "Hide"}</button><b>Funding recorded for ${y}</b>
     <div class="row"><span>Annual budgets to government departments</span><span class="num">${fmt$(sum("state"))}</span></div>
     <div class="row"><span>Annual payments to companies and contractors</span><span class="num">${fmt$(sum("private"))}</span></div>
-    <div class="row"><span>Annual payments to Aboriginal-controlled organisations</span><span class="num">${fmt$(sum("aboriginal"))}</span></div>
-    ${multi.length ? `<div class="row"><span>Multi-year or one-off to Aboriginal-controlled</span><span class="num">${multi.map(f => fmt$(f.amt)).join(" + ")}</span></div>` : ""}
+    <div class="row"><span>Annual payments to First Nations controlled organisations</span><span class="num">${fmt$(sum("aboriginal"))}</span></div>
+    ${multi.length ? `<div class="row"><span>Multi-year or one-off to First Nations controlled</span><span class="num">${multi.map(f => fmt$(f.amt)).join(" + ")}</span></div>` : ""}
     ${cuts.length ? `<div class="row"><span>Cuts recorded</span><span class="num" style="color:var(--harm)">${cuts.length}</span></div>` : ""}
-    <small>Only sourced figures are counted, so totals are partial. Annual and multi-year amounts are kept apart.</small>`;
+    <small>Only sourced figures are counted, so totals are partial. Click any box or line to follow its money.</small>`;
   $("mx").onclick = ev => { ev.stopPropagation(); $("moneySum").classList.toggle("min"); moneySummary(state.year); };
 }
 function thisYear(evY){
   const y = state.year, track = $("tkTrack"), tk = $("ticker");
-  $("tkYear").textContent = y; $("tkLabel").textContent = state.money ? "Money in" : "Changes in";
-  const items = state.money
+  $("tkYear").textContent = y; $("tkLabel").textContent = state.money ? "Funding in" : state.deaths ? "Deaths, harm" : "Changes in";
+  const items = state.deaths ? D.harm.filter(d => d.ye === y || d.y === y).map(d => `<button class="tk-item" data-key="D:${d.id}"><i class="tk-dot"></i>${esc(d.measure)}: ${esc(d.value)}<small>${esc(d.scope)}</small></button>`)
+    : state.money
     ? D.flows.filter(f => f.y === y).map(f => `<button class="tk-item" data-key="F:${f.id}"><i class="tk-dot ${f.kind === "cut" ? "" : "flow"}"></i>${f.kind === "cut" ? "Cut: " : ""}${fmt$(f.amt)} ${esc(f.label)}<small>${esc(nameOf(f.from))} → ${esc(f.to ? nameOf(f.to) : "—")}</small></button>`)
     : evY.map(e => `<button class="tk-item" data-key="E:${e.id}"><i class="tk-dot ${e.aboriginal_led === "yes" ? "led" : ""}"></i>${esc(e.title)}<small>${esc(nameOf(e.section))}${e.status !== "verified" ? " · " + esc(e.status) : ""}</small></button>`);
   if (items.length){
     tk.classList.remove("still"); const h = items.join("");
     track.innerHTML = `<div class="tk-run">${h}</div><div class="tk-run" aria-hidden="true">${h}</div>`;
     track.querySelectorAll(".tk-item").forEach(b => b.onclick = ev => { ev.stopPropagation(); const it = resolve(b.dataset.key); if (it && it.actor) zoomToActor(it.actor); choose(ev, b.dataset.key, true); });
-    requestAnimationFrame(() => { const w = track.firstChild.getBoundingClientRect().width; track.style.animationDuration = Math.max(14, w / 55) + "s"; track.style.animationName = "none"; void track.offsetWidth; track.style.animationName = ""; });
+    tick.x = 0;
   } else {
     tk.classList.add("still");
     const prev = [...D.eventYears].reverse().find(v => v < y), next = D.eventYears.find(v => v > y);
-    track.innerHTML = `<div class="tk-run tk-empty">No ${state.money ? "money record" : "change"} for ${y} yet. That can be a gap in the research rather than a quiet year.` + (prev ? ` <button data-y="${prev}">Back to ${prev}</button>` : "") + (next ? ` <button data-y="${next}">On to ${next}</button>` : "") + `</div>`;
+    tick.x = 0; track.style.transform = "";
+    track.innerHTML = `<div class="tk-run tk-empty">No ${state.money ? "funding record" : state.deaths ? "death or harm record" : "change"} for ${y} yet. That can be a gap in the research rather than a quiet year.` + (prev ? ` <button data-y="${prev}">Back to ${prev}</button>` : "") + (next ? ` <button data-y="${next}">On to ${next}</button>` : "") + `</div>`;
     track.querySelectorAll("button").forEach(b => b.onclick = ev => { ev.stopPropagation(); setYear(+b.dataset.y); });
   }
+}
+
+/* ticker: moved by script so it runs on every phone */
+const tick = {x:0, paused:0, last:0};
+function tickerLoop(){
+  const tk = $("ticker"), track = $("tkTrack");
+  tk.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") tick.paused = Infinity; });
+  tk.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") tick.paused = 0; });
+  tk.addEventListener("touchstart", () => tick.paused = performance.now() + 4000, {passive:true});
+  tk.addEventListener("focusin", () => tick.paused = Infinity); tk.addEventListener("focusout", () => tick.paused = 0);
+  const step = t => {
+    const dt = tick.last ? Math.min(64, t - tick.last) : 16; tick.last = t;
+    if (!tk.classList.contains("still") && t > tick.paused && track.firstChild){
+      const w = track.firstChild.getBoundingClientRect().width;
+      if (w > 0){ tick.x -= dt * 0.05; if (-tick.x >= w) tick.x += w; track.style.transform = `translateX(${tick.x}px)`; }
+    }
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+/* search */
+function runSearch(){
+  const q = $("q").value.trim().toLowerCase(), mode = $("qMode").value, y1 = num($("qY1").value), y2 = num($("qY2").value), type = $("qType").value;
+  $("qY2").hidden = mode !== "range"; $("qY1").hidden = mode === "any";
+  const inYears = (a, b) => { b = b ?? a; if (mode === "any" || y1 == null) return true;
+    if (mode === "in") return a <= y1 && y1 <= b; if (mode === "before") return a < y1; if (mode === "after") return b > y1;
+    if (mode === "range") return b >= y1 && a <= (y2 ?? y1); return true; };
+  const hit = txt => !q || q.split(/\s+/).every(w => txt.toLowerCase().includes(w));
+  const rows = [];
+  if (type === "all" || type === "E") D.events.forEach(e => { if (inYears(e.y) && hit([e.title, e.detail, e.actor, e.figure].join(" "))) rows.push({key: "E:" + e.id, y: e.y, t: e.title, k: "Change · " + nameOf(e.section)}); });
+  if (type === "all" || type === "F") D.flows.forEach(f => { if (inYears(f.y, f.ye) && hit([f.label, f.note, nameOf(f.from), f.to ? nameOf(f.to) : ""].join(" "))) rows.push({key: "F:" + f.id, y: f.y, t: (f.kind === "cut" ? "Cut: " : "") + fmt$(f.amt) + " " + f.label, k: "Funding · " + nameOf(f.from) + " → " + (f.to ? nameOf(f.to) : "—")}); });
+  if (type === "all" || type === "D") D.harm.forEach(d => { if (inYears(d.y, d.ye) && hit([d.measure, d.value, d.note].join(" "))) rows.push({key: "D:" + d.id, y: d.y, t: d.measure + ": " + d.value, k: "Death or harm · " + d.scope}); });
+  if (type === "all" || type === "H") D.officeholders.forEach(h => { if (inYears(h.sy, h.ey ?? 2026) && hit([h.person, h.role, h.party].join(" "))) rows.push({key: "H:" + h.id, y: h.sy, t: h.person, k: h.role + " · " + h.sy + "–" + (h.ey ?? "now")}); });
+  if (type === "all" || type === "A") D.actors.forEach(a => { if (inYears(a.start ?? 1824, a.end ?? 2026) && hit([a.label, a.summary].join(" "))) rows.push({key: "A:" + a.id, y: a.start, t: a.label, k: BAND_LABEL[a.band]}); });
+  rows.sort((p,q2) => (q2.y || 0) - (p.y || 0));
+  const mark = t => { let h = esc(t); if (q) q.split(/\s+/).filter(Boolean).forEach(w => { h = h.replace(new RegExp("(" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi"), "<mark>$1</mark>"); }); return h; };
+  $("qOut").innerHTML = (q || mode !== "any") ? `<div class="qn">${rows.length} results</div>` + rows.slice(0, 200).map(r => `<button data-key="${esc(r.key)}"><b>${r.y ?? ""}</b> ${mark(r.t)}<small>${esc(r.k)}</small></button>`).join("") : '<div class="qn">Type a word, or choose years.</div>';
+  $("qOut").querySelectorAll("[data-key]").forEach(b => b.onclick = ev => { const r = rows.find(x => x.key === b.dataset.key); if (r && r.y && r.key[0] !== "H") setYear(Math.max(r.y, state.year >= r.y ? state.year : r.y)); const it = resolve(b.dataset.key); if (it && it.actor) zoomToActor(it.actor); choose(ev, b.dataset.key, true); tab("pSearch"); });
 }
 
 /* ---------------- details ---------------- */
@@ -695,6 +823,7 @@ function resolve(key){
   if (t === "O"){ const o = D.outcomes.find(x => x.id === id); return o && {title: o.program + ": " + o.value, kind: "Result", actor: D.byId[o.actor], html: () => outcomeHtml(o)}; }
   if (t === "H"){ const h = D.officeholders.find(x => x.id === id); return h && {title: h.person, kind: h.role, actor: D.byId[h.actor], html: () => holderHtml(h)}; }
   if (t === "X"){ const x = D.examples.find(v => v.id === id); return x && {title: x.title, kind: "Example", html: () => exampleHtml(x)}; }
+  if (t === "D"){ const d = D.harm.find(x => x.id === id); return d && {title: d.measure, kind: "Death or harm", actor: D.byId[d.actor], html: () => harmDetail(d)}; }
   if (t === "G"){ const a = authAt(id, state.year) || D.authorities.find(v => v.id === id); return a && {title: a.label, kind: "Government", html: () => authHtml(id)}; }
   return null;
 }
@@ -743,6 +872,10 @@ function holderHtml(h){
     (h.note ? `<p>${esc(h.note)}</p>` : "") +
     (evs.length ? `<p style="font-size:12px;color:var(--muted)">Laws, policies and cuts recorded while they held office:</p><ul class="tl">${evs.map(e => `<li><span>${e.y}</span><span><button data-key="E:${e.id}">${esc(e.title)}</button></span></li>`).join("")}</ul>` : "") + src(h.source_title, h.source_url, h.status);
 }
+function harmDetail(d){
+  return head(d.kind + " · " + d.scope, d.y === d.ye ? d.y : d.y + "–" + d.ye, d.measure) + `<div class="cnote">Content note: death and injury.</div><p><b>${esc(d.value)}</b></p>` + (d.note ? `<div class="cav">${esc(d.note)}</div>` : "") +
+    (D.byId[d.actor] ? `<dl><dt>System</dt><dd>${esc(nameOf(d.actor))}</dd></dl>` : "") + src(d.source_title, d.source_url, d.status);
+}
 function exampleHtml(x){ return head(x.kind + " · example", x.y, x.title) + `<p>${esc(x.text)}</p><dl><dt>Consent</dt><dd>${esc(x.consent)}</dd></dl>` + src(x.source_title, x.source_url, x.kind === "composite" ? "composite" : "verified"); }
 function authHtml(id){
   const y = state.year, a = authAt(id, y) || D.authorities.find(v => v.id === id), who = holdersAt(y, h => h.actor === id);
@@ -750,15 +883,18 @@ function authHtml(id){
 }
 function aboutHtml(){
   return head("About", "", "How to read this map") +
-    `<p>Top row: the governments. Second row: the departments each one runs, showing their funding when zoomed out and every recorded change when zoomed in. Below them: the companies, contractors and charities paid by or working alongside government. At the bottom, on Country: Aboriginal-controlled organisations and nations, and what they achieve.</p>
-     <p><b>Money</b> turns the page blue and shows only money: who pays whom, what was cut, and the results recorded for each kind of spending, with caveats where comparisons are not like-for-like.</p>
+    `<p>Top row: the governments. Second row: the departments each one runs, showing their funding when zoomed out and every recorded change when zoomed in. Below them: the companies, contractors and charities paid by or working alongside government. At the bottom: First Nations controlled organisations, and what they achieve.</p>
+     <p><b>Deaths</b> turns the page red and lists deaths and injuries recorded in each system, with rates and odds.</p>
+     <p><b>Funding</b> turns the page blue and shows only money: who pays whom, what was cut, and the results recorded for each kind of spending, with caveats where comparisons are not like-for-like.</p>
      <p><b>Who held power</b> lists every person recorded in these offices up to the year you choose. Open a change to see who was in office.</p>
      <p>Sentences name the institution that acts and what it takes. Government positions are labelled State's account. Every item carries a status: verified (linked source), to source, testimony or reference. All content comes from CSV tables in the data folder.</p>`;
 }
 function showDefault(){
   if (state.locked) return;
-  $("pDetails").innerHTML = `<div class="empty-d">${head("Details", state.year, state.money ? "Money mode" : "Hover over anything on the map")}<p>${state.money
-    ? "The map now shows only money: blue lines are payments (thicker means more), red dashed lines are cuts. Zoom into a box to see each payment and the results recorded for it."
+  $("pDetails").innerHTML = `<div class="empty-d">${head("Details", state.year, state.money ? "Funding" : state.deaths ? "Deaths and harm" : "Hover over anything on the map")}<p>${state.deaths
+    ? "Each box now lists deaths and injuries recorded in that system, with rates and odds where they exist. Content note: this view describes death and injury."
+    : state.money
+    ? "The map now shows only funding: blue lines are payments (thicker means more), red dashed lines are cuts. Click any box or line to follow only that money from the Commonwealth down."
     : "Hover over a government, department, organisation, change or arrow to read about it here. Click to keep it here and add it to Saved. Scroll on the map to zoom in; scroll on the time bar to move through the years."}</p></div>`;
 }
 
@@ -774,6 +910,7 @@ function leave(){ lbl.classList.remove("show"); }
 function choose(ev, key, noSave){
   const it = resolve(key); if (!it) return;
   if (!noSave) save(key, it);
+  state.trace = state.money ? traceFrom(key) : null; applyTrace();
   state.locked = key; showDetails(key);
   if (!isDesk()){ $("popBody").innerHTML = details(key); wire($("popBody")); $("pop").classList.add("show"); $("side").classList.remove("open"); }
 }
@@ -788,7 +925,7 @@ function details(key){
   const savedNow = getSaved().some(s => s.key === key);
   const email = D.cfg.contact_email || "", subj = `Correction ${key} (${state.year}): ${it.title}`;
   const msg = `Item: ${key}\nYear viewed: ${state.year}\nTitle: ${it.title}\n\nWhat should change:\n\nSource (link or document):\n\nCan we credit you? (yes/no, name):\n`;
-  return it.html() + `<div class="acts"><button data-save="${esc(key)}">${savedNow ? "Saved ✓ (remove)" : "Save"}</button><button data-unlock>Release</button><button data-fix>Suggest a correction</button></div>
+  return (state.trace ? funnelHtml(state.trace) : "") + it.html() + `<div class="acts"><button data-save="${esc(key)}">${savedNow ? "Saved ✓ (remove)" : "Save"}</button><button data-unlock>Release</button><button data-fix>Suggest a correction</button></div>
     <div class="fix" hidden><div>${esc(D.cfg.contact_note || "")}</div><div style="margin-top:6px">Send to <code>${esc(email)}</code></div>
     <textarea aria-label="Message to copy">${esc(msg)}</textarea>
     <div class="acts" style="border:0;margin:0;padding:0"><button data-copy="msg" data-label="Copy message">Copy message</button><button data-copy="email" data-label="Copy address">Copy address</button><a href="mailto:${esc(email)}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Open in email app</a></div></div>`;
@@ -805,7 +942,7 @@ function wire(el){
     navigator.clipboard ? navigator.clipboard.writeText(t).then(done).catch(sel) : sel();
   });
 }
-function unlock(){ state.locked = null; if (gAct) gAct.selectAll(".act").classed("hl", false); showDefault(); }
+function unlock(){ state.locked = null; state.trace = null; if (gAct){ gAct.selectAll(".act").classed("hl", false); applyTrace(); } showDefault(); }
 
 const KEY = "nt-map-saved";
 function getSaved(){ try { return JSON.parse(localStorage.getItem(KEY) || "null") || state._saved || []; } catch(e){ return state._saved || []; } }
