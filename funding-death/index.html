@@ -510,12 +510,12 @@ function build(){
   $("popX").onclick = () => $("pop").classList.remove("show");
   $("sideBtn").onclick = () => $("side").classList.add("open");
   /* sidebar: drag to resize, arrow to hide or show */
-  const setW = w => { w = Math.max(150, Math.min(560, w)); document.documentElement.style.setProperty("--sideW", w + "px"); try { localStorage.setItem("nt-map-sideW", w); } catch(e){} };
-  try { const w = +localStorage.getItem("nt-map-sideW"); if (w) setW(w); if (localStorage.getItem("nt-map-sideHidden") === "1") document.body.classList.add("sideHidden"); } catch(e){}
+  const setW = w => { w = Math.max(150, Math.min(560, w)); document.documentElement.style.setProperty("--sideW", w + "px"); try { localStorage.setItem("funding-death-sideW", w); } catch(e){} };
+  try { const w = +localStorage.getItem("funding-death-sideW"); if (w) setW(w); if (localStorage.getItem("funding-death-sideHidden") === "1") document.body.classList.add("sideHidden"); } catch(e){}
   const syncArrow = () => { const h = document.body.classList.contains("sideHidden"); $("sideToggle").textContent = h ? "▶" : "◀"; $("sideToggle").setAttribute("aria-label", h ? "Show panel" : "Hide panel"); $("sideToggle").title = h ? "Show panel" : "Hide panel"; };
   syncArrow();
   const refit = () => setTimeout(() => { if (state.k / state.kFit < 1.2) fit(true); }, 30);
-  $("sideToggle").onclick = () => { document.body.classList.toggle("sideHidden"); syncArrow(); refit(); try { localStorage.setItem("nt-map-sideHidden", document.body.classList.contains("sideHidden") ? "1" : "0"); } catch(e){} };
+  $("sideToggle").onclick = () => { document.body.classList.toggle("sideHidden"); syncArrow(); refit(); try { localStorage.setItem("funding-death-sideHidden", document.body.classList.contains("sideHidden") ? "1" : "0"); } catch(e){} };
   $("grip").addEventListener("pointerdown", e => { e.preventDefault(); const g = $("grip"); g.setPointerCapture(e.pointerId); g.classList.add("on");
     const left = $("side").getBoundingClientRect().left;
     const mv = ev => setW(ev.clientX - left), up = () => { refit(); g.classList.remove("on"); g.removeEventListener("pointermove", mv); g.removeEventListener("pointerup", up); };
@@ -973,7 +973,7 @@ function wire(el){
 }
 function unlock(){ state.locked = null; state.trace = null; if (gAct){ gAct.selectAll(".act").classed("hl", false); applyTrace(); } showDefault(); }
 
-const KEY = "nt-map-saved";
+const KEY = "funding-death-saved";
 function getSaved(){ try { return JSON.parse(localStorage.getItem(KEY) || "null") || state._saved || []; } catch(e){ return state._saved || []; } }
 function setSaved(v){ state._saved = v; try { localStorage.setItem(KEY, JSON.stringify(v)); } catch(e){} renderSaved(); }
 function save(key, it){ const s = getSaved().filter(x => x.key !== key); s.unshift({key, title: it.title, kind: it.kind, year: state.year}); setSaved(s); }

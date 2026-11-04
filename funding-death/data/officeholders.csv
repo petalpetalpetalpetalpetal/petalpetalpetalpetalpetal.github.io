@@ -1,0 +1,119 @@
+id,person,role,actor,start,end,party,note,source_title,source_url,status
+h001,Boyle Travers Finniss,Government Resident,sa,1864-03-03,1865-11-04,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h002,William Bloomfield Douglas,Government Resident,sa,1870-04-27,1873-06-30,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h003,George Byng Scott,Government Resident,sa,1873-10-06,1876-06-30,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h004,Edward William Price,Government Resident,sa,1876-07-01,1883-03-06,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h005,John Parsons,Government Resident,sa,1884-03-19,1890-02-14,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h006,John Knight,Government Resident,sa,1890-07-16,1892-01-10,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h007,Charles James Dashwood,Government Resident,sa,1892-02-24,1905-01-31,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h008,Charles Edward Herbert,Government Resident,sa,1905-02-01,1910-02-08,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h009,Samuel Mitchell,Government Resident,sa,1910-04-01,1912-03-25,,South Australia's officer in the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h010,John Gilruth,Administrator,ntg,1912-03-25,1919-08-01,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h011,Henry Ernest Carey,Administrator,ntg,1919-08-01,1921-01-17,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h012,Frederic Urquhart,Administrator,ntg,1921-01-17,1927-03-01,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h013,Robert Weddell,Administrator,ntg,1927-03-01,1937-03-29,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h014,Aubrey Abbott,Administrator,ntg,1937-03-29,1946-07-01,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h015,Arthur Driver,Administrator,ntg,1946-07-01,1951-07-01,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h016,Frank Wise,Administrator,ntg,1951-07-01,1956-07-01,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h017,James Archer,Administrator,ntg,1956-07-01,1961-04-01,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h018,Roger Nott,Administrator,ntg,1961-04-01,1964-10-01,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h019,Roger Dean,Administrator,ntg,1964-10-01,1970-03-04,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h020,Frederick Chaney,Administrator,ntg,1970-03-04,1973-12-10,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h021,Jock Nelson,Administrator,ntg,1973-12-10,1975-11-12,,Commonwealth's ruler of the Territory,Administrator of the NT,https://www.wikiwand.com/en/Administrator_of_the_Northern_Territory,verified
+h022,Cecil Cook,Chief Protector of Aborigines,childprot,1927-03-01,1939-12-31,,Reported in 1934 that children 'have been removed to half-caste institutions under Government control',ADB: Cook,https://adb.anu.edu.au/biography/cook-cecil-evelyn-mick-12343,verified
+h023,E.W.P. Chinnery,Head of Native Affairs,childprot,1939-01-01,1946-12-31,,Seconded from New Guinea to bring 'New Guinea methods' to the Territory,ADB: Chinnery,https://adb.anu.edu.au/biography/chinnery-ernest-william-pearson-5583,verified
+h024,Harry Giese,Director of Welfare,childprot,1954-07-15,1970-12-31,,Ran the Welfare Branch that administered wardship,ADB: Giese,https://adb.anu.edu.au/biography/giese-harry-christian-33894,verified
+h025,Paul Hasluck,Minister for Territories,cwlth,1951-05-11,1963-12-18,Liberal,Architect of assimilation policy,Indigenous Rights: Hasluck,https://indigenousrights.net.au/people/pagination/paul_hasluck,verified
+h026,Andrew Fisher,Prime Minister,cwlth,1910-04-29,1913-06-24,Labor,,Australia's Prime Ministers (National Archives),,reference
+h027,Joseph Cook,Prime Minister,cwlth,1913-06-24,1914-09-17,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h028,Andrew Fisher,Prime Minister,cwlth,1914-09-17,1915-10-27,Labor,,Australia's Prime Ministers (National Archives),,reference
+h029,Billy Hughes,Prime Minister,cwlth,1915-10-27,1923-02-09,Labor / Nationalist,,Australia's Prime Ministers (National Archives),,reference
+h030,Stanley Bruce,Prime Minister,cwlth,1923-02-09,1929-10-22,Nationalist,,Australia's Prime Ministers (National Archives),,reference
+h031,James Scullin,Prime Minister,cwlth,1929-10-22,1932-01-06,Labor,,Australia's Prime Ministers (National Archives),,reference
+h032,Joseph Lyons,Prime Minister,cwlth,1932-01-06,1939-04-07,United Australia,,Australia's Prime Ministers (National Archives),,reference
+h033,Earle Page,Prime Minister,cwlth,1939-04-07,1939-04-26,Country,,Australia's Prime Ministers (National Archives),,reference
+h034,Robert Menzies,Prime Minister,cwlth,1939-04-26,1941-08-29,United Australia,,Australia's Prime Ministers (National Archives),,reference
+h035,Arthur Fadden,Prime Minister,cwlth,1941-08-29,1941-10-07,Country,,Australia's Prime Ministers (National Archives),,reference
+h036,John Curtin,Prime Minister,cwlth,1941-10-07,1945-07-05,Labor,,Australia's Prime Ministers (National Archives),,reference
+h037,Frank Forde,Prime Minister,cwlth,1945-07-06,1945-07-13,Labor,,Australia's Prime Ministers (National Archives),,reference
+h038,Ben Chifley,Prime Minister,cwlth,1945-07-13,1949-12-19,Labor,,Australia's Prime Ministers (National Archives),,reference
+h039,Robert Menzies,Prime Minister,cwlth,1949-12-19,1966-01-26,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h040,Harold Holt,Prime Minister,cwlth,1966-01-26,1967-12-19,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h041,John McEwen,Prime Minister,cwlth,1967-12-19,1968-01-10,Country,,Australia's Prime Ministers (National Archives),,reference
+h042,John Gorton,Prime Minister,cwlth,1968-01-10,1971-03-10,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h043,William McMahon,Prime Minister,cwlth,1971-03-10,1972-12-05,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h044,Gough Whitlam,Prime Minister,cwlth,1972-12-05,1975-11-11,Labor,,Australia's Prime Ministers (National Archives),,reference
+h045,Malcolm Fraser,Prime Minister,cwlth,1975-11-11,1983-03-11,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h046,Bob Hawke,Prime Minister,cwlth,1983-03-11,1991-12-20,Labor,,Australia's Prime Ministers (National Archives),,reference
+h047,Paul Keating,Prime Minister,cwlth,1991-12-20,1996-03-11,Labor,,Australia's Prime Ministers (National Archives),,reference
+h048,John Howard,Prime Minister,cwlth,1996-03-11,2007-12-03,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h049,Kevin Rudd,Prime Minister,cwlth,2007-12-03,2010-06-24,Labor,,Australia's Prime Ministers (National Archives),,reference
+h050,Julia Gillard,Prime Minister,cwlth,2010-06-24,2013-06-27,Labor,,Australia's Prime Ministers (National Archives),,reference
+h051,Kevin Rudd,Prime Minister,cwlth,2013-06-27,2013-09-18,Labor,,Australia's Prime Ministers (National Archives),,reference
+h052,Tony Abbott,Prime Minister,cwlth,2013-09-18,2015-09-15,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h053,Malcolm Turnbull,Prime Minister,cwlth,2015-09-15,2018-08-24,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h054,Scott Morrison,Prime Minister,cwlth,2018-08-24,2022-05-23,Liberal,,Australia's Prime Ministers (National Archives),,reference
+h055,Anthony Albanese,Prime Minister,cwlth,2022-05-23,,Labor,,Australia's Prime Ministers (National Archives),,reference
+h056,Bill Wentworth,Commonwealth minister for Aboriginal affairs,cwlth,1968-02-28,1971-05-31,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h057,Peter Howson,Commonwealth minister for Aboriginal affairs,cwlth,1971-05-31,1972-12-05,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h058,Gough Whitlam,Commonwealth minister for Aboriginal affairs,cwlth,1972-12-05,1972-12-19,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h059,Gordon Bryant,Commonwealth minister for Aboriginal affairs,cwlth,1972-12-19,1973-10-09,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h060,Jim Cavanagh,Commonwealth minister for Aboriginal affairs,cwlth,1973-10-09,1975-06-06,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h061,Les Johnson,Commonwealth minister for Aboriginal affairs,cwlth,1975-06-06,1975-11-11,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h062,Tom Drake-Brockman,Commonwealth minister for Aboriginal affairs,cwlth,1975-11-11,1975-12-22,National Country,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h063,Ian Viner,Commonwealth minister for Aboriginal affairs,cwlth,1975-12-22,1978-12-05,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h064,Fred Chaney,Commonwealth minister for Aboriginal affairs,cwlth,1978-12-05,1980-11-03,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h065,Peter Baume,Commonwealth minister for Aboriginal affairs,cwlth,1980-11-03,1982-05-07,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h066,Ian Wilson,Commonwealth minister for Aboriginal affairs,cwlth,1982-05-07,1983-03-11,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h067,Clyde Holding,Commonwealth minister for Aboriginal affairs,cwlth,1983-03-11,1987-07-24,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h068,Gerry Hand,Commonwealth minister for Aboriginal affairs,cwlth,1987-07-24,1990-04-04,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h069,Robert Tickner,Commonwealth minister for Aboriginal affairs,cwlth,1990-04-04,1996-03-11,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h070,John Herron,Commonwealth minister for Aboriginal affairs,cwlth,1996-03-11,2001-01-30,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h071,Philip Ruddock,Commonwealth minister for Aboriginal affairs,cwlth,2001-01-30,2003-10-07,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h072,Amanda Vanstone,Commonwealth minister for Aboriginal affairs,cwlth,2003-10-07,2006-01-27,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h073,Mal Brough,Commonwealth minister for Aboriginal affairs,cwlth,2006-01-27,2007-12-03,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h074,Jenny Macklin,Commonwealth minister for Aboriginal affairs,cwlth,2007-12-03,2013-09-18,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h075,Nigel Scullion,Commonwealth minister for Aboriginal affairs,cwlth,2013-09-18,2019-05-29,National,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h076,Ken Wyatt,Commonwealth minister for Aboriginal affairs,cwlth,2019-05-29,2022-05-23,Liberal,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h077,Linda Burney,Commonwealth minister for Aboriginal affairs,cwlth,2022-06-01,2024-07-29,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h078,Malarndirri McCarthy,Commonwealth minister for Aboriginal affairs,cwlth,2024-07-29,,Labor,,Minister for Indigenous Australians,https://en.wikipedia.org/wiki/Minister_for_Indigenous_Australians,verified
+h079,Paul Everingham,Chief Minister,ntg,1978-07-01,1984-10-15,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h080,Ian Tuxworth,Chief Minister,ntg,1984-10-16,1986-05-13,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h081,Stephen Hatton,Chief Minister,ntg,1986-05-14,1988-07-12,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h082,Marshall Perron,Chief Minister,ntg,1988-07-13,1995-05-24,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h083,Shane Stone,Chief Minister,ntg,1995-05-25,1999-02-07,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h084,Denis Burke,Chief Minister,ntg,1999-02-08,2001-08-27,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h085,Clare Martin,Chief Minister,ntg,2001-08-27,2007-11-26,Labor,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h086,Paul Henderson,Chief Minister,ntg,2007-11-26,2012-08-28,Labor,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h087,Terry Mills,Chief Minister,ntg,2012-08-29,2013-03-13,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h088,Adam Giles,Chief Minister,ntg,2013-03-14,2016-08-30,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h089,Michael Gunner,Chief Minister,ntg,2016-08-31,2022-05-13,Labor,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h090,Natasha Fyles,Chief Minister,ntg,2022-05-13,2023-12-21,Labor,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h091,Eva Lawler,Chief Minister,ntg,2023-12-21,2024-08-28,Labor,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h092,Lia Finocchiaro,Chief Minister,ntg,2024-08-28,,CLP,,Chief Minister of the NT,https://en.wikipedia.org/wiki/Chief_Minister_of_the_Northern_Territory,verified
+h093,Nicole Manison,Minister for Police,police,2020-09-08,2022-05-22,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h094,Kate Worden,Minister for Police,police,2022-05-23,2023-10-29,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h095,Brent Potter,Minister for Police,police,2023-10-30,2024-06-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h096,Lia Finocchiaro,Minister for Police,police,2024-08-27,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h097,Selena Uibo,Attorney-General,courts,2020-09-08,2022-05-22,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h098,Chansey Paech,Attorney-General,courts,2022-05-23,2024-06-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h099,Gerard Maley,Attorney-General,courts,2024-08-27,2024-09-09,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h100,Marie-Clare Boothby,Attorney-General,courts,2024-09-10,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h101,Gerard Maley,Minister for Corrections,custody,2024-09-10,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h102,Kate Worden,Minister for Territory Families,childprot,2020-09-08,2023-10-29,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h103,Ngaree Ah Kit,Minister for Territory Families,childprot,2023-10-30,2024-06-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h104,Robyn Cahill,Minister for Children and Families; Child Protection,childprot,2024-09-10,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h105,Lauren Moss,Minister for Education,schools,2020-09-08,2022-05-22,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h106,Eva Lawler,Minister for Education,schools,2022-05-23,2023-12-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h107,Mark Monaghan,Minister for Education,schools,2023-12-21,2024-06-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h108,Jo Hersey,Minister for Education and Training,schools,2024-09-10,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h109,Chansey Paech,Minister for Remote Housing and Town Camps,housing,2020-09-08,2022-05-22,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h110,Selena Uibo,Minister for Remote Housing and Homelands,housing,2022-05-23,2024-06-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h111,Steve Edgington,Minister for Housing; Aboriginal Affairs; Health,housing,2024-09-10,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h112,Natasha Fyles,Minister for Health,health,2020-09-08,2023-12-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h113,Selena Uibo,Minister for Health,health,2023-12-21,2024-06-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h114,Steve Edgington,Minister for Health,health,2024-09-10,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h115,Nicole Manison,Minister for Mining,dev,2020-09-08,2023-12-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h116,Mark Monaghan,Minister for Mining,dev,2023-12-21,2024-06-20,Labor,,NT Parliament: 14th Assembly ministries,https://parliament.nt.gov.au/members/previous-assemblies/Fourteenth-Assembly-Ministries-Consolidated.pdf,verified
+h117,Gerard Maley,Minister for Mining and Energy,dev,2024-09-10,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
+h118,Lia Finocchiaro,Minister for Territory Coordinator,dev,2024-09-10,,CLP,,NT Parliament: 15th Assembly ministries,https://parliament.nt.gov.au/__data/assets/pdf_file/0005/1553567/MASTER-15th-Assembly-Government-Ministries-by-Assembly-as-at-11-September-2024.pdf,verified
