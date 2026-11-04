@@ -1,144 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Page</title>
-  <style>
-    /* Basic CSS for layout */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petal</title>
 
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-    }
+<style>
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
 
-    .video-container {
-      text-align: center;
-      margin-top: 30px;
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-    }
+body {
+    background: #000;
+}
 
-    .iframe-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      overflow: hidden;
-    }
+/* Background GIF */
+.background {
+    width: 100%;
+    display: block;
+}
 
-    .iframe-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+/* Draggable flower */
+#flower {
+    position: absolute;
+    top: 300px;
+    left: 300px;
+    width: 180px;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+    z-index: 10;
+}
 
-    .movable-image {
-      position: absolute;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      width: 150px;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .links-container {
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    .links-container a {
-      display: inline-block;
-      margin: 10px;
-      font-size: 18px;
-      text-decoration: none;
-      color: #333;
-    }
-
-    /* Add responsive styling for smaller screens */
-    @media screen and (max-width: 600px) {
-      .links-container a {
-        font-size: 16px;
-        display: block;
-        margin: 5px 0;
-      }
-
-      .movable-image {
-        width: 100px; /* Smaller images on small screens */
-      }
-    }
-  </style>
+#flower:active {
+    cursor: grabbing;
+}
+</style>
 </head>
 <body>
 
-  <h1>Welcome to My Interactive Page</h1>
+<img
+    class="background"
+    src="src/ig (1).gif"
+    alt="Background artwork"
+>
 
-  <!-- Embed YouTube Video -->
-  <div class="video-container">
-    <h2>Watch this cool video!</h2>
-    <div class="iframe-container">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
+<img
+    id="flower"
+    src="src/gossypium-sturtianum-dig-13996-sm.jpg"
+    alt="Enter map"
+>
 
-  <!-- Movable Images by Cursor -->
-  <div class="movable-image" id="image1" style="top: 10%; left: 10%;">
-    <img src="https://via.placeholder.com/150" alt="Movable Image 1">
-  </div>
+<script>
+const flower = document.getElementById("flower");
 
-  <div class="movable-image" id="image2" style="top: 30%; left: 25%;">
-    <img src="https://via.placeholder.com/150" alt="Movable Image 2">
-  </div>
+let isDragging = false;
+let moved = false;
+let offsetX = 0;
+let offsetY = 0;
 
-  <!-- Links -->
-  <div class="links-container">
-    <h2>Useful Links:</h2>
-    <a href="https://www.example.com" target="_blank">Example Link 1</a>
-    <a href="https://www.github.com" target="_blank">GitHub</a>
-    <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>
-  </div>
+flower.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    moved = false;
 
-  <script>
-    // JavaScript to make images movable by cursor
-    document.querySelectorAll('.movable-image').forEach(image => {
-      let isDragging = false;
-      let offsetX, offsetY;
+    offsetX = e.clientX - flower.offsetLeft;
+    offsetY = e.clientY - flower.offsetTop;
+});
 
-      image.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        offsetX = e.clientX - image.getBoundingClientRect().left;
-        offsetY = e.clientY - image.getBoundingClientRect().top;
-        image.style.transition = 'none'; // Disable transition while dragging
-      });
+document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
 
-      document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-          let left = e.clientX - offsetX;
-          let top = e.clientY - offsetY;
-          image.style.left = left + 'px';
-          image.style.top = top + 'px';
-        }
-      });
+    moved = true;
 
-      document.addEventListener('mouseup', () => {
-        isDragging = false;
-        image.style.transition = 'transform 0.2s ease'; // Re-enable transition
-      });
-    });
-  </script>
+    flower.style.left = (e.clientX - offsetX) + "px";
+    flower.style.top = (e.clientY - offsetY + window.scrollY) + "px";
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+});
+
+flower.addEventListener("click", (e) => {
+    if (moved) {
+        e.preventDefault();
+        return;
+    }
+
+    window.location.href = "./nt-map/";
+});
+
+/* Touch support */
+flower.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+
+    isDragging = true;
+    moved = false;
+
+    offsetX = touch.clientX - flower.offsetLeft;
+    offsetY = touch.clientY - flower.offsetTop;
+});
+
+document.addEventListener("touchmove", (e) => {
+    if (!isDragging) return;
+
+    const touch = e.touches[0];
+
+    moved = true;
+
+    flower.style.left = (touch.clientX - offsetX) + "px";
+    flower.style.top = (touch.clientY - offsetY + window.scrollY) + "px";
+});
+
+document.addEventListener("touchend", () => {
+    isDragging = false;
+});
+</script>
 
 </body>
 </html>
