@@ -10,7 +10,7 @@ m_cdp,income,CDP and RJED remote jobs,2015,,2,c,"Community Development Program p
 m_pastoral,land,Dispossession for pastoral runs,1863,,,c,Land taken for pastoral leases; Aboriginal people confined to reserves and stations.,Country
 m_landrights,land,Land Rights Act and land councils,1976,,,,Over 50% of NT land and 85% of its coastline is Aboriginal land.,
 m_leases,land,Compulsory five-year leases,2007,2012,,c,Intervention leases over township land.,Control of community land
-m_rangers,land,Aboriginal ranger grants,2017,,,,"NT ranger grants, $12M over four years, dropped in 2025.",Jobs on Country
+m_rangers,rangers,Aboriginal ranger grants,2017,,,,"NT ranger grants, $12M over four years, dropped in 2025.",Jobs on Country
 m_tc,dev,Territory Coordinator,2025,,,c,Power to fast-track projects and override NT laws including the Heritage Act.,Say over development
 m_beetaloo,dev,Beetaloo gas,2018,,,c,Fracking exploration with public grants; native title holders object.,Water and Country
 m_reserves,housing,Reserves and confinement,1911,1971,1,c,People moved onto government settlements and reserves.,Country
@@ -48,6 +48,6 @@ m_youthdet,custody,Youth detention,2016,,7,b,Don Dale footage (2016); Holtze the
 m_transfer,custody,Transfers Alice Springs to Darwin,2024,,7,e,60 children moved in 10 months; handcuffed commercial flights.,Country
 m_prison,custody,Adult imprisonment,1883,,8,b,"4,515 per 100,000 Aboriginal adults (June 2026).",Years with kin
 m_programs,custody,Programs inside,2024,,8,,10 of 11 drug and alcohol sessions cancelled in six months.,A way out
-m_naaja,legal,Aboriginal legal services (NAAJA),1972,,6,,Represents about 65% of everyone in NT criminal matters; Commonwealth-funded.,
+m_naaja,naaja,Aboriginal legal services (NAAJA),1972,,6,,Represents about 65% of everyone in NT criminal matters; Commonwealth-funded.,
 m_ais,legal,Aboriginal Interpreter Service,2000,,6,,Fills about half of requests; most interpreters casual.,Being heard
 m_legalaid,legal,Legal Aid NT,1990,,6,,Stopped new criminal grants for people not in custody.,Representation
