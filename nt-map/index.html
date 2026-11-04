@@ -10,9 +10,9 @@
 /* Layout: a time bar on top; a left sidebar (details, saved, who held power); a zoomable power map:
    governments, then departments, then contractors, all standing on Country where Aboriginal-controlled organisations sit. */
 :root{
-  --bg:#15100a; --surface:#211910; --surface2:#2a2015; --ink:#f4d878; --muted:#c3a874; --line:#4c3b22; --faint:#33281a;
-  --state:#3b2a17; --state-ink:#ffd95e; --abo-head:#7c400e; --abo-ink:#ffe7ba; --country:#2e1a0b; --country-ink:#f6d7a2;
-  --corp-head:#3b3a35; --corp-ink:#ebe4cf; --corp-band:#262119;
+  --bg:#111513; --surface:#1a201d; --surface2:#222a26; --ink:#e4e9e5; --muted:#98a39d; --line:#3a4440; --faint:#262e2a;
+  --state:#344753; --state-ink:#eef2ef; --abo-head:#7c400e; --abo-ink:#ffe7ba; --country:#2a1a0d; --country-ink:#f6d7a2;
+  --corp-head:#3d3d39; --corp-ink:#ebe8df; --corp-band:#1c211e;
   --harm:#ff7b67; --led:#e39c3e; --ok:#8fd18f; --warn:#f0c05c; --flow:#6db3f2; --shadow:0 14px 36px rgba(0,0,0,.55);
   --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -35,7 +35,11 @@ a{color:inherit}
 .bar{flex:none;background:var(--surface);border-bottom:1px solid var(--line);padding-block:6px 4px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   display:grid;grid-template-columns:1fr auto;grid-template-areas:"sub ctrls" "year ctrls" "track track";gap:2px 16px;align-items:center;position:relative;z-index:6}
-.brand{grid-area:sub;min-width:0;margin:0;color:var(--muted);font-size:12px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo{position:absolute;top:4px;right:max(8px,env(safe-area-inset-right,0px));width:22px;height:22px;display:block;opacity:.9}
+.logo:hover{opacity:1}
+.logo img{width:22px;height:22px;display:block}
+.ctrls{margin-right:22px}
+.brand{grid-area:sub;padding-right:30px;min-width:0;margin:0;color:var(--muted);font-size:12px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .yearbox{grid-area:year;display:flex;align-items:baseline;gap:10px;min-width:0}
 .year{font-family:var(--f-mono);font-weight:600;font-size:24px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .era{min-width:0;display:flex;gap:8px;align-items:baseline;overflow:hidden}
@@ -71,7 +75,7 @@ a{color:inherit}
 
 /* ---------- body: sidebar + map ---------- */
 .wrap{flex:1;min-height:0;display:flex;position:relative}
-#side{flex:none;width:200px;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;z-index:5}
+#side{flex:none;width:var(--sideW,200px);position:relative;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;z-index:5}
 .tabs{display:flex;border-bottom:1px solid var(--line);flex:none}
 .tabs{flex-wrap:wrap}
 .tabs button{flex:1 1 50%;border:0;background:none;padding:7px 4px;font-size:11.5px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent}
@@ -79,15 +83,23 @@ a{color:inherit}
 .pane{flex:1;overflow:auto;padding:10px 10px 70px;min-height:0;line-height:1.4;font-size:12.5px}
 .pane[hidden]{display:none}
 .closeSide{display:none}
+.grip{position:absolute;top:0;right:-5px;width:10px;height:100%;cursor:col-resize;z-index:6;touch-action:none}
+.grip:hover,.grip.on{background:linear-gradient(90deg,transparent 4px,var(--line) 4px,var(--line) 6px,transparent 6px)}
+.sideToggle{position:absolute;top:50%;right:-15px;transform:translateY(-50%);width:15px;height:44px;border:1px solid var(--line);border-left:0;border-radius:0 6px 6px 0;background:var(--surface);color:var(--muted);font-size:11px;padding:0;z-index:7}
+.sideToggle:hover{color:var(--ink)}
+body.sideHidden #side{width:0;border-right:0}
+body.sideHidden #side > :not(.sideToggle){display:none}
 main{flex:1;position:relative;min-width:0}
 #map{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
 #map:active{cursor:grabbing}
 .crumbs{position:absolute;top:10px;left:16px;display:flex;gap:6px;align-items:center;font-size:13px;z-index:3}
 .crumbs button{border:0;background:none;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
 .crumbs .sep{color:var(--muted)} .crumbs .here{font-weight:600}
-.zoomctl{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(56px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px;z-index:3}
+.zoomctl{position:absolute;right:max(30px,calc(env(safe-area-inset-right,0px) + 30px));bottom:calc(56px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px;z-index:3}
 .panel{position:absolute;z-index:3;background:var(--surface);border:1px solid var(--line);border-radius:8px}
-.legend{right:max(60px,calc(env(safe-area-inset-right,0px) + 60px));bottom:calc(52px + env(safe-area-inset-bottom,0px));padding:3px 6px;font-size:9px;display:flex;flex-wrap:wrap;max-width:360px;gap:2px 8px;color:var(--muted);opacity:.9}
+.legend{right:max(4px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);writing-mode:vertical-rl;padding:6px 3px;font-size:9px;display:flex;flex-wrap:nowrap;gap:10px;color:var(--muted);opacity:.85}
+.legend .sw{border-top:0;border-left:1.5px solid var(--ink);height:12px;width:0}
+.legend .sw.d{border-left-style:dashed} .legend .sw.o{border-left-style:dotted}
 .legend span{display:flex;align-items:center;gap:3px;white-space:nowrap}
 .sw{display:inline-block;width:12px;height:0;border-top:1.5px solid var(--ink)} .sw.d{border-top-style:dashed} .sw.o{border-top-style:dotted}
 .sq{display:inline-block;width:8px;height:8px;border-radius:2px}
@@ -247,6 +259,8 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 @media (max-width:900px){
   #side{position:fixed;left:0;top:0;bottom:0;width:min(380px,90vw);transform:translateX(-102%);transition:transform .25s;z-index:25;box-shadow:var(--shadow);padding-top:env(safe-area-inset-top,0px)}
   #side.open{transform:none}
+  .grip,.sideToggle{display:none}
+  body.sideHidden #side{width:min(380px,90vw)} body.sideHidden #side > :not(.sideToggle){display:revert}
   .closeSide{display:block;border:0;background:none;padding:10px 12px;font-size:18px;flex:none!important}
   .legend{display:none}
 }
@@ -264,6 +278,7 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 </style>
 
 <header class="bar">
+  <a class="logo" href="https://petalpetalpetalpetalpetal.github.io/" title="petalpetalpetalpetalpetal home" aria-label="Home"><img src="logo.png" alt="petal logo" width="22" height="22"></a>
   <p class="brand" id="siteSub"></p>
   <div class="yearbox"><div class="year" id="yearOut" aria-live="polite">2026</div><div class="era"><b id="eraLabel"></b><span id="eraSum"></span></div></div>
   <div class="ctrls">
@@ -288,6 +303,8 @@ body.money #gLinks{display:none} body:not(.money) #gFlows{display:none}
 
 <div class="wrap">
   <aside id="side" aria-label="Details">
+    <div class="grip" id="grip" role="separator" aria-orientation="vertical" aria-label="Drag to resize the panel"></div>
+    <button class="sideToggle" id="sideToggle" aria-label="Hide panel" title="Hide panel">◀</button>
     <div class="tabs" role="tablist">
       <button class="closeSide" id="closeSide" aria-label="Close panel">×</button>
       <button role="tab" aria-selected="true" data-pane="pDetails">Details</button>
@@ -425,11 +442,11 @@ function build(){
   gAuth = root.append("g"); gAct = root.append("g"); gFlows = root.append("g").attr("id","gFlows");
 
   gBands.append("rect").attr("class","corpband").attr("x",0).attr("y",Y_PRIV).attr("width",W).attr("height",Y_COUNTRY - Y_PRIV - 14).attr("rx",6);
-  gBands.append("text").attr("class","band-label").attr("x",16).attr("y",Y_PRIV + 22).text("Companies, contractors and charities");
-  gBands.append("text").attr("class","band-sub").attr("x",16).attr("y",Y_PRIV + 37).text("Paid by governments, or extracting from Country with government approval.");
+  gBands.append("text").attr("class","band-label").attr("text-anchor","middle").attr("x",W/2).attr("y",Y_PRIV + 22).text("Companies, contractors and charities");
+  gBands.append("text").attr("class","band-sub").attr("text-anchor","middle").attr("x",W/2).attr("y",Y_PRIV + 37).text("Paid by governments, or extracting from Country with government approval.");
   gBands.append("rect").attr("class","country").attr("x",0).attr("y",Y_COUNTRY).attr("width",W).attr("height",COUNTRY_H).attr("rx",6);
-  gBands.append("text").attr("class","country-label").attr("x",16).attr("y",Y_COUNTRY + 24).text(D.cfg.country_label || "Country: sovereignty never ceded");
-  gBands.append("text").attr("class","country-sub").attr("x",16).attr("y",Y_COUNTRY + 40).text("Organisations controlled by First Nations people, on Country that was never ceded, and what they achieve when resourced.");
+  gBands.append("text").attr("class","country-label").attr("text-anchor","middle").attr("x",W/2).attr("y",Y_COUNTRY + 24).text(D.cfg.country_label || "Country: sovereignty never ceded");
+  gBands.append("text").attr("class","country-sub").attr("text-anchor","middle").attr("x",W/2).attr("y",Y_COUNTRY + 40).text("Organisations controlled by First Nations people, on Country that was never ceded, and what they achieve when resourced.");
 
   gAuth.selectAll("g").data(["crown","sa","cwlth","ntg"]).join("g").attr("class","auth").each(function(){
     const g = d3.select(this);
@@ -486,6 +503,17 @@ function build(){
   $("about").onclick = e => { e.stopPropagation(); choose(e, "ABOUT", true); };
   $("popX").onclick = () => $("pop").classList.remove("show");
   $("sideBtn").onclick = () => $("side").classList.add("open");
+  /* sidebar: drag to resize, arrow to hide or show */
+  const setW = w => { w = Math.max(150, Math.min(560, w)); document.documentElement.style.setProperty("--sideW", w + "px"); try { localStorage.setItem("nt-map-sideW", w); } catch(e){} };
+  try { const w = +localStorage.getItem("nt-map-sideW"); if (w) setW(w); if (localStorage.getItem("nt-map-sideHidden") === "1") document.body.classList.add("sideHidden"); } catch(e){}
+  const syncArrow = () => { const h = document.body.classList.contains("sideHidden"); $("sideToggle").textContent = h ? "▶" : "◀"; $("sideToggle").setAttribute("aria-label", h ? "Show panel" : "Hide panel"); $("sideToggle").title = h ? "Show panel" : "Hide panel"; };
+  syncArrow();
+  const refit = () => setTimeout(() => { if (state.k / state.kFit < 1.2) fit(true); }, 30);
+  $("sideToggle").onclick = () => { document.body.classList.toggle("sideHidden"); syncArrow(); refit(); try { localStorage.setItem("nt-map-sideHidden", document.body.classList.contains("sideHidden") ? "1" : "0"); } catch(e){} };
+  $("grip").addEventListener("pointerdown", e => { e.preventDefault(); const g = $("grip"); g.setPointerCapture(e.pointerId); g.classList.add("on");
+    const left = $("side").getBoundingClientRect().left;
+    const mv = ev => setW(ev.clientX - left), up = () => { refit(); g.classList.remove("on"); g.removeEventListener("pointermove", mv); g.removeEventListener("pointerup", up); };
+    g.addEventListener("pointermove", mv); g.addEventListener("pointerup", up); });
   $("closeSide").onclick = () => $("side").classList.remove("open");
   document.querySelectorAll(".tabs [role=tab]").forEach(b => b.onclick = () => tab(b.dataset.pane));
   document.addEventListener("keydown", e => {
