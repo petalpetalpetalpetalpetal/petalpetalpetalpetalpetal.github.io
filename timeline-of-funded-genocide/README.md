@@ -1,4 +1,4 @@
-# Taken, Year by Year
+# Timeline of Funded Genocide
 
 A one-page power map of the Commonwealth and Northern Territory institutions that act on Aboriginal children and families, the money behind them, the companies they pay, and the Aboriginal-controlled organisations that work, from 1824 to today.
 
