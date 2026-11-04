@@ -3,17 +3,17 @@ m_kahlin,missions,Kahlin Compound and Half-Caste Home,1913,1939,3,e,Darwin compo
 m_bungalow,missions,The Bungalow (Alice Springs),1914,1942,3,e,"Home for removed children in Stuart, moved to Jay Creek (1928) and Temple Bar (1932).","Family, Country"
 m_retta,missions,Retta Dixon Home,1946,1980,3,e,"Darwin home opened after the war with 51 children, peaking at 120.",Family
 m_south,missions,Removal to southern states,1942,1970,3,e,Children evacuated south in 1942; from 1955 the Commonwealth sent part-Aboriginal children to southern foster homes and schools.,Country
-m_rations,income,Rations and withheld wages,1863,1968,2,c,Aboriginal stock workers paid in rations or below award; paying more than a set amount was illegal until 1968.,Labour and pay
+m_rations,income,Rations and stolen wages,1863,1968,2,c,Aboriginal stock workers paid in rations or below award; paying more than a set amount was illegal until 1968.,Labour and pay
 m_cdep,income,CDEP (community-run work),1977,2007,2,,"Community Development Employment Projects, run by communities; abolished by the Intervention.",
 m_im,income,Compulsory income management,2007,2033,2,c,Half of welfare quarantined on a card; extended to 2033.,Control of money
 m_cdp,income,CDP and RJED remote jobs,2015,,2,c,"Community Development Program penalties, replaced by RJED from November 2025.",Income
-m_pastoral,land,Pastoral runs and reserves,1863,,,c,Land taken for pastoral leases; Aboriginal people confined to reserves and stations.,Country
+m_pastoral,land,Dispossession for pastoral runs,1863,,,c,Land taken for pastoral leases; Aboriginal people confined to reserves and stations.,Country
 m_landrights,land,Land Rights Act and land councils,1976,,,,Over 50% of NT land and 85% of its coastline is Aboriginal land.,
 m_leases,land,Compulsory five-year leases,2007,2012,,c,Intervention leases over township land.,Control of community land
 m_rangers,land,Aboriginal ranger grants,2017,,,,"NT ranger grants, $12M over four years, dropped in 2025.",Jobs on Country
 m_tc,dev,Territory Coordinator,2025,,,c,Power to fast-track projects and override NT laws including the Heritage Act.,Say over development
 m_beetaloo,dev,Beetaloo gas,2018,,,c,Fracking exploration with public grants; native title holders object.,Water and Country
-m_reserves,housing,Reserves and settlements,1911,1971,1,c,People moved onto government settlements and reserves.,Country
+m_reserves,housing,Reserves and confinement,1911,1971,1,c,People moved onto government settlements and reserves.,Country
 m_overcrowd,housing,Remote overcrowding,2007,,1,c,54% of remote community houses overcrowded (2022).,Safe shelter
 m_deal,housing,Remote housing agreements,2008,,1,,"Joint Commonwealth-NT housing deals; $4B agreement from 2024, behind schedule.",
 m_rent,housing,Remote rent and tenants' rights,2023,,1,c,Remote Rent Framework struck down in Badari (2025); NT amends the Housing Act.,Say over rent
@@ -32,7 +32,7 @@ m_wards,childprot,Wardship (Welfare Ordinance),1953,1964,3,e,"Director of Welfar
 m_acpp,childprot,Child Placement Principle,1983,,3,e,In NT law since 1983; applies only 'as far as practicable' from 2026.,Placement with kin
 m_kin,childprot,Kin placement,2017,,3,e,Only 16.7% of children in care placed with kin (2026).,Family
 m_oohc,childprot,Out-of-home care contracts,2017,,3,,93% of $143.4M paid to non-government providers.,
-m_mounted,police,Mounted police and punitive expeditions,1870,1933,5,a,"Police and settler reprisals, including Daly River (1884) and Coniston (1928).",Life
+m_mounted,police,Mounted police and massacres,1870,1933,5,a,"Police and settler reprisals, including Daly River (1884) and Coniston (1928).",Life
 m_pubdrink,police,Public drinking offence,2019,,5,b,Decriminalised in 2019 in line with the Royal Commission; re-criminalised October 2024.,Liberty
 m_custody,police,Arrests and watch houses,2020,,5,b,About 40 Aboriginal people a day taken into custody from December 2024.,Liberty
 m_force,police,Use of force and weapons,2017,,5,b,"Spit hoods banned 2017, reinstated 2025; armed public safety officers; OC spray legal for the public.",Safety

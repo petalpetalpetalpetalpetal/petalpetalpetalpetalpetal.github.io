@@ -17,7 +17,7 @@ def write(name, cols, rows):
 write("config.csv", ["key", "value", "note"], [
     {"key": "site_title", "value": "Taken, Year by Year", "note": "Page title"},
     {"key": "subtitle", "value": "How Commonwealth and Northern Territory institutions act on Aboriginal children and families, 1824 to today", "note": ""},
-    {"key": "contact_email", "value": "corrections@example.org", "note": "Replace with the address that should receive corrections"},
+    {"key": "contact_email", "value": "petal.petal.petal.petal.petal@proton.me", "note": "Address that receives corrections"},
     {"key": "contact_note", "value": "Spotted an error, a missing source or a case that should be added? Email us with the item code below. Every message is read before anything changes.", "note": ""},
     {"key": "start_year", "value": "1824", "note": "First year on the slider"},
     {"key": "end_year", "value": "2026", "note": "Last year on the slider"},
@@ -27,34 +27,34 @@ write("config.csv", ["key", "value", "note"], [
 
 # ---------------------------------------------------------------- authorities (tier 0)
 write("authorities.csv", ["id", "label", "start_year", "end_year", "position", "summary", "source_title", "source_url"], [
-    {"id": "crown", "label": "British Crown (Colony of NSW)", "start_year": 1824, "end_year": 1862, "position": "centre",
-     "summary": "Military outposts at Fort Dundas (Melville Island, 1824-28), Fort Wellington (1827-29) and Port Essington (1838-49). Fort Dundas was abandoned after conflict with Tiwi people and harsh conditions.",
+    {"id": "crown", "label": "British Crown (invading power)", "start_year": 1824, "end_year": 1862, "position": "centre",
+     "summary": "Military forts built on Tiwi and Iwaidja Country: Fort Dundas (Melville Island, 1824-28), Fort Wellington (1827-29) and Port Essington (1838-49). Fort Dundas was abandoned after Tiwi resistance, cyclones and tropical conditions.",
      "source_title": "History of the Northern Territory (Wikipedia)", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
     {"id": "sa", "label": "South Australia", "start_year": 1863, "end_year": 1910, "position": "centre",
-     "summary": "South Australia annexed the Territory by letters patent in 1863 and founded Palmerston (Darwin) in 1869. Pastoral, mining and telegraph expansion followed, with police-led punitive expeditions.",
+     "summary": "South Australia claimed the Territory by letters patent in 1863 and built Palmerston (Darwin) on Larrakia Country in 1869. Pastoral, mining and telegraph invasion followed, enforced by police-led massacres.",
      "source_title": "History of the Northern Territory (Wikipedia)", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
     {"id": "cwlth", "label": "Commonwealth of Australia", "start_year": 1911, "end_year": "", "position": "left",
      "summary": "Took control of the NT on 1 January 1911. Since 1978 it funds most NT services (over 70% of NT revenue in 2025-26) and runs income management, remote jobs and land rights law directly.",
      "source_title": "CityNews / AAP", "source_url": "https://citynews.com.au/2025/prison-spend-soars-to-cope-with-crackdown-on-bail-laws/"},
-    {"id": "ntg", "label": "NT Administration (run by the Commonwealth)", "start_year": 1911, "end_year": 1977, "position": "right",
+    {"id": "ntg", "label": "NT Administration (Commonwealth)", "start_year": 1911, "end_year": 1977, "position": "right",
      "summary": "The Commonwealth ran the Territory directly through an Administrator and its own branches (Chief Protector, later the Welfare Branch).",
      "source_title": "Bringing Them Home, ch. 9", "source_url": "https://www.humanrights.gov.au/our-work/bringing-them-home-chapter-9"},
-    {"id": "ntg", "label": "NT Government (self-government)", "start_year": 1978, "end_year": "", "position": "right",
-     "summary": "Self-government from 1978, with a Legislative Assembly headed by a Chief Minister. Runs police, courts, prisons, child protection, schools, housing and health.",
+    {"id": "ntg", "label": "NT Government", "start_year": 1978, "end_year": "", "position": "right",
+     "summary": "Took over from the Commonwealth in 1978, with a Legislative Assembly headed by a Chief Minister. Runs police, courts, prisons, child protection, schools, housing and health on Aboriginal Country.",
      "source_title": "History of the Northern Territory (Wikipedia)", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
 ])
 
 # ---------------------------------------------------------------- eras
 write("eras.csv", ["id", "start_year", "end_year", "label", "summary", "source_title", "source_url"], [
-    {"id": "e1", "start_year": 1824, "end_year": 1862, "label": "British outposts", "summary": "Three military settlements on the north coast, all abandoned.", "source_title": "History of the NT", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
-    {"id": "e2", "start_year": 1863, "end_year": 1910, "label": "South Australian frontier", "summary": "Annexation, Palmerston, the Overland Telegraph, pastoral runs and punitive expeditions.", "source_title": "History of the NT", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
-    {"id": "e3", "start_year": 1911, "end_year": 1952, "label": "Chief Protector", "summary": "Commonwealth rule; the Chief Protector is legal guardian of Aboriginal children and controls Aboriginal women for life.", "source_title": "Bringing Them Home, ch. 9", "source_url": "https://www.humanrights.gov.au/our-work/bringing-them-home-chapter-9"},
-    {"id": "e4", "start_year": 1953, "end_year": 1972, "label": "Assimilation and wardship", "summary": "The Welfare Ordinance makes 15,711 Aboriginal Territorians wards of the state.", "source_title": "Indigenous Rights (NMA)", "source_url": "https://indigenousrights.net.au/civil_rights/albert_namatjira_and_citizenship,_1958-59/the_stud_book"},
-    {"id": "e5", "start_year": 1973, "end_year": 1977, "label": "Land rights", "summary": "Policy shifts to self-management; the Land Rights Act passes in 1976.", "source_title": "Bringing Them Home, ch. 9", "source_url": "https://www.humanrights.gov.au/our-work/bringing-them-home-chapter-9"},
-    {"id": "e6", "start_year": 1978, "end_year": 2006, "label": "Self-government", "summary": "The NT Government takes over most services; the Royal Commission into Aboriginal Deaths in Custody reports in 1991.", "source_title": "History of the NT", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
-    {"id": "e7", "start_year": 2007, "end_year": 2012, "label": "The Intervention", "summary": "The Commonwealth suspends the Racial Discrimination Act to impose income management, alcohol bans, compulsory leases and extra police.", "source_title": "NT National Emergency Response (Wikipedia)", "source_url": "https://en.wikipedia.org/wiki/Northern_Territory_National_Emergency_Response"},
-    {"id": "e8", "start_year": 2013, "end_year": 2023, "label": "Stronger Futures to Royal Commission", "summary": "Intervention measures continue; Don Dale footage leads to the 2017 Royal Commission.", "source_title": "Royal Commission (Wikipedia)", "source_url": "https://en.wikipedia.org/wiki/Royal_Commission_into_the_Protection_and_Detention_of_Children_in_the_Northern_Territory"},
-    {"id": "e9", "start_year": 2024, "end_year": 2026, "label": "Current settings", "summary": "Age of criminal responsibility back to 10, bail and youth justice tightened, Child Placement Principle weakened, record imprisonment.", "source_title": "NAAJA", "source_url": "https://www.naaja.org.au/aboriginal-people-continue-to-be-locked-up-at-record-levels-putting-lives-at-risk/"},
+    {"id": "e1", "start_year": 1824, "end_year": 1862, "label": "Invasion of the north coast", "summary": "British forts built on Tiwi and Iwaidja Country; all abandoned in the face of resistance and conditions.", "source_title": "History of the NT", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
+    {"id": "e2", "start_year": 1863, "end_year": 1910, "label": "Frontier war and massacres", "summary": "South Australia claims the Territory; police and settlers massacre Aboriginal people to clear Country for pastoral runs, mines and the telegraph.", "source_title": "History of the NT", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
+    {"id": "e3", "start_year": 1911, "end_year": 1952, "label": "Removal and confinement", "summary": "The Chief Protector is legal guardian of every Aboriginal child and controls Aboriginal women for life; children are stolen into compounds and missions.", "source_title": "Bringing Them Home, ch. 9", "source_url": "https://www.humanrights.gov.au/our-work/bringing-them-home-chapter-9"},
+    {"id": "e4", "start_year": 1953, "end_year": 1972, "label": "Forced assimilation", "summary": "The Welfare Ordinance makes 15,711 Aboriginal Territorians wards of the state; child theft continues.", "source_title": "Indigenous Rights (NMA)", "source_url": "https://indigenousrights.net.au/civil_rights/albert_namatjira_and_citizenship,_1958-59/the_stud_book"},
+    {"id": "e5", "start_year": 1973, "end_year": 1977, "label": "Land rights struggle", "summary": "Gurindji and other nations force land rights onto the agenda; the Land Rights Act passes in 1976.", "source_title": "Bringing Them Home, ch. 9", "source_url": "https://www.humanrights.gov.au/our-work/bringing-them-home-chapter-9"},
+    {"id": "e6", "start_year": 1978, "end_year": 2006, "label": "Territory settler rule", "summary": "The NT Government takes control of police, prisons and child protection; Aboriginal deaths in custody force a Royal Commission (1991).", "source_title": "History of the NT", "source_url": "https://en.wikipedia.org/wiki/History_of_the_Northern_Territory"},
+    {"id": "e7", "start_year": 2007, "end_year": 2012, "label": "The Intervention", "summary": "The Commonwealth suspends the Racial Discrimination Act to impose income management, alcohol bans, compulsory leases, police and the army.", "source_title": "NT National Emergency Response (Wikipedia)", "source_url": "https://en.wikipedia.org/wiki/Northern_Territory_National_Emergency_Response"},
+    {"id": "e8", "start_year": 2013, "end_year": 2023, "label": "Intervention continued", "summary": "Intervention measures continue under new names; torture of children in Don Dale is exposed (2016).", "source_title": "Royal Commission (Wikipedia)", "source_url": "https://en.wikipedia.org/wiki/Royal_Commission_into_the_Protection_and_Detention_of_Children_in_the_Northern_Territory"},
+    {"id": "e9", "start_year": 2024, "end_year": 2026, "label": "Mass incarceration and removal", "summary": "Criminal responsibility back to age 10, spit hoods back, the Child Placement Principle weakened, record imprisonment of Aboriginal people.", "source_title": "NAAJA", "source_url": "https://www.naaja.org.au/aboriginal-people-continue-to-be-locked-up-at-record-levels-putting-lives-at-risk/"},
 ])
 
 # ---------------------------------------------------------------- sections (tier 1)
@@ -63,16 +63,16 @@ S = [
  ("missions", "cwlth", 1, "Missions and compounds", 1913, 1980, "3", "1913-1980:Missions and compounds",
   "Government compounds and church missions that held children removed from their families.",
   "Family, language and Country", "Survivors' testimony to Bringing Them Home (1997)"),
- ("income", "cwlth", 2, "Income and work", 1863, "", "2", "1863-1967:Rations and unpaid labour|1968-2006:Award wages and CDEP|2007-2026:Income management and CDP",
+ ("income", "cwlth", 2, "Income and work", 1863, "", "2", "1863-1967:Rations and stolen wages|1968-2006:Award wages and CDEP|2007-2026:Income management and CDP",
   "Who controls Aboriginal people's pay and welfare.",
   "Control of a family's own money and labour", "Wave Hill walk-off (1966); community-run CDEP"),
- ("land", "cwlth", 3, "Land and rangers", 1824, "", "", "1824-1862:British outposts|1863-1975:Pastoral leases and reserves|1976-2026:Land rights and land councils",
+ ("land", "cwlth", 3, "Land and rangers", 1824, "", "", "1824-1862:Invaded Country|1863-1975:Dispossession for pastoral runs|1976-2026:Land rights and land councils",
   "Who holds and decides over land and water.",
   "Country and authority over it", "Wave Hill walk-off; land councils; ranger groups"),
  ("dev", "ntg", 4, "Development powers", 1978, "", "", "1978-2026:Development and resources",
   "NT powers to fast-track mining, gas and major projects.",
   "Say over development on Country", "Land councils and Nurrdalinji native title holders"),
- ("housing", "ntg", 5, "Housing and homelands", 1911, "", "1", "1911-1971:Reserves and settlements|1972-2026:Housing and homelands",
+ ("housing", "ntg", 5, "Housing and homelands", 1911, "", "1", "1911-1971:Reserves and confinement|1972-2026:Housing and homelands",
   "Remote, town camp and public housing, shelters, and evacuation.",
   "Safe shelter", "Papunya tenants' heat case; Badari High Court win; YiSSA"),
  ("health", "ntg", 6, "Health and alcohol services", 1911, "", "1", "1911-2026:Health and alcohol services",
@@ -81,7 +81,7 @@ S = [
  ("schools", "ntg", 7, "Schools", 1950, "", "4", "1950-1977:Welfare Branch schools|1978-2026:Schools",
   "Schools, language of teaching, funding, attendance enforcement and boarding.",
   "Education in the child's own language", "Bilingual schools; Aboriginal Assistant Teachers"),
- ("childprot", "ntg", 8, "Child removal and protection", 1910, "", "3", "1910-1952:Chief Protector|1953-1977:Welfare Branch|1978-2025:Child protection|2026-2026:Child protection (Every Child Matters Act)",
+ ("childprot", "ntg", 8, "Child removal and protection", 1910, "", "3", "1910-1952:Chief Protector (child theft)|1953-1977:Welfare Branch (wardship)|1978-2025:Child protection|2026-2026:Child protection (Every Child Matters Act)",
   "The agency that removes Aboriginal children and decides where they live.",
   "Family, language and Country", "Kin who come forward to care; SNAICC"),
  ("police", "ntg", 9, "Police and watch houses", 1870, "", "5", "1870-1910:Mounted Police (South Australia)|1911-1977:NT Police (Commonwealth)|1978-2026:NT Police",
@@ -108,17 +108,17 @@ M = [
  ("m_bungalow", "missions", "The Bungalow (Alice Springs)", 1914, 1942, "3", "e", "Home for removed children in Stuart, moved to Jay Creek (1928) and Temple Bar (1932).", "Family, Country"),
  ("m_retta", "missions", "Retta Dixon Home", 1946, 1980, "3", "e", "Darwin home opened after the war with 51 children, peaking at 120.", "Family"),
  ("m_south", "missions", "Removal to southern states", 1942, 1970, "3", "e", "Children evacuated south in 1942; from 1955 the Commonwealth sent part-Aboriginal children to southern foster homes and schools.", "Country"),
- ("m_rations", "income", "Rations and withheld wages", 1863, 1968, "2", "c", "Aboriginal stock workers paid in rations or below award; paying more than a set amount was illegal until 1968.", "Labour and pay"),
+ ("m_rations", "income", "Rations and stolen wages", 1863, 1968, "2", "c", "Aboriginal stock workers paid in rations or below award; paying more than a set amount was illegal until 1968.", "Labour and pay"),
  ("m_cdep", "income", "CDEP (community-run work)", 1977, 2007, "2", "", "Community Development Employment Projects, run by communities; abolished by the Intervention.", ""),
  ("m_im", "income", "Compulsory income management", 2007, 2033, "2", "c", "Half of welfare quarantined on a card; extended to 2033.", "Control of money"),
  ("m_cdp", "income", "CDP and RJED remote jobs", 2015, "", "2", "c", "Community Development Program penalties, replaced by RJED from November 2025.", "Income"),
- ("m_pastoral", "land", "Pastoral runs and reserves", 1863, "", "", "c", "Land taken for pastoral leases; Aboriginal people confined to reserves and stations.", "Country"),
+ ("m_pastoral", "land", "Dispossession for pastoral runs", 1863, "", "", "c", "Land taken for pastoral leases; Aboriginal people confined to reserves and stations.", "Country"),
  ("m_landrights", "land", "Land Rights Act and land councils", 1976, "", "", "", "Over 50% of NT land and 85% of its coastline is Aboriginal land.", ""),
  ("m_leases", "land", "Compulsory five-year leases", 2007, 2012, "", "c", "Intervention leases over township land.", "Control of community land"),
  ("m_rangers", "land", "Aboriginal ranger grants", 2017, "", "", "", "NT ranger grants, $12M over four years, dropped in 2025.", "Jobs on Country"),
  ("m_tc", "dev", "Territory Coordinator", 2025, "", "", "c", "Power to fast-track projects and override NT laws including the Heritage Act.", "Say over development"),
  ("m_beetaloo", "dev", "Beetaloo gas", 2018, "", "", "c", "Fracking exploration with public grants; native title holders object.", "Water and Country"),
- ("m_reserves", "housing", "Reserves and settlements", 1911, 1971, "1", "c", "People moved onto government settlements and reserves.", "Country"),
+ ("m_reserves", "housing", "Reserves and confinement", 1911, 1971, "1", "c", "People moved onto government settlements and reserves.", "Country"),
  ("m_overcrowd", "housing", "Remote overcrowding", 2007, "", "1", "c", "54% of remote community houses overcrowded (2022).", "Safe shelter"),
  ("m_deal", "housing", "Remote housing agreements", 2008, "", "1", "", "Joint Commonwealth-NT housing deals; $4B agreement from 2024, behind schedule.", ""),
  ("m_rent", "housing", "Remote rent and tenants' rights", 2023, "", "1", "c", "Remote Rent Framework struck down in Badari (2025); NT amends the Housing Act.", "Say over rent"),
@@ -137,7 +137,7 @@ M = [
  ("m_acpp", "childprot", "Child Placement Principle", 1983, "", "3", "e", "In NT law since 1983; applies only 'as far as practicable' from 2026.", "Placement with kin"),
  ("m_kin", "childprot", "Kin placement", 2017, "", "3", "e", "Only 16.7% of children in care placed with kin (2026).", "Family"),
  ("m_oohc", "childprot", "Out-of-home care contracts", 2017, "", "3", "", "93% of $143.4M paid to non-government providers.", ""),
- ("m_mounted", "police", "Mounted police and punitive expeditions", 1870, 1933, "5", "a", "Police and settler reprisals, including Daly River (1884) and Coniston (1928).", "Life"),
+ ("m_mounted", "police", "Mounted police and massacres", 1870, 1933, "5", "a", "Police and settler reprisals, including Daly River (1884) and Coniston (1928).", "Life"),
  ("m_pubdrink", "police", "Public drinking offence", 2019, "", "5", "b", "Decriminalised in 2019 in line with the Royal Commission; re-criminalised October 2024.", "Liberty"),
  ("m_custody", "police", "Arrests and watch houses", 2020, "", "5", "b", "About 40 Aboriginal people a day taken into custody from December 2024.", "Liberty"),
  ("m_force", "police", "Use of force and weapons", 2017, "", "5", "b", "Spit hoods banned 2017, reinstated 2025; armed public safety officers; OC spray legal for the public.", "Safety"),
@@ -186,13 +186,13 @@ BUDGET = ("AAP via Shepparton News: NT budget 2026/27", "https://www.sheppnews.c
 ABC_NAAJA = ("ABC: NAAJA youth justice submission (3 Feb 2026)", "https://www.abc.net.au/news/2026-02-03/naaja-scathing-submission-nt-youth-justice-national-inquiry/106297320")
 
 # --- colonial frontier
-E(1824, "land", "", "institution", "Fort Dundas founded on Tiwi Country", "First British settlement in northern Australia, on Melville Island; abandoned in 1828 after conflict with Tiwi people, cyclones and tropical conditions.", "British Crown", "Country", "", "", "no", "", *HNT, "reference", tags="settlement")
-E(1838, "land", "", "institution", "Port Essington (Victoria) settlement", "Fort Victoria established on the Cobourg Peninsula in October 1838; disbanded in December 1849.", "British Crown", "Country", "", "", "no", "", *HNT, "reference", tags="settlement")
-E(1863, "land", "m_pastoral", "law", "South Australia annexes the Territory", "Letters patent place the NT under South Australia, opening it to survey and sale.", "South Australia", "Country", "c", "", "no", "", *HNT, "reference", tags="annexation")
-E(1869, "land", "m_pastoral", "institution", "Palmerston (Darwin) founded on Larrakia Country", "Surveyor-General George Goyder founds a settlement of 135 people.", "South Australia", "Country", "", "", "no", "", *HNT, "reference", tags="settlement")
-E(1884, "police", "m_mounted", "violence", "Daly River reprisals", "After four miners were killed at the Mt Hayward copper mine, police (Mounted Constable George Montagu, Inspector Paul Foelsche) and a civilian party led reprisals against Malak Malak, Woolwonga and Murrinh-patha people. Official estimate 20-30 dead; the Protector of Aborigines said 'not less than 150'.", "SA Mounted Police and settlers", "Life", "a", "20-30 official; up to 150", "no", "Police report put deaths at 20-30.", "Colonial Frontier Massacres map, Daly River", "https://c21ch.newcastle.edu.au/colonialmassacres/detail.php?r=704", "academic", date="1884-10", tags="massacre")
-E(1889, "police", "m_mounted", "violence", "Jampawurru (Red Lily Spring) killings", "Seven or eight Aboriginal men killed by a party including Gordon Buchanan.", "Settlers", "Life", "a", "7-8 killed", "no", "", "Australian Frontier Conflicts: NT", "https://australianfrontierconflicts.com.au/some-known-frontier-conflicts-in-the-northern-territory/", "academic", tags="massacre")
-E(1892, "police", "m_mounted", "violence", "Constable Smith's punitive expedition", "Police-led expedition at Corella and Cresswell Downs after two settlers were killed; Aboriginal people killed, number unrecorded.", "SA Mounted Police", "Life", "a", "", "no", "", "Australian Frontier Conflicts: NT", "https://australianfrontierconflicts.com.au/some-known-frontier-conflicts-in-the-northern-territory/", "academic", tags="massacre")
+E(1824, "land", "", "invasion", "British fort built on Tiwi Country", "Fort Dundas, the first British fort in northern Australia, on Melville Island; abandoned in 1828 after Tiwi resistance, cyclones and tropical conditions.", "British Crown", "Country", "", "", "no", "", *HNT, "reference", tags="settlement")
+E(1838, "land", "", "invasion", "British fort at Port Essington", "Fort Victoria built on Iwaidja Country on the Cobourg Peninsula in October 1838; abandoned in December 1849.", "British Crown", "Country", "", "", "no", "", *HNT, "reference", tags="settlement")
+E(1863, "land", "m_pastoral", "invasion", "South Australia claims the Territory", "Letters patent place Aboriginal Country under South Australia, opening it to survey and sale.", "South Australia", "Country", "c", "", "no", "", *HNT, "reference", tags="annexation")
+E(1869, "land", "m_pastoral", "invasion", "Palmerston (Darwin) built on Larrakia Country", "Surveyor-General George Goyder establishes a settlement of 135 colonists.", "South Australia", "Country", "", "", "no", "", *HNT, "reference", tags="settlement")
+E(1884, "police", "m_mounted", "violence", "Daly River massacre", "After four miners were killed at the Mt Hayward copper mine, police (Mounted Constable George Montagu, Inspector Paul Foelsche) and a civilian party led reprisals against Malak Malak, Woolwonga and Murrinh-patha people. Official estimate 20-30 dead; the Protector of Aborigines said 'not less than 150'.", "SA Mounted Police and settlers", "Life", "a", "20-30 official; up to 150", "no", "Police report put deaths at 20-30.", "Colonial Frontier Massacres map, Daly River", "https://c21ch.newcastle.edu.au/colonialmassacres/detail.php?r=704", "academic", date="1884-10", tags="massacre")
+E(1889, "police", "m_mounted", "violence", "Jampawurru (Red Lily Spring) massacre", "Seven or eight Aboriginal men killed by a party including Gordon Buchanan.", "Settlers", "Life", "a", "7-8 killed", "no", "", "Australian Frontier Conflicts: NT", "https://australianfrontierconflicts.com.au/some-known-frontier-conflicts-in-the-northern-territory/", "academic", tags="massacre")
+E(1892, "police", "m_mounted", "violence", "Police killings at Corella and Cresswell Downs", "Police-led expedition at Corella and Cresswell Downs after two settlers were killed; Aboriginal people killed, number unrecorded.", "SA Mounted Police", "Life", "a", "", "no", "", "Australian Frontier Conflicts: NT", "https://australianfrontierconflicts.com.au/some-known-frontier-conflicts-in-the-northern-territory/", "academic", tags="massacre")
 
 # --- Commonwealth and the Chief Protector
 E(1910, "childprot", "m_protector", "law", "Northern Territory Aboriginals Act", "The Chief Protector becomes 'legal guardian of every Aboriginal and every half-caste child up to the age of 18 years'.", "South Australia", "Family", "e", "", "no", "", *BTH, "government", tags="removal")
@@ -218,11 +218,11 @@ E(1966, "land", "m_pastoral", "resistance", "Wave Hill walk-off", "On 23 August 
 E(1967, "childprot", "m_wards", "data", "18% of Aboriginal children in government care", "Almost 18% of Territory Indigenous children in government care in 1967-68.", "Commonwealth", "Family", "e", "almost 18%", "no", "", *BTH, "government")
 E(1968, "income", "m_rations", "law", "Equal wages take effect", "Paying Aboriginal workers more than a set amount in goods and money had been illegal until 1968.", "Commonwealth", "", "", "", "no", "", "Creative Spirits: Wave Hill", "https://www.creativespirits.info/aboriginalculture/politics/aboriginal-people-strike-walk-off-at-wave-hill", "reference")
 E(1971, "childprot", "m_wards", "data", "97% of children in foster care Indigenous", "", "Commonwealth", "Family", "e", "97%", "no", "", *BTH, "government")
-E(1973, "schools", "m_bilingual", "policy", "Commonwealth shifts to self-management", "Policy shifts from assimilation to self-management. Bilingual education begins in NT schools around this time (date to confirm).", "Commonwealth", "", "", "", "no", "", *BTH, "government", status="to source")
+E(1973, "schools", "m_bilingual", "policy", "Assimilation policy formally abandoned", "Policy shifts from assimilation to self-management. Bilingual education begins in NT schools around this time (date to confirm).", "Commonwealth", "", "", "", "no", "", *BTH, "government", status="to source")
 E(1975, "land", "m_pastoral", "resistance", "Whitlam hands land back to the Gurindji", "On 16 August 1975 Gough Whitlam pours soil into Vincent Lingiari's hands.", "Gurindji people", "", "", "", "yes", "", "Creative Spirits: Wave Hill", "https://www.creativespirits.info/aboriginalculture/politics/aboriginal-people-strike-walk-off-at-wave-hill", "reference", date="1975-08-16", tags="resistance")
 E(1976, "land", "m_landrights", "law", "Aboriginal Land Rights (NT) Act", "Passed 16 December 1976, operating from 26 January 1977; creates the land councils.", "Commonwealth", "", "", "", "yes", "", *HNT, "reference", date="1976-12-16", tags="land rights")
 E(1977, "income", "m_cdep", "policy", "CDEP begins", "Community Development Employment Projects, run by communities (start year to confirm).", "Commonwealth", "", "", "", "yes", "", *S493, "testimony", status="to source")
-E(1978, "courts", "", "institution", "Self-government", "The NT gains responsible government with a Chief Minister.", "Commonwealth", "", "", "", "no", "", *HNT, "reference", date="1978-07-01")
+E(1978, "courts", "", "law", "NT Government takes control", "The Commonwealth hands the Territory to an NT Legislative Assembly with a Chief Minister.", "Commonwealth", "", "", "", "no", "", *HNT, "reference", date="1978-07-01")
 E(1979, "childprot", "m_acpp", "resistance", "Karu Aboriginal child care agency founded", "", "Aboriginal community", "", "", "", "yes", "", *BTH, "government", tags="community control")
 E(1980, "schools", "m_bilingual", "cut", "First move to end bilingual education", "The NT moved to end bilingual education in 1980, 1998, 2008 and 2024, never consulting communities first.", "NT Government", "Language", "", "", "no", "", *S624, "sector")
 E(1983, "childprot", "m_acpp", "law", "Child Placement Principle enters NT law", "The Community Welfare Act is the first NT law to include the Aboriginal Child Placement Principle.", "NT Government", "", "", "", "no", "", *BTH, "government")

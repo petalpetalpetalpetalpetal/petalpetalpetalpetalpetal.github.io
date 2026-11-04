@@ -81,8 +81,25 @@ main{flex:1;position:relative;min-height:0}
 .crumbs button{border:0;background:none;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
 .crumbs .sep{color:var(--muted)}
 .crumbs .here{font-weight:600}
-.zoomctl{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px;z-index:3}
+.zoomctl{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(56px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px;z-index:3}
 .panel{position:absolute;z-index:3;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.ticker{position:absolute;left:0;right:0;bottom:0;z-index:4;height:42px;display:flex;align-items:stretch;background:var(--state);color:var(--state-ink);padding-bottom:env(safe-area-inset-bottom,0px);overflow:hidden}
+.tk-year{flex:none;display:flex;flex-direction:column;justify-content:center;padding:0 12px 0 max(16px,env(safe-area-inset-left,0px));background:var(--harm);color:#fff;line-height:1}
+.tk-year small{font-size:9px;text-transform:uppercase;letter-spacing:.08em;opacity:.9}
+.tk-year b{font-family:var(--f-mono);font-size:16px}
+.tk-viewport{flex:1;min-width:0;overflow:hidden;position:relative}
+.tk-track{display:flex;width:max-content;height:100%;animation:tk linear infinite;animation-duration:30s}
+.ticker:hover .tk-track,.ticker:focus-within .tk-track{animation-play-state:paused}
+.ticker.still .tk-track{animation:none}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk-run{display:flex;align-items:center;gap:0;padding-right:40px}
+.tk-item{display:inline-flex;align-items:center;gap:8px;border:0;background:none;color:inherit;font-size:13.5px;padding:0 22px 0 0;white-space:nowrap;height:42px}
+.tk-item small{opacity:.7;font-size:11.5px}
+.tk-item:hover{text-decoration:underline}
+.tk-dot{width:8px;height:8px;border-radius:50%;background:var(--harm);flex:none}
+.tk-dot.tk-dot-led{background:var(--ochre)}
+.tk-empty{padding:0 12px;font-size:13px;white-space:nowrap}
+.tk-empty button{border:1px solid currentColor;background:none;color:inherit;border-radius:4px;padding:1px 8px;margin-left:8px;font-size:12px}
 .thisyear{left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));width:min(340px,calc(100vw - 100px));max-height:min(38%,220px);display:flex;flex-direction:column}
 .thisyear header{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:1px solid var(--faint)}
 .thisyear header b{font-family:var(--f-display);font-stretch:85%;text-transform:uppercase;letter-spacing:.06em;font-size:12px}
@@ -95,7 +112,7 @@ main{flex:1;position:relative;min-height:0}
 .thisyear .empty{padding:8px 10px;font-size:12px;color:var(--muted);line-height:1.4}
 .thisyear .empty button{border:0;background:none;padding:0;text-decoration:underline;font-size:12px;color:var(--ink)}
 .thisyear.collapsed ul,.thisyear.collapsed .empty{display:none}
-.legend{right:max(64px,calc(env(safe-area-inset-right,0px) + 64px));bottom:max(16px,env(safe-area-inset-bottom,0px));padding:8px 10px;font-size:11px;display:grid;grid-template-columns:auto auto;gap:4px 14px;color:var(--muted)}
+.legend{right:max(64px,calc(env(safe-area-inset-right,0px) + 64px));bottom:calc(56px + env(safe-area-inset-bottom,0px));padding:8px 10px;font-size:11px;display:grid;grid-template-columns:auto auto;gap:4px 14px;color:var(--muted)}
 .legend span{display:flex;align-items:center;gap:6px;white-space:nowrap}
 .sw{display:inline-block;width:18px;height:0;border-top:2px solid var(--ink)}
 .sw.d{border-top-style:dashed}.sw.o{border-top-style:dotted}
@@ -140,10 +157,10 @@ main{flex:1;position:relative;min-height:0}
 
 /* foreignObject content (tier 2) */
 .fo{font-family:var(--f-body);color:var(--ink)}
-.mech{display:block;border:1px solid var(--faint);border-left:3px solid var(--line);border-radius:3px;background:var(--surface);padding:3px 5px 4px;margin:0 0 3px;cursor:pointer;font-size:7.2px;line-height:1.25}
-.mech b{display:block;font-size:7.6px;font-weight:600}
-.mech .st{display:block;color:var(--muted)}
-.mech .fig{font-family:var(--f-mono);color:var(--ink);font-weight:500}
+.mech{display:block;box-sizing:border-box;height:47px;overflow:hidden;border:1px solid var(--faint);border-left:3px solid var(--line);border-radius:3px;background:var(--surface);padding:3px 5px;margin:0 0 3px;cursor:pointer;font-size:7px;line-height:1.2}
+.mech b{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;font-size:7.6px;font-weight:600}
+.mech .st{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--muted)}
+.mech .fig{display:block;font-family:var(--f-mono);color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mech.on{border-left-color:var(--state)}
 .mech.changed{border-left-color:var(--harm);background:color-mix(in srgb,var(--harm) 9%,var(--surface))}
 .mech.off{opacity:.45;border-style:dashed}
@@ -198,7 +215,7 @@ main{flex:1;position:relative;min-height:0}
   .wheelhint{display:none}
   .thisyear{max-height:30%}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.tk-track{animation:none!important}.tk-viewport{overflow-x:auto}.tk-run[aria-hidden]{display:none}}
 </style>
 
 <header class="bar">
@@ -224,10 +241,7 @@ main{flex:1;position:relative;min-height:0}
   <div class="loading" id="loading">Loading the evidence tables…</div>
   <nav class="crumbs" id="crumbs" aria-label="Where you are"></nav>
   <div class="panel hint" id="hint">Scroll on the map to zoom into a section, scroll back to zoom out. Hover for details, click to pin.<button aria-label="Close tip" id="hintX">×</button></div>
-  <section class="panel thisyear" id="thisYear">
-    <header><b id="tyTitle">Changes in 2026</b><button class="btn" id="tyToggle" style="height:24px;padding:0 8px;font-size:12px">Hide</button></header>
-    <ul id="tyList"></ul><div class="empty" id="tyEmpty" hidden></div>
-  </section>
+  <div class="ticker" id="ticker" aria-label="Changes recorded this year"><span class="tk-year"><small>Changes in</small><b id="tkYear">2026</b></span><div class="tk-viewport"><div class="tk-track" id="tkTrack"></div></div></div>
   <div class="panel legend" id="legend">
     <span><i class="ring"></i>Changed this year</span><span><i class="led-dot"></i>Aboriginal-led</span>
     <span><i class="sw"></i>NT evidence</span><span><i class="sw d"></i>National evidence</span>
@@ -252,9 +266,9 @@ const LIMB = {a:"Killing members of the group (a)", b:"Serious bodily or mental 
 const KIND = {nt:"NT evidence", national:"National evidence, NT data needed", gap:"Gap: logical link, no NT figure yet"};
 
 /* geometry of the virtual canvas */
-const COLW = 190, BOXW = 170, BOXH = 250, X0 = 40;
-const Y_AUTH = 30, AUTH_H = 52, Y_SEC = 170, Y_COUNTRY = 610, COUNTRY_H = 150;
-let W = 0, H = Y_COUNTRY + COUNTRY_H + 20;
+const COLW = 190, BOXW = 170, BOXH = 250, X0 = 40, CARD = 47;
+const Y_AUTH = 30, AUTH_H = 52, Y_SEC = 170, COUNTRY_H = 150;
+let W = 0, Y_COUNTRY = 610, H = Y_COUNTRY + COUNTRY_H + 20;
 
 const state = {year:2026, k:1, kFit:1, pinned:null, playing:null, focusSection:null};
 let D = {};
@@ -265,7 +279,7 @@ Promise.all(files.map(f => d3.csv("data/" + f + ".csv"))).then(res => {
   files.forEach((f,i) => D[f] = res[i]);
   prepare(); build(); setYear(state.year, true); fit(false);
   $("loading").remove();
-  if (innerWidth < 720){ $("thisYear").classList.add("collapsed"); $("tyToggle").textContent = "Show"; const h = $("hint"); if (h) h.firstChild.textContent = "Pinch to zoom into a section. Tap anything for details."; }
+  if (innerWidth < 720){ const h = $("hint"); if (h) h.firstChild.textContent = "Pinch to zoom into a section. Tap anything for details."; }
 }).catch(err => {
   $("loading").textContent = "The data tables did not load. If you opened this file directly, serve the folder over the web (for example GitHub Pages) so the browser can read data/*.csv.";
   console.error(err);
@@ -293,6 +307,11 @@ function prepare(){
   D.mechById = Object.fromEntries(D.mechanisms.map(m => [m.id, m]));
   D.linkById = Object.fromEntries(D.links.map(l => [l.id, l]));
   W = X0 * 2 + (d3.max(D.sections, s => s.col) - 1) * COLW + BOXW;
+  D.sections.forEach(s => {
+    let mx = 0; for (let y = y0; y <= y1; y++){ const n = D.money.filter(m => m.section === s.id && m.y <= y && y <= m.ye).length; if (n > mx) mx = n; }
+    s.moneyMax = mx; s.h = Math.max(BOXH, 76 + s.mechs.length * (CARD + 3) + (mx ? mx * 10 + 8 : 0) + 26);
+  });
+  Y_COUNTRY = Y_SEC + d3.max(D.sections, s => s.h) + 175; H = Y_COUNTRY + COUNTRY_H + 20;
   D.eventYears = [...new Set(D.events.map(e => e.y))].sort((a,b) => a-b);
 }
 
@@ -346,17 +365,17 @@ function build(){
 
   /* sections */
   const sec = gSec.selectAll("g.sec").data(D.sections).join("g").attr("class","sec").attr("transform", s => `translate(${s.x},${s.y})`);
-  sec.append("rect").attr("class","sec-box").attr("width",BOXW).attr("height",BOXH).attr("rx",5);
+  sec.append("rect").attr("class","sec-box").attr("width",BOXW).attr("height",s => s.h).attr("rx",5);
   sec.append("path").attr("class","sec-head").attr("d", `M0,5a5,5 0 0 1 5,-5h${BOXW-10}a5,5 0 0 1 5,5v59h-${BOXW}z`);
   sec.append("text").attr("class","sec-title").attr("x",10).attr("y",20);
   sec.append("text").attr("class","sec-sub").attr("x",10).attr("y",56);
   sec.append("text").attr("class","sec-take").attr("x",10).attr("y",82);
-  sec.append("text").attr("class","sec-count").attr("x",10).attr("y",BOXH - 12);
+  sec.append("text").attr("class","sec-count").attr("x",10).attr("y",s => s.h - 12);
   const ov = sec.append("g").attr("class","overview");
   ov.append("text").attr("class","sec-figyr").attr("x",10).attr("y",112);
   ov.append("text").attr("class","sec-fig").attr("x",10).attr("y",140);
   ov.append("text").attr("class","sec-figcap").attr("x",10).attr("y",160);
-  sec.append("foreignObject").attr("class","mechfo").attr("x",6).attr("y",70).attr("width",BOXW-12).attr("height",BOXH-88)
+  sec.append("foreignObject").attr("class","mechfo").attr("x",6).attr("y",72).attr("width",BOXW-12).attr("height",s => s.h - 96)
     .append("xhtml:div").attr("class","fo mechs");
   sec.on("pointerenter", (ev,s) => hover(ev, () => tipSection(s), "S-" + s.id))
      .on("pointermove", moveTip).on("pointerleave", leave)
@@ -391,7 +410,6 @@ function build(){
   $("zout").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.6);
   $("zfit").onclick = () => fit(true);
   $("hintX").onclick = () => $("hint").remove();
-  $("tyToggle").onclick = () => { const c = $("thisYear").classList.toggle("collapsed"); $("tyToggle").textContent = c ? "Show" : "Hide"; };
   $("tipX").onclick = e => { e.stopPropagation(); unpin(); };
   $("about").onclick = e => { e.stopPropagation(); pinCentered(tipAbout, "ABOUT"); };
   document.addEventListener("keydown", e => {
@@ -404,7 +422,7 @@ function build(){
 function fit(animate){
   const r = svg.node().getBoundingClientRect();
   const pad = 70;
-  const reserve = r.width > 720 ? 150 : 110;
+  const reserve = 70;
   const k = Math.min((r.width - 32) / W, (r.height - pad - reserve) / H);
   state.kFit = k;
   let t = d3.zoomIdentity.translate((r.width - W * k) / 2, pad).scale(k);
@@ -419,8 +437,8 @@ function zoomTo(cx, cy, rel){
 }
 function zoomToSection(s){
   const r = svg.node().getBoundingClientRect();
-  const rel = Math.max(2.4, Math.min((r.height * 0.86) / ((BOXH + 140) * state.kFit), (r.width * 0.5) / (BOXW * state.kFit)));
-  if (state.k / state.kFit < 2.2) zoomTo(s.cx, s.y + BOXH/2 + 40, rel);
+  const rel = Math.max(2.4, Math.min((r.height * 0.86) / ((s.h + 140) * state.kFit), (r.width * 0.5) / (BOXW * state.kFit)));
+  if (state.k / state.kFit < 2.2) zoomTo(s.cx, s.y + s.h/2 + 40, rel);
 }
 
 /* ---------------- semantic zoom ---------------- */
@@ -514,8 +532,8 @@ function render(){
   /* links */
   const lks = D.links.filter(l => active(l, y) && D.secById[l.from] && D.secById[l.to] && active(D.secById[l.from], y) && active(D.secById[l.to], y));
   lks.forEach(l => { const a = D.secById[l.from], b = D.secById[l.to]; const x1 = a.cx + (b.cx > a.cx ? 18 : -18), x2 = b.cx + (b.cx > a.cx ? -18 : 18);
-    const yb = Y_SEC + BOXH; const depth = 26 + Math.min(Math.abs(x2 - x1) * 0.08, 118) + (l.id.length % 3) * 8;
-    l.path = `M${x1},${yb}C${x1},${yb + depth} ${x2},${yb + depth} ${x2},${yb + 4}`; l.mx = (x1 + x2)/2; l.my = yb + depth * 0.75; });
+    const yb = Y_SEC + Math.max(a.h, b.h); const depth = 26 + Math.min(Math.abs(x2 - x1) * 0.08, 118) + (l.id.length % 3) * 8;
+    const ya = Y_SEC + a.h, yb2 = Y_SEC + b.h; l.path = `M${x1},${ya}C${x1},${yb + depth} ${x2},${yb + depth} ${x2},${yb2 + 4}`; l.mx = (x1 + x2)/2; l.my = yb + depth * 0.75; });
   const lg = gLinks.selectAll("g.lkg").data(lks, l => l.id).join(en => {
     const g = en.append("g").attr("class","lkg");
     g.append("path").attr("class", l => "lk " + l.evidence).attr("marker-end","url(#arr)");
@@ -560,30 +578,32 @@ function wrapWords(t, n){ const out = []; let cur = ""; String(t).split(" ").for
 function fitText(t, n){ t = String(t || ""); return t.length > n ? t.slice(0, n - 1).trimEnd() + "…" : t; }
 function latestEvent(mid, y){ return D.events.filter(e => e.mechanism === mid && e.y <= y).sort((a,b) => b.y - a.y || (b.date > a.date ? 1 : -1))[0]; }
 function mechHtml(s, y){
-  const rows = s.mechs.slice().sort((a,b) => (active(b,y) - active(a,y)) || (a.start - b.start)).slice(0, 6).map(m => {
+  const rows = s.mechs.slice().sort((a,b) => (active(b,y) - active(a,y)) || (a.start - b.start)).map(m => {
     const on = active(m, y), le = on ? latestEvent(m.id, y) : null, ch = D.events.some(e => e.mechanism === m.id && e.y === y);
-    const st = !on ? (m.start > y ? "From " + m.start : "Ended " + m.end) : le ? `${le.y}: ${fitText(le.title, 54)}` : "In place";
-    const fig = on && le && le.figure ? ` <span class="fig">${esc(fitText(le.figure, 26))}</span>` : "";
-    return `<div class="mech ${on ? "on" : "off"} ${ch ? "changed" : ""}" data-id="${m.id}"><b>${esc(m.label)}</b><span class="st">${esc(st)}${fig}</span></div>`;
+    const st = !on ? (m.start > y ? "From " + m.start : "Ended " + m.end) : le ? `${le.y}: ${le.title}` : "In place";
+    const fig = on && le && le.figure ? `<span class="fig">${esc(le.figure)}</span>` : "";
+    return `<div class="mech ${on ? "on" : "off"} ${ch ? "changed" : ""}" data-id="${m.id}"><b>${esc(m.label)}</b><span class="st">${esc(st)}</span>${fig}</div>`;
   });
-  const money = D.money.filter(m => m.section === s.id && m.y <= y && y <= m.ye).slice(0, 2)
+  const money = D.money.filter(m => m.section === s.id && m.y <= y && y <= m.ye)
     .map(m => `<div><span class="${m.direction === "cut" ? "cut" : ""}">${m.direction === "cut" ? "cut " : ""}${fmt$(m.amt)}</span> ${esc(fitText(m.label, 34))}</div>`).join("");
   return rows.join("") + (money ? `<div class="money">${money}</div>` : "");
 }
 function thisYear(evY){
-  const y = state.year;
-  $("tyTitle").textContent = "Changes in " + y;
-  const list = $("tyList"), empty = $("tyEmpty");
+  const y = state.year, track = $("tkTrack"), tk = $("ticker");
+  $("tkYear").textContent = y;
+  let items;
   if (evY.length){
-    empty.hidden = true;
-    list.innerHTML = evY.map(e => `<li><button data-id="${e.id}"><i class="dot ${e.aboriginal_led === "yes" ? "led" : ""}"></i><span>${esc(e.title)}<small>${esc(labelAt(D.secById[e.section], y))}${e.status !== "verified" ? " · " + esc(e.status) : ""}</small></span></button></li>`).join("");
-    list.querySelectorAll("button").forEach(b => b.onclick = ev => { ev.stopPropagation(); const e = D.events.find(d => d.id === b.dataset.id); const s = D.secById[e.section]; if (s) zoomToSection(s); pinCentered(() => tipEvent(e), "E-" + e.id); });
+    items = evY.map(e => `<button class="tk-item" data-id="${e.id}"><i class="tk-dot ${e.aboriginal_led === "yes" ? "tk-dot-led" : ""}"></i>${esc(e.title)}<small>${esc(labelAt(D.secById[e.section], y))}${e.status !== "verified" ? " · " + esc(e.status) : ""}</small></button>`).join("");
+    tk.classList.remove("still");
+    track.innerHTML = `<div class="tk-run">${items}</div><div class="tk-run" aria-hidden="true">${items}</div>`;
+    track.querySelectorAll(".tk-item").forEach(b => b.onclick = ev => { ev.stopPropagation(); const e = D.events.find(d => d.id === b.dataset.id); const s = D.secById[e.section]; if (s) zoomToSection(s); pinCentered(() => tipEvent(e), "E-" + e.id); });
+    requestAnimationFrame(() => { const w = track.firstChild.getBoundingClientRect().width; track.style.animationDuration = Math.max(14, w / 55) + "s"; track.style.animationName = "none"; void track.offsetWidth; track.style.animationName = ""; });
   } else {
-    list.innerHTML = ""; empty.hidden = false;
+    tk.classList.add("still");
     const prev = [...D.eventYears].reverse().find(v => v < y), next = D.eventYears.find(v => v > y);
-    empty.innerHTML = `No change is recorded for ${y} yet. That can be a gap in the research rather than a quiet year.` +
-      (prev || next ? `<br>Nearest records: ${prev ? `<button data-y="${prev}">${prev}</button>` : ""}${prev && next ? " · " : ""}${next ? `<button data-y="${next}">${next}</button>` : ""}` : "");
-    empty.querySelectorAll("button").forEach(b => b.onclick = () => setYear(+b.dataset.y));
+    track.innerHTML = `<div class="tk-run tk-empty">No change recorded for ${y} yet. That can be a gap in the research rather than a quiet year.` +
+      (prev ? ` <button data-y="${prev}">Back to ${prev}</button>` : "") + (next ? ` <button data-y="${next}">On to ${next}</button>` : "") + `</div>`;
+    track.querySelectorAll("button").forEach(b => b.onclick = ev => { ev.stopPropagation(); setYear(+b.dataset.y); });
   }
 }
 
